@@ -1,0 +1,19 @@
+<!-- 供应商、管理端面板 -->
+<div>
+    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+        <div ng-include="'../partials/sidebar.html?4'"></div>
+    </div>
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+          <div class="container-fluid"><h4>{{title}}</h4></div>
+        </nav>
+        <div class="content">
+            <!-- Error message -->
+            <div data-ng-if="error" class="c-col c-col--12 c-msg c-msg--small c-msg--error c-msg--full-width" data-qa="manage-policies-error-msg">
+                <i class="c-icon icon-alert"></i>
+                <span>{{error | translate}}</span>
+            </div>
+            <ui-view></ui-view>
+        </div>
+    </div>
+</div>

@@ -41,3 +41,21 @@ func GetOrderTaxs(orderID string, month int) (models.TaxInfo, error) {
 
 	return tax, nil
 }
+
+// GetOrderCapitals ...
+func GetOrderCapitals(orderID string, month int) (models.CapitalInfo, error) {
+
+	var capital models.CapitalInfo
+	year, _, _ := time.Now().Date()
+	query := func(c *mgo.Collection) error {
+		bs := bson.M{"orderID": orderID, "year": year}
+		return c.Find(bs).One(&capital)
+	}
+
+	err := executeQuery(orderTaxsCollectionName, query)
+	if err != nil {
+		return capital, nil
+	}
+
+	return capital, nil
+}

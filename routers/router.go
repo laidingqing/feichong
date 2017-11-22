@@ -23,21 +23,21 @@ func init() {
 	routes = append(routes, Route{
 		Name:        "UsersGet",
 		Method:      "GET",
-		Pattern:     "/users",
+		Pattern:     "/api/users",
 		HandlerFunc: handlers.GetUsers,
 	})
 
 	routes = append(routes, Route{
 		Name:        "UserGetById",
 		Method:      "GET",
-		Pattern:     "/users/{userId}",
+		Pattern:     "/api/users/{userId}",
 		HandlerFunc: handlers.GetUserByID,
 	})
 
 	routes = append(routes, Route{
 		Name:        "UserCreate",
 		Method:      "POST",
-		Pattern:     "/users",
+		Pattern:     "/api/users",
 		HandlerFunc: handlers.PostUser,
 	})
 
@@ -45,70 +45,70 @@ func init() {
 	routes = append(routes, Route{
 		Name:        "OrdersGet",
 		Method:      "GET",
-		Pattern:     "/orders",
+		Pattern:     "/api/orders",
 		HandlerFunc: handlers.GetOrders,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderGetById",
 		Method:      "GET",
-		Pattern:     "/orders/{orderId}",
+		Pattern:     "/api/orders/{orderId}",
 		HandlerFunc: handlers.GetOrderByID,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderCreate",
 		Method:      "POST",
-		Pattern:     "/orders",
+		Pattern:     "/api/orders",
 		HandlerFunc: handlers.PostOrder,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderCreate",
 		Method:      "PUT",
-		Pattern:     "/orders/{orderId}/views/",
+		Pattern:     "/api/orders/{orderId}/views/",
 		HandlerFunc: handlers.PutOrderByViews,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderProfitCreate",
 		Method:      "POST",
-		Pattern:     "/orders/{orderId}/profits/",
+		Pattern:     "/api/orders/{orderId}/profits/",
 		HandlerFunc: handlers.AddProfitInfoByOrder,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderProfitGet",
 		Method:      "GET",
-		Pattern:     "/orders/{orderId}/profits/{month}/",
+		Pattern:     "/api/orders/{orderId}/profits/{month}/",
 		HandlerFunc: handlers.GetProfitInfosByOrder,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderTaxCreate",
 		Method:      "POST",
-		Pattern:     "/orders/{orderId}/tax/",
+		Pattern:     "/api/orders/{orderId}/tax/",
 		HandlerFunc: handlers.AddTaxInfoByOrder,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderTaxGet",
 		Method:      "GET",
-		Pattern:     "/orders/{orderId}/tax/{month}/",
+		Pattern:     "/api/orders/{orderId}/tax/{month}/",
 		HandlerFunc: handlers.GetTaxInfosByOrder,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderCaptialCreate",
 		Method:      "POST",
-		Pattern:     "/orders/{orderId}/captials/",
+		Pattern:     "/api/orders/{orderId}/captials/",
 		HandlerFunc: handlers.AddCapitalInfoByOrder,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderCaptialGet",
 		Method:      "GET",
-		Pattern:     "/orders/{orderId}/captials/{month}/",
+		Pattern:     "/api/orders/{orderId}/captials/{month}/",
 		HandlerFunc: handlers.GetCapitalInfosByOrder,
 	})
 
@@ -116,9 +116,10 @@ func init() {
 	routes = append(routes, Route{
 		Name:        "WeixinLogin",
 		Method:      "POST",
-		Pattern:     "/weixin/login/",
+		Pattern:     "/api/weixin/login/",
 		HandlerFunc: handlers.LoginSession,
 	})
+
 }
 
 // NewRouter ...
@@ -136,5 +137,6 @@ func NewRouter() *mux.Router {
 			Name(route.Name).
 			Handler(handler)
 	}
+	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
 	return router
 }
