@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"net/http"
-
+	"strconv"
 	"github.com/laidingqing/feichong/helpers"
 	"github.com/laidingqing/feichong/managers"
 	"github.com/laidingqing/feichong/models"
@@ -12,8 +12,16 @@ const orderIDParam = "orderId"
 
 // GetOrders ...
 func GetOrders(w http.ResponseWriter, r *http.Request) {
-	orders := managers.GetOrders()
-	if len(orders) > 0 {
+	page := helpers.GetInParam(r, orderPageParam)
+	size := helpers.GetInParam(r, orderSizeParam)
+	catalog := helpers.GetInParam(r, orderCatalogParam)
+
+	pageIndex, _ := strconv.Atoi(page)
+	pageSize, _ := strconv.Atoi(size)
+	catalogQuery, _ := strconv.Atoi(catalog)
+
+	orders, err := managers.GetOrders(pageIndex, pageSize, catalogQuery)
+	if err == nil {
 		helpers.SetResponse(w, http.StatusOK, orders)
 	} else {
 		helpers.SetResponse(w, http.StatusNotFound, nil)

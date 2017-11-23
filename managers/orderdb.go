@@ -2,21 +2,31 @@ package managers
 
 import (
 	"github.com/laidingqing/feichong/models"
-
+	"github.com/laidingqing/feichong/helpers"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
 // GetOrders 获取所有订单
-func GetOrders() []models.Order {
+func GetOrders(page int, size int, catalog int) (models.Pagination, error) {
 
+	bson := bson.M{"type": catalog} // 查询条件
+	logger := helpers.NewLogger()
 	var orders []models.Order
-	query := func(c *mgo.Collection) error {
-		return c.Find(nil).All(&orders)
-	}
+	session := getSession()
+	defer session.Close()
+	c := session.DB(databaseName).C(orderCollectionName)
+	q := c.Find(bson)
+	total, err := q.Count()
+	logger.Log("err", err, "total", total)
 
-	executeQuery(orderCollectionName, query)
-	return orders
+	q.All(&orders)
+
+	logger.Log("data", len(orders))
+	return models.Pagination{
+		Data: orders,
+		TotalCount: total,
+	}, err
 }
 
 // GetOrderByID 根据用户编号获取订单信息
@@ -55,7 +65,7 @@ func PutOrder(orderID string, order models.Order) (models.Order, error) {
 
 // InsertOrder 新增订单
 func InsertOrder(order models.Order) string {
-	order.ID = bson.NewObjectId().Hex()
+	order.ID = bson.NewObjectId()
 	query := func(c *mgo.Collection) error {
 		return c.Insert(order)
 	}
@@ -65,5 +75,5 @@ func InsertOrder(order models.Order) string {
 		return ""
 	}
 
-	return order.ID
+	return order.ID.Hex()
 }

@@ -19,6 +19,10 @@ func GetParam(request *http.Request, paramName string) string {
 	return p
 }
 
+func GetInParam(request *http.Request, paramName string) string {
+	return request.FormValue(paramName)
+}
+
 // GetUserBody ...
 func GetUserBody(response http.ResponseWriter, request *http.Request, user *models.User) {
 

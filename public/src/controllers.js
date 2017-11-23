@@ -3,25 +3,86 @@
 'use strict';
 
 define(function() {
-    var controllers = {};
+  var controllers = {};
 
-    controllers.HomeCtrl = function($scope, $rootScope, $location) {
-        $scope.login = function() {
-          $location.path("/dashboard")
-        }
+  // 登录控制器
+  controllers.HomeCtrl = function($scope, $rootScope, $location) {
+    $scope.login = function() {
+      $location.path("/dashboard")
     }
-    controllers.HomeCtrl.$inject = ['$scope', '$rootScope', '$location'];
+  }
+  controllers.HomeCtrl.$inject = ['$scope', '$rootScope', '$location'];
 
-    controllers.DashboardCtrl = function($scope, $rootScope) {
-      $scope.title = "面板"
+  // 面板控制器
+  controllers.DashboardCtrl = function($scope, $rootScope) {
+    $scope.title = "面板"
+  }
+  controllers.DashboardCtrl.$inject = ['$scope', '$rootScope'];
+
+  // 订单控制器
+  controllers.OrdersCtrl = function($scope, $rootScope, OrderService) {
+    $scope.currentPageNum = 6;
+    $scope.totalItems = 0;
+    $scope.count = 10;
+    $scope.currentPage = 1;
+    $scope.maxSize = 8;
+    $scope.pageSize = 10;
+    $scope.param = {};
+    $scope.data = {}; // 参数
+    $scope.data.param = $scope.param;
+    $scope.pagination = {};
+    $scope.pagination.data = [];
+    $scope.queryList = function(page) {
+      $scope.data.startIndex = (page - 1) * $scope.pageSize;
+      $scope.data.size = $scope.size;
+      OrderService.getOrders($scope.data.startIndex, $scope.data.size, 1, function(res) {
+        $scope.pagination.data = res.data.data;
+        $scope.totalItems = res.totalCount;
+        console.log(res.data)
+      }, function(err) {
+        console.log(err)
+      })
     }
-    controllers.DashboardCtrl.$inject = ['$scope', '$rootScope'];
+    $scope.queryList($scope.currentPage)
+  }
+  controllers.OrdersCtrl.$inject = ['$scope', '$rootScope', 'OrderService'];
 
-    controllers.CustomersCtrl = function($scope, $rootScope) {
-      $scope.title = "客户管理"
+  // 业务跟踪控制器
+  controllers.TracksCtrl = function($scope, $rootScope) {
+
+  }
+  controllers.TracksCtrl.$inject = ['$scope', '$rootScope'];
+
+
+
+  // 客户管理控制器
+  controllers.CustomersCtrl = function($scope, $rootScope, UserService) {
+    $scope.currentPageNum = 6;
+    $scope.totalItems = 0;
+    $scope.count = 10;
+    $scope.currentPage = 1;
+    $scope.maxSize = 8;
+    $scope.pageSize = 10;
+    $scope.param = {};
+    $scope.data = {}; // 参数
+    $scope.data.param = $scope.param;
+    $scope.pagination = {};
+    $scope.pagination.data = [];
+    $scope.queryList = function(page) {
+      $scope.data.startIndex = (page - 1) * $scope.pageSize;
+      $scope.data.size = $scope.size;
+      UserService.getUsers($scope.data.startIndex, $scope.data.size, function(res) {
+        $scope.pagination.data = res.data.data;
+        $scope.totalItems = res.totalCount;
+        console.log(res.data)
+      }, function(err) {
+        console.log(err)
+      })
     }
-    controllers.CustomersCtrl.$inject = ['$scope', '$rootScope'];
+    $scope.queryList($scope.currentPage)
+  }
+  controllers.CustomersCtrl.$inject = ['$scope', '$rootScope', 'UserService'];
 
 
-    return controllers;
+  return controllers;
 });

@@ -41,6 +41,13 @@ func init() {
 		HandlerFunc: handlers.PostUser,
 	})
 
+	routes = append(routes, Route{
+		Name:        "UserCreate",
+		Method:      "POST",
+		Pattern:     "/api/users/session",
+		HandlerFunc: handlers.LoginUser,
+	})
+
 	// orders routes.
 	routes = append(routes, Route{
 		Name:        "OrdersGet",

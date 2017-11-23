@@ -1,10 +1,23 @@
 package models
 
 import "time"
+import "errors"
+import (
+	"gopkg.in/mgo.v2/bson"
+)
+// Pagination 分页
+
+type Pagination struct {
+	Data interface{} `bson:"-" json:"data"`
+	TotalCount int `bson:"-" json:"totalCount"`
+}
 
 // User 用户信息
 type User struct {
-	ID          string    `bson:"_id" json:"id"`
+	ID          bson.ObjectId    `bson:"_id" json:"id"`
+	UserName    string    `bson:"username" json:"username"`
+	Password    string    `bson:"password" json:"password"`
+	Salt				string    `bson:"salt" json:"-"`
 	Nick        string    `bson:"nick" json:"nick"`
 	Email       string    `bson:"email" json:"email"`
 	Name        string    `bson:"name" json:"name"`
@@ -17,7 +30,7 @@ type User struct {
 
 // Order 订单信息
 type Order struct {
-	ID        string    `bson:"_id" json:"id"`
+	ID        bson.ObjectId    `bson:"_id" json:"id"`
 	UserID    string    `bson:"userID" json:"userID"`
 	Type      int       `bson:"type" json:"type"` //订单业务类型
 	Teams     []string  `bson:"teams" json:"teams"`
@@ -25,6 +38,7 @@ type Order struct {
 	Editors   []string  `bson:"editors" json:"editors"` //都谁可编辑订单
 	CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
 	Status    int       `bson:"status" json:"status"`
+	Company	  string    `bson:"companyName" json:"companyName"`
 }
 
 // Business 业务信息
@@ -72,3 +86,8 @@ type TaxInfo struct {
 	Other     float64   `bson:"other" json:"other"`   //其它
 	CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
 }
+
+
+var (
+	ErrUserNotFound = errors.New("用户不存在")
+)

@@ -1,0 +1,32 @@
+<div>
+  <div class="card">
+    <div class="header">
+      <h4 class="title">业务管理</h4>
+      <p class="category">建立财务月报订单跟踪数据，由业务录入，绑定客户可见</p>
+    </div>
+    <div class="content table-responsive table-full-width">
+      <table class="table table-hover table-striped" id="paninationData">
+        <thead>
+          <tr>
+            <th>#编号</th>
+            <th>绑定用户</th>
+            <th>订单类型</th>
+            <th>订单日期</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in pagination.data">
+            <td>{{item.username}}</td>
+            <td>{{item.nick}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.openID}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+      <uibPagination items-per-page="itemsPerPage" ng-model="currentPage" max-size="maxSize" class="pagination-sm" next-text="&raquo;" previous-text="&laquo;" boundary-links="false">
+      </uibPagination>
+    </div>
+  </div>
+</div>
