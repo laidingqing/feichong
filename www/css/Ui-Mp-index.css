@@ -1,0 +1,308 @@
+@media (min-width: 1200px) {
+    .navbar{
+        min-height: 80px;
+    } 
+    .container h1{
+        font-size: 38px;
+        font-weight: bold;
+    }
+    .container p{
+        width: 40%;
+        margin: 0 auto;
+        margin-top: 30px;
+    }
+    .jumbotron .container{
+        margin-top: 100px;
+    }
+    .btn{
+    width: 150px;
+    height: 48px;
+    border-radius: 24px;
+    background:#FF4081;
+    margin-top: 40px;
+    }
+    .banner-bg, .banner-bg2{
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 600px;
+    background-size: cover;
+}
+    .picture-bg{
+    width: 100%;
+    background-image: url(../img/sucess-picture.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 60px;
+    }
+    .projects-header {
+        width: 60%;
+        text-align: center;
+        margin: 60px 0 10px;
+        font-weight: 200;
+        margin-bottom: 40px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .intro{
+    width: 70%;
+    margin: 0 auto;
+    }
+    .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+        bottom: 25px;
+    }
+    .price-free, .price-basic{
+    border-radius: 5px;
+    width: 80%;
+    margin: 0 auto;
+    }
+    .navbar-brand img{
+    width: 80%;  
+    }
+    .navbar-nav>li>a{
+        padding: 0 15px;
+        line-height: 80px;
+    }
+}
+@media( max-width: 1200px) and (min-width: 768px)  { 
+    .container h1{
+        font-size: 34px;
+        font-weight: bold;
+    }
+    .container p{
+        width: 40%;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+     .btn{
+        width: 150px;
+        height: 48px;
+        border-radius: 24px;
+        background:#FF4081;
+        margin-top: 20px;
+        }
+    .picture-bg{
+    width: 100%;
+    background-image: url(../img/sucess-picture.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 60px;
+    }
+    .col-md-6-second{
+        margin-top: 20px;
+    }
+    .intro{
+    width: 70%;
+    margin: 0 auto;
+}
+    .projects-header {
+        width: 60%;
+        text-align: center;
+        margin: 60px 0 10px;
+        font-weight: 200;
+        margin-bottom: 40px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .navbar-brand{
+        padding: 7px 15px;
+    }
+      .navbar-brand img{
+    width: 60%;  
+    }
+}
+@media (max-width: 768px){ 
+    .container h1{
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .container p{
+        font-size: 14px;
+        width: 70%;
+        line-height: 26px;
+        margin: 0 auto;
+        margin-top: 30px;
+    }
+    .btn{
+    width: 120px;
+    height: 36px;
+    border-radius: 24px;
+    background:#FF4081;
+    margin-top: 20px;
+    }
+    .projects-reg{
+    width: 200px;
+    }
+    .page-header h2{
+     font-size: 16px;
+     line-height: 26px;
+    }
+    .reg-process img{
+    width: 100%;
+   }
+   .picture-bg{
+    width: 100%;
+    height: 300px;
+    background-image: url(../img/sucess-picture.png);
+    background-size: cover;
+    margin-top: 40px;
+  }
+  .col-md-6-second{
+        margin-top: 20px;
+    }
+  .intro-title, .price-title{
+      font-size: 20px;
+  }
+  .intro{
+    width: 90%;
+    margin: 0 auto;
+}
+  .projects-header {
+        width: 60%;
+        text-align: center;
+        margin: 40px 0 10px;
+        font-weight: 200;
+        margin-bottom: 40px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .price-free, .price-basic{
+    border-radius: 5px;
+    width: 90%;
+    margin: 0 auto;
+    }
+    .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+        bottom: 50px;
+    }
+    .navbar-brand{
+        padding: 7px 15px;
+    }
+      .navbar-brand img{
+    width: 60%;  
+    }
+}
+.navbar{
+    margin-bottom: 0px;
+}
+.swiper-slide{
+    height: auto;
+}
+.swiper-wrapper{
+    height: auto;
+}
+.navbar-inverse{
+    background: transparent;
+    border-color: transparent;
+}
+.jumbotron {
+    position: relative;
+    padding: 40px 0;
+    color: #fff;
+    text-align: center;
+    background-color: transparent;
+}
+.masthead {
+    padding: 90px 0 80px;
+}
+.reg-company{
+    color: #3A76E5;
+}
+.reg-process{
+    width: 90%;
+    margin: 0 auto;
+}
+.reg-process img{
+    width: 100%;
+}
+.reg-sucess{
+    width: 90%;
+    margin: 0 auto;
+}
+.reg-sucess img{
+     width: 100%;
+}
+.reg-wrap{
+    padding-top: 10px;
+    margin: 0 auto;
+}
+.banner-bg{
+    background-image: url(../img/banner01.png);
+}
+.banner-bg2{
+    background-image: url(../img/banner02.png);
+}
+.price-free{
+    background: #B3E5FC;
+}
+.price-basic{
+    background: #2196F3;
+}
+.price-free ul{
+    padding: 30px 30px;
+}
+.price-free li h3{
+    font-weight: bold;
+    line-height: 48px;
+}
+.price-basic ul{
+    color: #fff;
+    padding: 30px 30px;
+}
+.price-basic li h3{
+    font-weight: bold;
+    line-height: 48px;
+}
+
+.intro h3{
+    font-weight: bold;
+    color: #3A76E5;
+    line-height: 48px;
+}
+.contact-list{
+    padding-left: 0;
+    padding-right: 0;
+}
+.contact-list ul{
+     padding: 20px 0;
+}
+.list-inline{
+    margin-left: 0;
+}
+.contact-infor{
+    margin-right: 0;
+    margin-left: 0;
+    margin: 20px 0;
+    border: solid 1px #ccc;
+}
+.footer{
+   margin-top: 30px;
+    background: #3A76E5;
+    color: #FFF;
+    line-height: 20px;
+    text-align: center;
+}
+.footer p{
+    line-height: 55px;
+}
+.navbar-inverse .navbar-toggle:hover {
+     background-color: transparent; 
+}
+.navbar-inverse .navbar-toggle {
+     border-color: transparent; 
+}
+.navbar-inverse .navbar-collapse{
+    border-color: #ccc;
+    font-size: 18px;
+}
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover{
+    color: #d9d9d9;
+    cursor: pointer;
+}
+.navbar-inverse .navbar-nav>li>a{
+    color: #fff;
+}
+.navbar-inverse .navbar-nav>li>a:hover{
+    color: #d9d9d9;
+}
