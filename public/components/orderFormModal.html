@@ -1,0 +1,38 @@
+<div class="modal-header">
+  <h3 class="modal-title">新增订单</h3>
+</div>
+<div class="modal-body" ng-init="init()">
+  <form>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>订单类型</label>
+          <div class="">
+            <input class="form-check-input" type="radio" name="catalog" id="inlineCheckbox1" value="1"> 财务外包
+            <input class="form-check-input" type="radio" name="catalog" id="inlineCheckbox2" value="2"> 工商注册
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+          <div class="form-group">
+            <label for="price">绑定公司</label>
+            <select class="form-control">
+                <option>AAAA</option>
+            </select>
+          </div>
+      </div>
+      <div class="col-md-12">
+          <div class="form-group">
+            <label for="price">绑定团队</label>
+            <select class="form-control">
+                          <option>AAAA</option>
+                      </select>
+          </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-sm btn-default" type="button" ng-click="cancel()">取消</button>
+  <button class="btn btn-sm btn-primary" type="button" ng-click="ok()">确定</button>
+</div>

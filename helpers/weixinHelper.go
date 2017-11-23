@@ -135,8 +135,8 @@ func getWxSession(code string) (Jscode2Session, int64, error) {
 		return ret, 500001, fmt.Errorf("Code为空")
 	}
 	urls := url.Values{}
-	urls.Add("appid", "wxbea870699c843ded")
-	urls.Add("secret", "291514eec27a0440778cb266677a7401")
+	urls.Add("appid", "wxf5a6ca5f27f3d5cc")
+	urls.Add("secret", "ef76ee8e04486cd4c4ba81188b5b9ccd")
 	urls.Add("js_code", code)
 	urls.Add("grant_type", "authorization_code")
 	url := fmt.Sprintf("https://api.weixin.qq.com/sns/jscode2session?" + urls.Encode())

@@ -62,6 +62,20 @@ func GetUserByUserName(username string) models.User {
 	return user
 }
 
+// GetUserByOpenID
+func GetUserByOpenID(openID string) models.User {
+
+	var user models.User
+
+	query := func(c *mgo.Collection) error {
+		return c.Find(bson.M{"openID": openID}).One(&user)
+	}
+
+	executeQuery(userCollectionName, query)
+
+	return user
+}
+
 // InsertUser 新增用户
 func InsertUser(user models.User) string {
 	user.ID = bson.NewObjectId()

@@ -12,9 +12,10 @@
           <tr>
             <th>用户名</th>
             <th>昵称</th>
-            <th>邮箱</th>
-            <th>微信绑定</th>
+            <th>公司名称</th>
+            <th>绑定微信</th>
             <th>管理员</th>
+            <th>注册日期</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -22,10 +23,15 @@
           <tr ng-repeat="item in pagination.data">
             <td>{{item.username}}</td>
             <td>{{item.nick}}</td>
-            <td>{{item.email}}</td>
+            <td>{{item.companyName}}</td>
             <td>{{item.openID}}</td>
             <td>{{item.admin ? '是' : '否'}}</td>
-            <td></td>
+            <td><span ng-bind="item.createdAt | date: 'yyyy-MM-dd'"></span></td>
+            <td>
+              <button type="button" ng-click="upateProfile(item.ID)" rel="tooltip" title="完善信息" class="btn btn-info btn-simple btn-xs">
+                  <i class="fa fa-edit"></i>
+              </button>
+            </td>
           </tr>
         </tbody>
 

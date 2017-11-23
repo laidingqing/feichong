@@ -123,7 +123,7 @@ func init() {
 	routes = append(routes, Route{
 		Name:        "WeixinLogin",
 		Method:      "POST",
-		Pattern:     "/api/weixin/login/",
+		Pattern:     "/api/weixin/login",
 		HandlerFunc: handlers.LoginSession,
 	})
 

@@ -20,7 +20,7 @@ define(function() {
   controllers.DashboardCtrl.$inject = ['$scope', '$rootScope'];
 
   // 订单控制器
-  controllers.OrdersCtrl = function($scope, $rootScope, OrderService) {
+  controllers.OrdersCtrl = function($scope, $rootScope, $uibModal, OrderService) {
     $scope.currentPageNum = 6;
     $scope.totalItems = 0;
     $scope.count = 10;
@@ -43,20 +43,58 @@ define(function() {
         console.log(err)
       })
     }
+    $scope.showFormModal = function () {
+        var modalInstance = $uibModal.open({
+            templateUrl: '../components/orderFormModal.html?3',
+            controller: ['$scope', '$uibModal', controllers.NewOrderCtrl],
+            size: 'lg',
+            resolve: {
+
+            }
+        });
+        return modalInstance;
+    }
     $scope.queryList($scope.currentPage)
   }
-  controllers.OrdersCtrl.$inject = ['$scope', '$rootScope', 'OrderService'];
+  controllers.OrdersCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'OrderService'];
 
   // 业务跟踪控制器
-  controllers.TracksCtrl = function($scope, $rootScope) {
+  controllers.TracksCtrl = function($scope, $rootScope, OrderService) {
+
+    $scope.totalItems = 64;
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 10;
+
+    $scope.pagination = {};
+    $scope.pagination.data = [];
+
+    $scope.$watch("currentPage", function() {
+      queryList($scope.currentPage);
+    });
+
+    var queryList = function(page) {
+      var page = (page - 1) * $scope.itemsPerPage;
+      var size = $scope.itemsPerPage;
+      OrderService.getOrders(page, size, 1, function(res) {
+        $scope.pagination.data = res.data.data;
+        $scope.totalItems = res.totalCount;
+        console.log(res.data)
+      }, function(err) {
+        console.log(err)
+      })
+    }
 
   }
-  controllers.TracksCtrl.$inject = ['$scope', '$rootScope'];
+  controllers.TracksCtrl.$inject = ['$scope', '$rootScope', 'OrderService'];
 
+  controllers.NewOrderCtrl = function($scope, $rootScope, OrderService) {
 
+  }
+
+  controllers.NewOrderCtrl.$inject = ['$scope', '$rootScope', 'OrderService'];
 
   // 客户管理控制器
-  controllers.CustomersCtrl = function($scope, $rootScope, UserService) {
+  controllers.CustomersCtrl = function($scope, $rootScope, $uibModal, UserService) {
     $scope.totalItems = 64;
     $scope.currentPage = 1;
     $scope.itemsPerPage = 10;
@@ -79,8 +117,25 @@ define(function() {
         console.log(err)
       })
     }
+
+    $scope.upateProfile = function(id){
+      var modalInstance = $uibModal.open({
+          templateUrl: '../components/userFormModal.html?3',
+          controller: ['$scope', '$uibModal', 'userId', function($scope, $uibModal, userId){
+            console.log(userId)
+  					$scope.ok = function () {
+  						$uibModal.close();
+  					};
+          }],
+          size: 'lg',
+          resolve: {
+            userId: function(){ return id;}
+          }
+      });
+      return modalInstance;
+    }
   }
-  controllers.CustomersCtrl.$inject = ['$scope', '$rootScope', 'UserService'];
+  controllers.CustomersCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'UserService'];
 
 
   return controllers;

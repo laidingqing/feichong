@@ -26,6 +26,7 @@ type User struct {
 	Admin       bool      `bson:"admin" json:"admin"`
 	OpenID      string    `bson:"openID" json:"openID"`
 	CreatedAt   time.Time `bson:"createdAt" json:"createdAt"`
+	Avatar	    string    `bson:"avatar" json:"avatar"`
 }
 
 // Order 订单信息

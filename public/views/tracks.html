@@ -10,23 +10,25 @@
           <tr>
             <th>#编号</th>
             <th>绑定用户</th>
+            <th>公司名称</th>
             <th>订单类型</th>
             <th>订单日期</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="item in pagination.data">
-            <td>{{item.username}}</td>
-            <td>{{item.nick}}</td>
-            <td>{{item.email}}</td>
-            <td>{{item.openID}}</td>
+            <td>{{item.ID}}</td>
+            <td>{{item.userID}}</td>
+            <td>{{item.companyName}}</td>
+            <td>{{item.type == 1 ? "财务外包": ""}}</td>
+            <td><span ng-bind="item.createdAt | date: 'yyyy-MM-dd'"></span></td>
           </tr>
         </tbody>
 
       </table>
 
-      <uibPagination items-per-page="itemsPerPage" ng-model="currentPage" max-size="maxSize" class="pagination-sm" next-text="&raquo;" previous-text="&laquo;" boundary-links="false">
-      </uibPagination>
+      <ui uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" max-size="maxSize" class="pagination-sm" next-text="&raquo;" previous-text="&laquo;" boundary-links="false">
+      </ui>
     </div>
   </div>
 </div>
