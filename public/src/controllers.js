@@ -57,21 +57,21 @@ define(function() {
 
   // 客户管理控制器
   controllers.CustomersCtrl = function($scope, $rootScope, UserService) {
-    $scope.currentPageNum = 6;
-    $scope.totalItems = 0;
-    $scope.count = 10;
+    $scope.totalItems = 64;
     $scope.currentPage = 1;
-    $scope.maxSize = 8;
-    $scope.pageSize = 10;
-    $scope.param = {};
-    $scope.data = {}; // 参数
-    $scope.data.param = $scope.param;
+    $scope.itemsPerPage = 10;
+
     $scope.pagination = {};
     $scope.pagination.data = [];
-    $scope.queryList = function(page) {
-      $scope.data.startIndex = (page - 1) * $scope.pageSize;
-      $scope.data.size = $scope.size;
-      UserService.getUsers($scope.data.startIndex, $scope.data.size, function(res) {
+
+    $scope.$watch("currentPage", function() {
+      queryList($scope.currentPage);
+    });
+
+    var queryList = function(page) {
+      var page = (page - 1) * $scope.itemsPerPage;
+      var size = $scope.itemsPerPage;
+      UserService.getUsers(page, size, function(res) {
         $scope.pagination.data = res.data.data;
         $scope.totalItems = res.totalCount;
         console.log(res.data)
@@ -79,7 +79,6 @@ define(function() {
         console.log(err)
       })
     }
-    $scope.queryList($scope.currentPage)
   }
   controllers.CustomersCtrl.$inject = ['$scope', '$rootScope', 'UserService'];
 
