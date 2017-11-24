@@ -79,7 +79,9 @@ func AddCapitalInfoByOrder(w http.ResponseWriter, r *http.Request) {
 	orderID := helpers.GetParam(r, busOrderIDParam)
 
 	var capital models.CapitalInfo
+
 	helpers.GetCapitalInfoBody(w, r, &capital)
+	capital.OrderID = orderID
 
 	if true {
 		helpers.SetResponse(w, http.StatusOK, nil)

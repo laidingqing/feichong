@@ -94,28 +94,28 @@ func init() {
 	routes = append(routes, Route{
 		Name:        "OrderTaxCreate",
 		Method:      "POST",
-		Pattern:     "/api/orders/{orderId}/tax/",
+		Pattern:     "/api/orders/{orderId}/tax",
 		HandlerFunc: handlers.AddTaxInfoByOrder,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderTaxGet",
 		Method:      "GET",
-		Pattern:     "/api/orders/{orderId}/tax/{month}/",
+		Pattern:     "/api/orders/{orderId}/tax/{month}",
 		HandlerFunc: handlers.GetTaxInfosByOrder,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderCaptialCreate",
 		Method:      "POST",
-		Pattern:     "/api/orders/{orderId}/captials/",
+		Pattern:     "/api/orders/{orderId}/captials",
 		HandlerFunc: handlers.AddCapitalInfoByOrder,
 	})
 
 	routes = append(routes, Route{
 		Name:        "OrderCaptialGet",
 		Method:      "GET",
-		Pattern:     "/api/orders/{orderId}/captials/{month}/",
+		Pattern:     "/api/orders/{orderId}/captials/{month}",
 		HandlerFunc: handlers.GetCapitalInfosByOrder,
 	})
 
