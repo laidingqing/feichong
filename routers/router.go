@@ -119,6 +119,21 @@ func init() {
 		HandlerFunc: handlers.GetCapitalInfosByOrder,
 	})
 
+	// 咨询接口
+	routes = append(routes, Route{
+		Name:        "ConsultCreate",
+		Method:      "POST",
+		Pattern:     "/api/consults",
+		HandlerFunc: handlers.AddCapitalInfoByOrder,
+	})
+
+	routes = append(routes, Route{
+		Name:        "ConsultGet",
+		Method:      "GET",
+		Pattern:     "/api/consults",
+		HandlerFunc: handlers.GetCapitalInfosByOrder,
+	})
+
 	// weixin route
 	routes = append(routes, Route{
 		Name:        "WeixinLogin",

@@ -22,7 +22,7 @@ type User struct {
 	Email       string    `bson:"email" json:"email"`
 	Name        string    `bson:"name" json:"name"`
 	Phone       string    `bson:"phone" json:"phone"`
-	CompanyName bool      `bson:"companyName" json:"companyName"`
+	CompanyName string    `bson:"companyName" json:"companyName"`
 	Admin       bool      `bson:"admin" json:"admin"`
 	OpenID      string    `bson:"openID" json:"openID"`
 	CreatedAt   time.Time `bson:"createdAt" json:"createdAt"`
@@ -33,6 +33,7 @@ type User struct {
 type Order struct {
 	ID        bson.ObjectId    `bson:"_id" json:"id"`
 	UserID    string    `bson:"userID" json:"userID"`
+	Saler			string    `bson:"saler" json:"saler"`
 	Type      int       `bson:"type" json:"type"` //订单业务类型
 	Teams     []string  `bson:"teams" json:"teams"`
 	Views     []string  `bson:"views" json:"views"`     //都谁可查看订单
@@ -88,6 +89,18 @@ type TaxInfo struct {
 	CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
 }
 
+// 咨询表单记录
+type Consult struct {
+		ID string `bson:"_id" json:"id"`
+		From string `bson:"from" json:"from"`
+		Invite string `bson:"invite" json:"invite"`
+		Name string `bson:"name" json:"name"`
+		Phone string `bson:"phone" json:"phone"`
+		Description string `bson:"description" json:"description"`
+		CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
+		Catalog string `bson:"catalog" json:"catalog"`
+		Biz string `bson:"biz" json:"biz"`
+}
 
 var (
 	ErrUserNotFound = errors.New("用户不存在")
