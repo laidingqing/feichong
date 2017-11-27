@@ -37,14 +37,8 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 func GetUserByID(w http.ResponseWriter, r *http.Request) {
 
 	userID := helpers.GetParam(r, userIDParam)
-
 	model := managers.GetUserByID(userID)
-
-	if (models.User{}) == model {
-		helpers.SetResponse(w, http.StatusNotFound, nil)
-	} else {
-		helpers.SetResponse(w, http.StatusOK, model)
-	}
+	helpers.SetResponse(w, http.StatusOK, model)
 }
 
 // PostUser create user

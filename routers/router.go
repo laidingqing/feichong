@@ -30,7 +30,7 @@ func init() {
 	routes = append(routes, Route{
 		Name:        "UserGetById",
 		Method:      "GET",
-		Pattern:     "/api/users/{userId}",
+		Pattern:     "/api/users/{userId}/",
 		HandlerFunc: handlers.GetUserByID,
 	})
 
@@ -44,14 +44,14 @@ func init() {
 	routes = append(routes, Route{
 		Name:        "UserCreate",
 		Method:      "POST",
-		Pattern:     "/api/users/session",
+		Pattern:     "/api/session",
 		HandlerFunc: handlers.LoginUser,
 	})
 
 	routes = append(routes, Route{
 		Name:        "UserSelf",
 		Method:      "GET",
-		Pattern:     "/api/users/self",
+		Pattern:     "/api/operators",
 		HandlerFunc: handlers.SelfUsers,
 	})
 

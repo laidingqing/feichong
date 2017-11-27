@@ -40,7 +40,7 @@ func GetUserByID(userID string) models.User {
 	}
 
 	query := func(c *mgo.Collection) error {
-		return c.FindId(userID).One(&user)
+		return c.FindId(bson.ObjectIdHex(userID)).One(&user)
 	}
 
 	executeQuery(userCollectionName, query)

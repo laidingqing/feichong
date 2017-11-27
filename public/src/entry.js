@@ -10,7 +10,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('login', { url: '/login', templateUrl: 'views/login.html?1', controller: controllers.HomeCtrl })
         .state('dashboard', { url: '/dashboard', templateUrl: 'views/dashboard.html?6', controller: controllers.DashboardCtrl })
-        .state('dashboard.customers', { url: '/customers', templateUrl: 'views/customers.html?5', controller: controllers.CustomersCtrl })
+        .state('dashboard.customers', { url: '/customers', templateUrl: 'views/customers.html?6', controller: controllers.CustomersCtrl })
         .state('dashboard.orders', { url: '/orders', templateUrl: 'views/orders.html?3', controller: controllers.OrdersCtrl })
         .state('dashboard.tracks', { url: '/tracks', templateUrl: 'views/tracks.html?2', controller: controllers.TracksCtrl })
 });

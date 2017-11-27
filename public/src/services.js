@@ -84,7 +84,7 @@ define(['angular'], function(angular) {
           var headers = {
             'Content-Type': 'application/json'
           };
-          $http.get(Config.url + this.type + "/" + userId, {}, {
+          $http.get(Config.url + this.type + "/" + userId + "/", {}, {
               headers: headers
             })
             .then(function(response) {
@@ -98,7 +98,7 @@ define(['angular'], function(angular) {
           var headers = {
             'Content-Type': 'application/json'
           };
-          $http.get(Config.url + this.type + "/self" + userId, {}, {
+          $http.get(Config.url + "operators", {}, {
               headers: headers
             })
             .then(function(response) {

@@ -45,8 +45,8 @@ define(function() {
     }
     $scope.showFormModal = function () {
         var modalInstance = $uibModal.open({
-            templateUrl: '../components/orderFormModal.html?3',
-            controller: ['$scope', '$uibModal', 'OrderService', controllers.NewOrderCtrl],
+            templateUrl: '../components/orderFormModal.html?5',
+            controller: controllers.NewOrderCtrl,
             size: 'lg',
             resolve: {
             }
@@ -86,11 +86,13 @@ define(function() {
   }
   controllers.TracksCtrl.$inject = ['$scope', '$rootScope', 'OrderService'];
 
-  controllers.NewOrderCtrl = function($scope, $uibModal, OrderService) {
+  controllers.NewOrderCtrl = function($scope, $uibModal, OrderService, UserService) {
     $scope.users = []
+    $scope.selected
     var queryList = function() {
-      OrderService.getUserBySelf(function(response){
+      UserService.getUserBySelf(function(response){
         $scope.users = response.data
+        console.log($scope.users)
       }, function(err){
         console.log(err)
       })
@@ -98,7 +100,7 @@ define(function() {
     queryList();
   }
 
-  controllers.NewOrderCtrl.$inject = ['$scope', '$rootScope', 'OrderService'];
+  controllers.NewOrderCtrl.$inject = ['$scope', '$uibModal', 'OrderService', 'UserService'];
 
   // 客户管理控制器
   controllers.CustomersCtrl = function($scope, $rootScope, $uibModal, UserService) {
@@ -127,22 +129,34 @@ define(function() {
 
     $scope.upateProfile = function(id){
       var modalInstance = $uibModal.open({
-          templateUrl: '../components/userFormModal.html?3',
-          controller: ['$scope', '$uibModal', 'userId', function($scope, $uibModal, userId){
-            console.log(userId)
-  					$scope.ok = function () {
-  						$uibModal.close();
-  					};
-          }],
+          templateUrl: '../components/userFormModal.html?6',
+          controller: controllers.UpdateProfileCtrl,
           size: 'lg',
           resolve: {
-            userId: function(){ return id;}
+            updateUserId: function(){
+              return id
+            }
           }
       });
       return modalInstance;
     }
   }
   controllers.CustomersCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'UserService'];
+
+  controllers.UpdateProfileCtrl = function($scope, $uibModal, UserService, updateUserId){
+    $scope.user = {}
+    UserService.getUser(updateUserId, function(res){
+      $scope.user = res
+    }, function(err){
+      console.log(err)
+    })
+
+    $scope.ok = function () {
+      $uibModal.close();
+    };
+  }
+
+  controllers.UpdateProfileCtrl.$inject = ['$scope', '$uibModal', 'UserService', 'updateUserId'];
 
 
   return controllers;
