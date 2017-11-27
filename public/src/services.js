@@ -94,6 +94,20 @@ define(['angular'], function(angular) {
               error(err);
             })
         },
+        getUserBySelf: function(success, error) {
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.get(Config.url + this.type + "/self" + userId, {}, {
+              headers: headers
+            })
+            .then(function(response) {
+              success(response);
+            })
+            .catch(function(err) {
+              error(err);
+            })
+        },
         getUsers: function(page = 0, size = 10, success, error) {
           var headers = {
             'Content-Type': 'application/json'

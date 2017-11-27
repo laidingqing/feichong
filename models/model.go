@@ -33,6 +33,7 @@ type User struct {
 type Order struct {
 	ID        bson.ObjectId    `bson:"_id" json:"id"`
 	UserID    string    `bson:"userID" json:"userID"`
+	OrderNO   string    `bson:"orderNO" json:"orderNO"`
 	Saler			string    `bson:"saler" json:"saler"`
 	Type      int       `bson:"type" json:"type"` //订单业务类型
 	Teams     []string  `bson:"teams" json:"teams"`

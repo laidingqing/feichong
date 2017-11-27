@@ -63,6 +63,12 @@ func PostUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// SelfUsers 获取管理用户
+func SelfUsers(w http.ResponseWriter, r *http.Request) {
+	users := managers.GetUsersBySelf()
+	helpers.SetResponse(w, http.StatusOK, users)
+}
+
 // LoginUser 用户登录
 func LoginUser(w http.ResponseWriter, r *http.Request) {
 

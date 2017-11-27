@@ -1,7 +1,7 @@
 @media (min-width: 1200px) {
     .navbar{
         min-height: 80px;
-    } 
+    }
     .container h1{
         font-size: 38px;
         font-weight: bold;
@@ -32,7 +32,7 @@
     background-image: url(../img/sucess-picture.png);
     background-repeat: no-repeat;
     background-size: cover;
-    margin-top: 60px;
+    /*margin-top: 60px;*/
     }
     .projects-header {
         width: 60%;
@@ -57,14 +57,14 @@
     margin: 0 auto;
     }
     .navbar-brand img{
-    width: 80%;  
+    width: 80%;
     }
     .navbar-nav>li>a{
         padding: 0 15px;
         line-height: 80px;
     }
 }
-@media( max-width: 1200px) and (min-width: 768px)  { 
+@media( max-width: 1200px) and (min-width: 768px)  {
     .container h1{
         font-size: 34px;
         font-weight: bold;
@@ -109,10 +109,10 @@
         padding: 7px 15px;
     }
       .navbar-brand img{
-    width: 60%;  
+    width: 60%;
     }
 }
-@media (max-width: 768px){ 
+@media (max-width: 768px){
     .container h1{
         font-size: 20px;
         font-weight: bold;
@@ -180,7 +180,7 @@
         padding: 7px 15px;
     }
       .navbar-brand img{
-    width: 60%;  
+    width: 60%;
     }
 }
 .navbar{
@@ -287,10 +287,10 @@
     line-height: 55px;
 }
 .navbar-inverse .navbar-toggle:hover {
-     background-color: transparent; 
+     background-color: transparent;
 }
 .navbar-inverse .navbar-toggle {
-     border-color: transparent; 
+     border-color: transparent;
 }
 .navbar-inverse .navbar-collapse{
     border-color: #ccc;

@@ -62,6 +62,20 @@ func GetUserByUserName(username string) models.User {
 	return user
 }
 
+// GetUsersBySelf 获取管理员用户
+func GetUsersBySelf() []models.User {
+
+	var users []models.User
+
+	query := func(c *mgo.Collection) error {
+		return c.Find(bson.M{"admin": true}).All(&users)
+	}
+
+	executeQuery(userCollectionName, query)
+
+	return users
+}
+
 // GetUserByOpenID
 func GetUserByOpenID(openID string) models.User {
 

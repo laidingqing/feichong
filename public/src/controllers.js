@@ -46,10 +46,9 @@ define(function() {
     $scope.showFormModal = function () {
         var modalInstance = $uibModal.open({
             templateUrl: '../components/orderFormModal.html?3',
-            controller: ['$scope', '$uibModal', controllers.NewOrderCtrl],
+            controller: ['$scope', '$uibModal', 'OrderService', controllers.NewOrderCtrl],
             size: 'lg',
             resolve: {
-
             }
         });
         return modalInstance;
@@ -87,8 +86,16 @@ define(function() {
   }
   controllers.TracksCtrl.$inject = ['$scope', '$rootScope', 'OrderService'];
 
-  controllers.NewOrderCtrl = function($scope, $rootScope, OrderService) {
-
+  controllers.NewOrderCtrl = function($scope, $uibModal, OrderService) {
+    $scope.users = []
+    var queryList = function() {
+      OrderService.getUserBySelf(function(response){
+        $scope.users = response.data
+      }, function(err){
+        console.log(err)
+      })
+    }
+    queryList();
   }
 
   controllers.NewOrderCtrl.$inject = ['$scope', '$rootScope', 'OrderService'];

@@ -48,6 +48,13 @@ func init() {
 		HandlerFunc: handlers.LoginUser,
 	})
 
+	routes = append(routes, Route{
+		Name:        "UserSelf",
+		Method:      "GET",
+		Pattern:     "/api/users/self",
+		HandlerFunc: handlers.SelfUsers,
+	})
+
 	// orders routes.
 	routes = append(routes, Route{
 		Name:        "OrdersGet",
