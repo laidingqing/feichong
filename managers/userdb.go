@@ -48,6 +48,26 @@ func GetUserByID(userID string) models.User {
 	return user
 }
 
+func UpdateUserByID(user models.User) models.User {
+
+	us := GetUserByID(user.ID.Hex())
+
+	us.UserName = user.UserName
+	us.Email = user.Email
+	us.CompanyName = user.CompanyName
+	us.Phone = user.Phone
+	us.Admin = user.Admin
+
+
+	query := func(c *mgo.Collection) error {
+		return c.UpdateId(user.ID, us)
+	}
+
+	executeQuery(userCollectionName, query)
+
+	return user
+}
+
 // GetUserByUserName 根据用户获取用户信息
 func GetUserByUserName(username string) models.User {
 
@@ -69,6 +89,20 @@ func GetUsersBySelf() []models.User {
 
 	query := func(c *mgo.Collection) error {
 		return c.Find(bson.M{"admin": true}).All(&users)
+	}
+
+	executeQuery(userCollectionName, query)
+
+	return users
+}
+
+// GetUsersByEnterPrise 获取管理员用户
+func GetUsersByEnterPrise() []models.User {
+
+	var users []models.User
+
+	query := func(c *mgo.Collection) error {
+		return c.Find(bson.M{"admin": false, "companyName": bson.M{"$ne": ""}}).All(&users)
 	}
 
 	executeQuery(userCollectionName, query)

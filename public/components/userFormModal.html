@@ -6,19 +6,19 @@
     <div class="col-md-4">
       <div class="form-group">
         <label>微信昵称</label>
-        <input class="form-control" />
+        <input class="form-control" ng-model="user.nick" disabled/>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label>用户名</label>
-        <input class="form-control" />
+        <input class="form-control" ng-model="user.username" placeholder="非管理员，不需要输入"/>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label>姓名</label>
-        <input class="form-control" />
+        <input class="form-control" ng-model="user.name" placeholder="输入姓名"/>
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <label>电话</label>
-        <input class="form-control" />
+        <input class="form-control" ng-model="user.phone" placeholder="请输入一个联系电话"/>
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <label>邮箱</label>
-        <label class="form-control">邮箱</label>
+        <input class="form-control" ng-model="user.email" placeholder="xx@example.com"/>
       </div>
     </div>
   </div>
@@ -42,11 +42,19 @@
     <div class="col-md-12">
       <div class="form-group">
         <label>公司名称</label>
-        <input class="form-control" />
+        <input class="form-control" ng-model="user.companyName" placeholder="输入客户公司名称"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>是否管理员<input class="" type="checkbox" ng-model="user.admin"></label>
       </div>
     </div>
   </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-sm btn-default" type="button" ng-click="cancel()">取消</button>
+  <button class="btn btn-sm btn-info" type="button" ng-click="submit()">更新</button>
 </div>

@@ -21,6 +21,7 @@ func GetOrders(w http.ResponseWriter, r *http.Request) {
 	catalogQuery, _ := strconv.Atoi(catalog)
 
 	orders, err := managers.GetOrders(pageIndex, pageSize, catalogQuery)
+
 	if err == nil {
 		helpers.SetResponse(w, http.StatusOK, orders)
 	} else {
@@ -45,13 +46,16 @@ func GetOrderByID(w http.ResponseWriter, r *http.Request) {
 // PostOrder create user
 func PostOrder(w http.ResponseWriter, r *http.Request) {
 
-	var order models.Order
-	helpers.GetOrderBody(w, r, &order)
+	var orderReq models.Order
+	helpers.GetOrderBody(w, r, &orderReq)
 
-	id := managers.InsertOrder(order)
+	order := managers.InsertOrder(orderReq)
 
-	if id != "" {
-		helpers.SetResponse(w, http.StatusCreated, nil)
+	log := helpers.NewLogger()
+	log.Log("orderID", order.ID, "userInfo", orderReq.SalerInfo.Id)
+
+	if order.ID != "" {
+		helpers.SetResponse(w, http.StatusCreated, order)
 	} else {
 		helpers.SetResponse(w, http.StatusBadRequest, nil)
 	}

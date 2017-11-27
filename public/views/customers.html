@@ -12,6 +12,7 @@
           <tr>
             <th>用户名</th>
             <th>昵称</th>
+            <th>姓名</th>
             <th>公司名称</th>
             <th>绑定微信</th>
             <th>管理员</th>
@@ -23,8 +24,9 @@
           <tr ng-repeat="item in pagination.data">
             <td>{{item.username}}</td>
             <td>{{item.nick}}</td>
+            <td>{{item.name}}</td>
             <td>{{item.companyName}}</td>
-            <td>{{item.openID}}</td>
+            <td>{{item.openID != "" : '已绑定' : '未绑定'}}</td>
             <td>{{item.admin ? '是' : '否'}}</td>
             <td><span ng-bind="item.createdAt | date: 'yyyy-MM-dd'"></span></td>
             <td>

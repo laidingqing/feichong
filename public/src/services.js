@@ -80,6 +80,22 @@ define(['angular'], function(angular) {
               callback(err);
             })
         },
+        putUser: function(user, callback) {
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          var jsonObject = angular.toJson(user);
+          $http.put(Config.url + this.type + '/' + user.id +"/", jsonObject, {
+              headers: headers
+            })
+            .then(function(response) {
+              console.log(response)
+              callback(response);
+            })
+            .catch(function(err) {
+              callback(err);
+            })
+        },
         getUser: function(userId, success, error) {
           var headers = {
             'Content-Type': 'application/json'
@@ -88,7 +104,7 @@ define(['angular'], function(angular) {
               headers: headers
             })
             .then(function(response) {
-              success(response);
+              success(response.data);
             })
             .catch(function(err) {
               error(err);
@@ -99,6 +115,20 @@ define(['angular'], function(angular) {
             'Content-Type': 'application/json'
           };
           $http.get(Config.url + "operators", {}, {
+              headers: headers
+            })
+            .then(function(response) {
+              success(response);
+            })
+            .catch(function(err) {
+              error(err);
+            })
+        },
+        getUserByEnterprise: function(success, error) {
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.get(Config.url + "companies/", {}, {
               headers: headers
             })
             .then(function(response) {
@@ -148,7 +178,23 @@ define(['angular'], function(angular) {
             .catch(function(err) {
               error(err);
             })
-        }
+        },
+        postOrder: function(order, callback) {
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          var jsonObject = angular.toJson(order);
+          $http.post(Config.url + this.type + '/', jsonObject, {
+              headers: headers
+            })
+            .then(function(response) {
+              console.log(response)
+              callback(response);
+            })
+            .catch(function(err) {
+              callback(err);
+            })
+        },
       }
       return Order;
     }])

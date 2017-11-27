@@ -4,6 +4,7 @@ import "time"
 import "errors"
 import (
 	"gopkg.in/mgo.v2/bson"
+	"gopkg.in/mgo.v2"
 )
 // Pagination 分页
 
@@ -32,16 +33,16 @@ type User struct {
 // Order 订单信息
 type Order struct {
 	ID        bson.ObjectId    `bson:"_id" json:"id"`
-	UserID    string    `bson:"userID" json:"userID"`
 	OrderNO   string    `bson:"orderNO" json:"orderNO"`
-	Saler			string    `bson:"saler" json:"saler"`
-	Type      int       `bson:"type" json:"type"` //订单业务类型
+	Catalog      int    `bson:"catalog" json:"catalog"` //订单业务类型
 	Teams     []string  `bson:"teams" json:"teams"`
 	Views     []string  `bson:"views" json:"views"`     //都谁可查看订单
 	Editors   []string  `bson:"editors" json:"editors"` //都谁可编辑订单
 	CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
 	Status    int       `bson:"status" json:"status"`
 	Company	  string    `bson:"companyName" json:"companyName"`
+	SalerInfo mgo.DBRef `bson:"saler,omitempty" json:"salerInfo,omitempty"`
+	UserInfo  mgo.DBRef `bson:"userid,omitempty" json:"userInfo,omitempty"`
 }
 
 // Business 业务信息

@@ -35,6 +35,13 @@ func init() {
 	})
 
 	routes = append(routes, Route{
+		Name:        "UpdateUser",
+		Method:      "PUT",
+		Pattern:     "/api/users/{userId}/",
+		HandlerFunc: handlers.PutUserByID,
+	})
+
+	routes = append(routes, Route{
 		Name:        "UserCreate",
 		Method:      "POST",
 		Pattern:     "/api/users",
@@ -53,6 +60,13 @@ func init() {
 		Method:      "GET",
 		Pattern:     "/api/operators",
 		HandlerFunc: handlers.SelfUsers,
+	})
+
+	routes = append(routes, Route{
+		Name:        "UserSelf",
+		Method:      "GET",
+		Pattern:     "/api/companies",
+		HandlerFunc: handlers.EnterPriseUsers,
 	})
 
 	// orders routes.
@@ -78,7 +92,7 @@ func init() {
 	})
 
 	routes = append(routes, Route{
-		Name:        "OrderCreate",
+		Name:        "OrderUpdateView",
 		Method:      "PUT",
 		Pattern:     "/api/orders/{orderId}/views/",
 		HandlerFunc: handlers.PutOrderByViews,

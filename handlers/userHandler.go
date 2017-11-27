@@ -41,6 +41,14 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	helpers.SetResponse(w, http.StatusOK, model)
 }
 
+
+// Update User Profile
+func PutUserByID(w http.ResponseWriter, r *http.Request) {
+	var user models.User
+	helpers.GetUserBody(w, r, &user)
+	managers.UpdateUserByID(user)
+}
+
 // PostUser create user
 func PostUser(w http.ResponseWriter, r *http.Request) {
 
@@ -60,6 +68,11 @@ func PostUser(w http.ResponseWriter, r *http.Request) {
 // SelfUsers 获取管理用户
 func SelfUsers(w http.ResponseWriter, r *http.Request) {
 	users := managers.GetUsersBySelf()
+	helpers.SetResponse(w, http.StatusOK, users)
+}
+
+func EnterPriseUsers(w http.ResponseWriter, r *http.Request) {
+	users := managers.GetUsersByEnterPrise()
 	helpers.SetResponse(w, http.StatusOK, users)
 }
 

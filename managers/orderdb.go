@@ -64,7 +64,7 @@ func PutOrder(orderID string, order models.Order) (models.Order, error) {
 }
 
 // InsertOrder 新增订单
-func InsertOrder(order models.Order) string {
+func InsertOrder(order models.Order) models.Order {
 	order.ID = bson.NewObjectId()
 	query := func(c *mgo.Collection) error {
 		return c.Insert(order)
@@ -72,8 +72,12 @@ func InsertOrder(order models.Order) string {
 
 	err := executeQuery(orderCollectionName, query)
 	if err != nil {
-		return ""
+		return models.Order{
+			ID: "",
+		}
 	}
 
-	return order.ID.Hex()
+	return models.Order{
+		ID: order.ID,
+	}
 }
