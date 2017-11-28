@@ -3,8 +3,8 @@ package managers
 import (
 	"time"
 
-	"github.com/laidingqing/feichong/models"
 	"github.com/laidingqing/feichong/helpers"
+	"github.com/laidingqing/feichong/models"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -18,6 +18,7 @@ func GetUsers(page int, size int) (models.Pagination, error) {
 	defer session.Close()
 	c := session.DB(databaseName).C(userCollectionName)
 	q := c.Find(bson)
+
 	total, err := q.Count()
 	logger.Log("err", err, "total", total)
 
@@ -25,7 +26,7 @@ func GetUsers(page int, size int) (models.Pagination, error) {
 
 	logger.Log("data", len(users))
 	return models.Pagination{
-		Data: users,
+		Data:       users,
 		TotalCount: total,
 	}, err
 }
@@ -57,7 +58,6 @@ func UpdateUserByID(user models.User) models.User {
 	us.CompanyName = user.CompanyName
 	us.Phone = user.Phone
 	us.Admin = user.Admin
-
 
 	query := func(c *mgo.Collection) error {
 		return c.UpdateId(user.ID, us)

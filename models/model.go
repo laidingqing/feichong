@@ -1,48 +1,52 @@
 package models
 
-import "time"
-import "errors"
 import (
-	"gopkg.in/mgo.v2/bson"
+	"errors"
+	"time"
+
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
+
 // Pagination 分页
 
 type Pagination struct {
-	Data interface{} `bson:"-" json:"data"`
-	TotalCount int `bson:"-" json:"totalCount"`
+	Data       interface{} `bson:"-" json:"data"`
+	TotalCount int         `bson:"-" json:"totalCount"`
 }
 
 // User 用户信息
 type User struct {
-	ID          bson.ObjectId    `bson:"_id" json:"id"`
-	UserName    string    `bson:"username" json:"username"`
-	Password    string    `bson:"password" json:"password"`
-	Salt				string    `bson:"salt" json:"-"`
-	Nick        string    `bson:"nick" json:"nick"`
-	Email       string    `bson:"email" json:"email"`
-	Name        string    `bson:"name" json:"name"`
-	Phone       string    `bson:"phone" json:"phone"`
-	CompanyName string    `bson:"companyName" json:"companyName"`
-	Admin       bool      `bson:"admin" json:"admin"`
-	OpenID      string    `bson:"openID" json:"openID"`
-	CreatedAt   time.Time `bson:"createdAt" json:"createdAt"`
-	Avatar	    string    `bson:"avatar" json:"avatar"`
+	ID          bson.ObjectId `bson:"_id" json:"id"`
+	UserName    string        `bson:"username" json:"username,omitempty"`
+	Password    string        `bson:"password" json:"password,omitempty"`
+	Salt        string        `bson:"salt" json:"-"`
+	Nick        string        `bson:"nick" json:"nick,omitempty"`
+	Email       string        `bson:"email" json:"email,omitempty"`
+	Name        string        `bson:"name" json:"name,omitempty"`
+	Phone       string        `bson:"phone" json:"phone,omitempty"`
+	CompanyName string        `bson:"companyName" json:"companyName,omitempty"`
+	Admin       bool          `bson:"admin" json:"admin,omitempty"`
+	OpenID      string        `bson:"openID" json:"openID,omitempty"`
+	CreatedAt   time.Time     `bson:"createdAt" json:"createdAt,omitempty"`
+	Avatar      string        `bson:"avatar" json:"avatar,omitempty"`
 }
 
 // Order 订单信息
 type Order struct {
-	ID        bson.ObjectId    `bson:"_id" json:"id"`
-	OrderNO   string    `bson:"orderNO" json:"orderNO"`
-	Catalog      int    `bson:"catalog" json:"catalog"` //订单业务类型
-	Teams     []string  `bson:"teams" json:"teams"`
-	Views     []string  `bson:"views" json:"views"`     //都谁可查看订单
-	Editors   []string  `bson:"editors" json:"editors"` //都谁可编辑订单
-	CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
-	Status    int       `bson:"status" json:"status"`
-	Company	  string    `bson:"companyName" json:"companyName"`
-	SalerInfo mgo.DBRef `bson:"saler,omitempty" json:"salerInfo,omitempty"`
-	UserInfo  mgo.DBRef `bson:"userid,omitempty" json:"userInfo,omitempty"`
+	ID        bson.ObjectId `bson:"_id" json:"id"`
+	OrderNO   string        `bson:"orderNO" json:"orderNO"`
+	Catalog   int           `bson:"catalog" json:"catalog"` //订单业务类型
+	Teams     []string      `bson:"teams" json:"teams"`
+	Views     []string      `bson:"views" json:"views"`     //都谁可查看订单
+	Editors   []string      `bson:"editors" json:"editors"` //都谁可编辑订单
+	CreatedAt time.Time     `bson:"createdAt" json:"createdAt"`
+	Status    int           `bson:"status" json:"status"`
+	Company   string        `bson:"companyName" json:"companyName"`
+	SalerID   *mgo.DBRef    `bson:"saler,omitempty" json:"salerId,omitempty"`
+	UserID    *mgo.DBRef    `bson:"userid,omitempty" json:"userId,omitempty"`
+	SalerInfo User          `bson:"-" json:"salerInfo"`
+	UserInfo  User          `bson:"-" json:"userInfo"`
 }
 
 // Business 业务信息
@@ -93,15 +97,15 @@ type TaxInfo struct {
 
 // 咨询表单记录
 type Consult struct {
-		ID string `bson:"_id" json:"id"`
-		From string `bson:"from" json:"from"`
-		Invite string `bson:"invite" json:"invite"`
-		Name string `bson:"name" json:"name"`
-		Phone string `bson:"phone" json:"phone"`
-		Description string `bson:"description" json:"description"`
-		CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
-		Catalog string `bson:"catalog" json:"catalog"`
-		Biz string `bson:"biz" json:"biz"`
+	ID          string    `bson:"_id" json:"id"`
+	From        string    `bson:"from" json:"from"`
+	Invite      string    `bson:"invite" json:"invite"`
+	Name        string    `bson:"name" json:"name"`
+	Phone       string    `bson:"phone" json:"phone"`
+	Description string    `bson:"description" json:"description"`
+	CreatedAt   time.Time `bson:"createdAt" json:"createdAt"`
+	Catalog     string    `bson:"catalog" json:"catalog"`
+	Biz         string    `bson:"biz" json:"biz"`
 }
 
 var (

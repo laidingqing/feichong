@@ -3,6 +3,7 @@ package handlers
 import (
 	"net/http"
 	"strconv"
+
 	"github.com/laidingqing/feichong/helpers"
 	"github.com/laidingqing/feichong/managers"
 	"github.com/laidingqing/feichong/models"
@@ -49,15 +50,12 @@ func PostOrder(w http.ResponseWriter, r *http.Request) {
 	var orderReq models.Order
 	helpers.GetOrderBody(w, r, &orderReq)
 
-	order := managers.InsertOrder(orderReq)
+	order, err := managers.InsertOrder(orderReq)
 
-	log := helpers.NewLogger()
-	log.Log("orderID", order.ID, "userInfo", orderReq.SalerInfo.Id)
-
-	if order.ID != "" {
-		helpers.SetResponse(w, http.StatusCreated, order)
+	if err == nil {
+		helpers.SetResponse(w, http.StatusOK, order)
 	} else {
-		helpers.SetResponse(w, http.StatusBadRequest, nil)
+		helpers.SetResponse(w, http.StatusBadRequest, err)
 	}
 }
 
