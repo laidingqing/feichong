@@ -34,6 +34,7 @@ func GeneratorBusinessFinData(order models.Order) {
 			Month:     orderMonth,
 			Catalog:   models.BusinessStatusUnknown, //没有状态变化
 			CreatedAt: time.Now(),
+			Seq:       i,
 		}
 
 		managers.InsertBusinessData(business)
@@ -58,13 +59,8 @@ func GeneratorBusinessFinData(order models.Order) {
 // GetBusinessByOrderID 根据订单编号查询业务情况
 func GetBusinessByOrderID(w http.ResponseWriter, r *http.Request) {
 	orderID := helpers.GetParam(r, busOrderIDParam)
-	year := helpers.GetInParam(r, businessYearParam)
-	month := helpers.GetInParam(r, businessMonthParam)
 
-	vYear, _ := strconv.Atoi(year)
-	vMonth, _ := strconv.Atoi(month)
-
-	business, err := managers.FindOrderBusiness(orderID, vYear, vMonth)
+	business, err := managers.FindOrderBusiness(orderID)
 	if err != nil {
 		helpers.SetResponse(w, http.StatusBadRequest, err)
 	} else {

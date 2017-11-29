@@ -179,6 +179,20 @@ define(['angular'], function(angular) {
               error(err);
             })
         },
+
+        getBusinessByOrder: function(orderId, success, error) {
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.get(Config.url + this.type + "/" + orderId + "/business/", { params: { } }, {headers: headers})
+            .then(function(response) {
+              success(response.data);
+            })
+            .catch(function(err) {
+              error(err);
+            })
+        },
+
         postOrder: function(order, callback) {
           var headers = {
             'Content-Type': 'application/json'

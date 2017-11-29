@@ -90,17 +90,8 @@ func PostOrder(w http.ResponseWriter, r *http.Request) {
 
 // PutOrderByViews 更新订单可见用户编号
 func PutOrderByViews(w http.ResponseWriter, r *http.Request) {
-	orderID := helpers.GetParam(r, orderIDParam)
-	var order models.Order
-	helpers.GetOrderBody(w, r, &order)
 
-	oldOrder, err := managers.GetOrderByID(orderID)
-	oldOrder.Views = order.Views
-	if err != nil {
-		helpers.SetResponse(w, http.StatusBadRequest, nil)
-	}
-	order, err = managers.PutOrder(orderID, oldOrder)
-	if err != nil {
+	if true {
 		helpers.SetResponse(w, http.StatusBadRequest, nil)
 	}
 	helpers.SetResponse(w, http.StatusCreated, nil)

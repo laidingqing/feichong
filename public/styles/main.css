@@ -291,3 +291,41 @@
 .content table tbody td{
     vertical-align: top;
 }
+
+
+.business-wrap{
+  max-width: 1000px;
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.business-wrap .business-item{
+  width: calc(100% / 4 - 30px);
+  height: 200px;
+  position: relative;
+  float: left;
+  padding: 0;
+  margin: 0 15px 30px 15px;
+  /*background-color: #f9f9f9;*/
+}
+
+.business-wrap .pass{
+  background-color: #ccc;
+}
+
+.business-wrap .business-item h4{
+  text-align: center;
+}
+.business-wrap .business-item .content{
+  min-height: 150px;
+}
+
+.business-wrap::after, .business-wrap .business-item::after{
+  content: "";
+  display: table;
+  clear: both;
+}

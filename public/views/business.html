@@ -1,0 +1,26 @@
+<div>
+  <div class="card">
+    <div class="header">
+      <h4 class="title">订单业务交接单, 合同号:</h4>
+    </div>
+    <div class="content table-responsive table-full-width">
+      <ul class="business-wrap clear">
+          <li class="business-item" ng-repeat="b in business">
+            <div class="card card-user">
+                <div class="content">
+                    <p class="description text-center">{{b.year}}年/{{b.month}}月份 <br/>
+                      <small>当前交接状态：{{b.catalog | BusinessStatus}}</small>
+                    </p>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <a href="javascript:;">资金情况</a>
+                    <a href="javascript:;">利润情况</a>
+                    <a href="javascript:;">报税情况</a>
+                </div>
+            </div>
+          </li>
+      </ul>
+    </div>
+  </div>
+</div>

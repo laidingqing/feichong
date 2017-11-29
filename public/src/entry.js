@@ -2,8 +2,9 @@
 
 var controllers = require('./controllers')
 var services = require('./services')
+var services = require('./filters')
 var bootstrap = require('bootstrap')
-var routerApp = angular.module('dbsApp', ['ui.router', 'ui.bootstrap', 'ui.bootstrap.tpls', 'app.services']);
+var routerApp = angular.module('dbsApp', ['ui.router', 'ui.bootstrap', 'ui.bootstrap.tpls', 'app.services', 'app.filters']);
 
 routerApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
@@ -12,5 +13,6 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('dashboard', { url: '/dashboard', templateUrl: 'views/dashboard.html?6', controller: controllers.DashboardCtrl })
         .state('dashboard.customers', { url: '/customers', templateUrl: 'views/customers.html?6', controller: controllers.CustomersCtrl })
         .state('dashboard.orders', { url: '/orders', templateUrl: 'views/orders.html?6', controller: controllers.OrdersCtrl })
-        .state('dashboard.tracks', { url: '/tracks', templateUrl: 'views/tracks.html?3', controller: controllers.TracksCtrl })
+        .state('dashboard.tracks', { url: '/tracks', templateUrl: 'views/tracks.html?6', controller: controllers.TracksCtrl })
+        .state('dashboard.business', { url: '/business/?:id', params: {'id': null}, templateUrl: 'views/business.html?4', controller: controllers.BusinessCtrl })
 });

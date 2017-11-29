@@ -8,7 +8,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-// BusinessStatus 记账业务状态 取单、做账、报税、回访
+// BusinessStatus 记账业务状态 取单、做账、报税、回访，完成
 type BusinessStatus int
 
 const (
@@ -22,6 +22,8 @@ const (
 	BusinessStatusTax
 	// BusinessStatusRes 回访
 	BusinessStatusRes
+	// BusinessStatusFinish 完成
+	BusinessStatusFinish
 )
 
 // Pagination 分页
@@ -50,26 +52,28 @@ type User struct {
 
 // Order 订单信息
 type Order struct {
-	ID         bson.ObjectId `bson:"_id" json:"id"`
-	OrderNO    string        `bson:"orderNO" json:"orderNO"`
-	Catalog    int           `bson:"catalog" json:"catalog"` //订单业务类型, 1: 账务记账，2：企业注册
-	Teams      []string      `bson:"teams" json:"teams"`
-	Views      []string      `bson:"views" json:"views"`     //都谁可查看订单
-	Editors    []string      `bson:"editors" json:"editors"` //都谁可编辑订单
-	StartMonth int           `bson:"startMonth" json:"startMonth"`
-	CreatedAt  time.Time     `bson:"createdAt" json:"createdAt"`
-	ExpiredAt  time.Time     `bson:"expiredAt" json:"expiredAt"`
-	Status     int           `bson:"status" json:"status"`
-	Company    string        `bson:"companyName" json:"companyName"`
-	SalerID    *mgo.DBRef    `bson:"saler,omitempty" json:"salerId,omitempty"`
-	UserID     *mgo.DBRef    `bson:"userid,omitempty" json:"userId,omitempty"`
-	SalerInfo  User          `bson:"-" json:"salerInfo"`
-	UserInfo   User          `bson:"-" json:"userInfo"`
+	ID          bson.ObjectId `bson:"_id" json:"id"`
+	OrderNO     string        `bson:"orderNO" json:"orderNO"`
+	Catalog     int           `bson:"catalog" json:"catalog"` //订单业务类型, 1: 账务记账，2：企业注册
+	StartMonth  int           `bson:"startMonth" json:"startMonth"`
+	CreatedAt   time.Time     `bson:"createdAt" json:"createdAt"`
+	ExpiredAt   time.Time     `bson:"expiredAt" json:"expiredAt"`
+	Status      int           `bson:"status" json:"status"`
+	Company     string        `bson:"companyName" json:"companyName"`
+	SalerID     *mgo.DBRef    `bson:"saler,omitempty" json:"salerId,omitempty"` //业务
+	UserID      *mgo.DBRef    `bson:"userid,omitempty" json:"userId,omitempty"`
+	ServiceID   *mgo.DBRef    `bson:"serviceid,omitempty" json:"serviceId,omitempty"` //客服
+	AdviserID   *mgo.DBRef    `bson:"adviserid,omitempty" json:"adviserId,omitempty"` //财务顾问
+	SalerInfo   User          `bson:"-" json:"salerInfo"`
+	UserInfo    User          `bson:"-" json:"userInfo"`
+	ServiceInfo *mgo.DBRef    `bson:"-" json:"serviceInfo"`
+	AdviserInfo *mgo.DBRef    `bson:"-" json:"adviserInfo"`
 }
 
 // Business 业务信息-交接单
 type Business struct {
 	ID          string         `bson:"_id" json:"id"`
+	Seq         int            `bson:"sorter" json:"-"`
 	OrderID     string         `bson:"orderID" json:"orderID"`
 	CreatedAt   time.Time      `bson:"createdAt" json:"createdAt"`
 	Description string         `bson:"description" json:"description"`
@@ -78,6 +82,9 @@ type Business struct {
 	Catalog     BusinessStatus `bson:"catalog" json:"catalog"` //业务类型: 未知、取单、做账、报税、回访
 	Star        int            `bson:"star" json:"star"`       //客户评星
 	Comment     string         `bson:"comment" json:"comment"` //客户评价
+	CapitalInfo CapitalInfo    `bson:"capitalInfo" json:"capitalInfo"`
+	ProfitInfo  ProfitInfo     `bson:"profitInfo" json:"profitInfo"`
+	TaxInfo     TaxInfo        `bson:"taxInfo" json:"taxInfo"`
 }
 
 // CapitalInfo 资金情况

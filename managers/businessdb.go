@@ -26,11 +26,11 @@ func InsertBusinessData(biz models.Business) string {
 }
 
 // FindOrderBusiness ...
-func FindOrderBusiness(orderID string, year int, month int) ([]models.Business, error) {
+func FindOrderBusiness(orderID string) ([]models.Business, error) {
 	var data []models.Business
 
 	query := func(c *mgo.Collection) error {
-		return c.Find(bson.M{"orderID": orderID, "month": month, "year": year}).All(&data)
+		return c.Find(bson.M{"orderID": orderID}).Sort("sorter").All(&data)
 	}
 
 	err := executeQuery(businessCollectionName, query)

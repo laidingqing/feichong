@@ -63,7 +63,7 @@ define(function() {
   controllers.OrdersCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'OrderService'];
 
   // 业务跟踪控制器
-  controllers.TracksCtrl = function($scope, $rootScope, OrderService) {
+  controllers.TracksCtrl = function($scope, $rootScope, $state, OrderService) {
 
     $scope.totalItems = 64;
     $scope.currentPage = 1;
@@ -88,8 +88,13 @@ define(function() {
       })
     }
 
+    $scope.trackDetail = function(orderId){
+      console.log(orderId, $state)
+      $state.go('dashboard.business', {id: orderId });
+    }
+
   }
-  controllers.TracksCtrl.$inject = ['$scope', '$rootScope', 'OrderService'];
+  controllers.TracksCtrl.$inject = ['$scope', '$rootScope', '$state', 'OrderService'];
 
   controllers.NewOrderCtrl = function($scope, $uibModalInstance, $filter, OrderService, UserService) {
     $scope.users = []
@@ -199,6 +204,23 @@ define(function() {
 
   controllers.UpdateProfileCtrl.$inject = ['$scope', '$uibModalInstance', 'UserService', 'updateUserId'];
 
+  controllers.BusinessCtrl = function($scope, $stateParams, UserService, OrderService){
+    console.log($stateParams, $stateParams.id)
+    $scope.business = []
+    var init = function(){
+      OrderService.getBusinessByOrder($stateParams.id, function(data){
+        $scope.business = data || []
+        console.log(response)
+      }, function(err){
+        console.log(err)
+      })
+    }
+
+    init()
+
+  }
+
+  controllers.BusinessCtrl.$inject = ['$scope', '$stateParams', 'UserService', 'OrderService'];
 
   return controllers;
 });
