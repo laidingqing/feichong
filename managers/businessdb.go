@@ -9,6 +9,22 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+// InsertBusinessData 新增订单业务数据
+func InsertBusinessData(biz models.Business) string {
+	biz.ID = bson.NewObjectId().Hex()
+	biz.CreatedAt = time.Now()
+	query := func(c *mgo.Collection) error {
+		return c.Insert(biz)
+	}
+
+	err := executeQuery(businessCollectionName, query)
+	if err != nil {
+		return ""
+	}
+
+	return biz.ID
+}
+
 // InsertOrderTax 新增用户
 func InsertOrderTax(tax models.TaxInfo) string {
 	tax.ID = bson.NewObjectId().Hex()

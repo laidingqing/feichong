@@ -20,7 +20,6 @@ func GetOrders(page int, size int, catalog int) (models.Pagination, error) {
 	c := session.DB(databaseName).C(orderCollectionName)
 	q := c.Find(bsonQuery)
 	total, err := q.Count()
-	logger.Log("err", err, "total", total)
 
 	q.All(&orders)
 
@@ -56,7 +55,6 @@ func GetOrders(page int, size int, catalog int) (models.Pagination, error) {
 
 	}
 
-	logger.Log("data", len(orders))
 	return models.Pagination{
 		Data:       orders,
 		TotalCount: total,
@@ -138,7 +136,5 @@ func InsertOrder(order models.Order) (models.Order, error) {
 		}, err
 	}
 
-	return models.Order{
-		ID: order.ID,
-	}, nil
+	return order, nil
 }

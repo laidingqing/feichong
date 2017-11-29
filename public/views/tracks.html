@@ -8,7 +8,7 @@
       <table class="table table-hover table-striped" id="paninationData">
         <thead>
           <tr>
-            <th>#编号</th>
+            <th>#合同编号</th>
             <th>绑定用户</th>
             <th>公司名称</th>
             <th>订单类型</th>
@@ -18,10 +18,10 @@
         </thead>
         <tbody>
           <tr ng-repeat="item in pagination.data">
-            <td>{{item.id}}</td>
-            <td>{{item.userID}}</td>
+            <td>{{item.orderNO}}</td>
+            <td>{{item.userInfo.nick}}</td>
             <td>{{item.companyName}}</td>
-            <td>{{item.type == 1 ? "财务外包": ""}}</td>
+            <td>{{item.catalog == 1 ? "财务记账": "企业注册"}}</td>
             <td><span ng-bind="item.createdAt | date: 'yyyy-MM-dd'"></span></td>
             <td>
               <button type="button" ng-click="trackDetail(item.ID)" rel="tooltip" title="业务处理" class="btn btn-info btn-simple btn-xs">

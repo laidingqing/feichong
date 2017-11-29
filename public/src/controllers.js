@@ -54,7 +54,7 @@ define(function() {
         modalInstance.result.then(function (newOutputData) {
           console.log(newOutputData)
             if(newOutputData){
-              queryList(1)
+              $scope.queryList(1)
             }
         });
     }

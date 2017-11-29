@@ -34,20 +34,21 @@ type User struct {
 
 // Order 订单信息
 type Order struct {
-	ID        bson.ObjectId `bson:"_id" json:"id"`
-	OrderNO   string        `bson:"orderNO" json:"orderNO"`
-	Catalog   int           `bson:"catalog" json:"catalog"` //订单业务类型
-	Teams     []string      `bson:"teams" json:"teams"`
-	Views     []string      `bson:"views" json:"views"`     //都谁可查看订单
-	Editors   []string      `bson:"editors" json:"editors"` //都谁可编辑订单
-	CreatedAt time.Time     `bson:"createdAt" json:"createdAt"`
-	ExpiredAt time.Time     `bson:"expiredAt" json:"expiredAt"`
-	Status    int           `bson:"status" json:"status"`
-	Company   string        `bson:"companyName" json:"companyName"`
-	SalerID   *mgo.DBRef    `bson:"saler,omitempty" json:"salerId,omitempty"`
-	UserID    *mgo.DBRef    `bson:"userid,omitempty" json:"userId,omitempty"`
-	SalerInfo User          `bson:"-" json:"salerInfo"`
-	UserInfo  User          `bson:"-" json:"userInfo"`
+	ID         bson.ObjectId `bson:"_id" json:"id"`
+	OrderNO    string        `bson:"orderNO" json:"orderNO"`
+	Catalog    int           `bson:"catalog" json:"catalog"` //订单业务类型, 1: 账务记账，2：企业注册
+	Teams      []string      `bson:"teams" json:"teams"`
+	Views      []string      `bson:"views" json:"views"`     //都谁可查看订单
+	Editors    []string      `bson:"editors" json:"editors"` //都谁可编辑订单
+	StartMonth int           `bson:"startMonth" json:"startMonth"`
+	CreatedAt  time.Time     `bson:"createdAt" json:"createdAt"`
+	ExpiredAt  time.Time     `bson:"expiredAt" json:"expiredAt"`
+	Status     int           `bson:"status" json:"status"`
+	Company    string        `bson:"companyName" json:"companyName"`
+	SalerID    *mgo.DBRef    `bson:"saler,omitempty" json:"salerId,omitempty"`
+	UserID     *mgo.DBRef    `bson:"userid,omitempty" json:"userId,omitempty"`
+	SalerInfo  User          `bson:"-" json:"salerInfo"`
+	UserInfo   User          `bson:"-" json:"userInfo"`
 }
 
 // Business 业务信息
@@ -58,7 +59,9 @@ type Business struct {
 	Description string    `bson:"description" json:"description"`
 	Year        int       `bson:"year" json:"year"`
 	Month       int       `bson:"month" json:"month"`
-	Type        int       `bson:"type" json:"type"` //业务类型: 取单、做账、报税、回访
+	Catalog     int       `bson:"catalog" json:"catalog"` //业务类型: 未知、取单、做账、报税、回访
+	Star        int       `bson:"star" json:"star"`       //客户评星
+	Comment     string    `bson:"comment" json:"comment"` //客户评价
 }
 
 // CapitalInfo 资金情况

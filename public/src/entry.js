@@ -12,5 +12,5 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('dashboard', { url: '/dashboard', templateUrl: 'views/dashboard.html?6', controller: controllers.DashboardCtrl })
         .state('dashboard.customers', { url: '/customers', templateUrl: 'views/customers.html?6', controller: controllers.CustomersCtrl })
         .state('dashboard.orders', { url: '/orders', templateUrl: 'views/orders.html?6', controller: controllers.OrdersCtrl })
-        .state('dashboard.tracks', { url: '/tracks', templateUrl: 'views/tracks.html?2', controller: controllers.TracksCtrl })
+        .state('dashboard.tracks', { url: '/tracks', templateUrl: 'views/tracks.html?3', controller: controllers.TracksCtrl })
 });
