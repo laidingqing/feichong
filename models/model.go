@@ -8,6 +8,22 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+// BusinessStatus 记账业务状态 取单、做账、报税、回访
+type BusinessStatus int
+
+const (
+	// BusinessStatusUnknown 未知
+	BusinessStatusUnknown BusinessStatus = iota
+	// BusinessStatusGet 取单
+	BusinessStatusGet
+	// BusinessStatusDo 做账
+	BusinessStatusDo
+	// BusinessStatusTax 报税
+	BusinessStatusTax
+	// BusinessStatusRes 回访
+	BusinessStatusRes
+)
+
 // Pagination 分页
 
 type Pagination struct {
@@ -51,17 +67,17 @@ type Order struct {
 	UserInfo   User          `bson:"-" json:"userInfo"`
 }
 
-// Business 业务信息
+// Business 业务信息-交接单
 type Business struct {
-	ID          string    `bson:"_id" json:"id"`
-	OrderID     string    `bson:"orderID" json:"orderID"`
-	CreatedAt   time.Time `bson:"createdAt" json:"createdAt"`
-	Description string    `bson:"description" json:"description"`
-	Year        int       `bson:"year" json:"year"`
-	Month       int       `bson:"month" json:"month"`
-	Catalog     int       `bson:"catalog" json:"catalog"` //业务类型: 未知、取单、做账、报税、回访
-	Star        int       `bson:"star" json:"star"`       //客户评星
-	Comment     string    `bson:"comment" json:"comment"` //客户评价
+	ID          string         `bson:"_id" json:"id"`
+	OrderID     string         `bson:"orderID" json:"orderID"`
+	CreatedAt   time.Time      `bson:"createdAt" json:"createdAt"`
+	Description string         `bson:"description" json:"description"`
+	Year        int            `bson:"year" json:"year"`
+	Month       int            `bson:"month" json:"month"`
+	Catalog     BusinessStatus `bson:"catalog" json:"catalog"` //业务类型: 未知、取单、做账、报税、回访
+	Star        int            `bson:"star" json:"star"`       //客户评星
+	Comment     string         `bson:"comment" json:"comment"` //客户评价
 }
 
 // CapitalInfo 资金情况

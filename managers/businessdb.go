@@ -25,6 +25,21 @@ func InsertBusinessData(biz models.Business) string {
 	return biz.ID
 }
 
+// FindOrderBusiness ...
+func FindOrderBusiness(orderID string, year int, month int) ([]models.Business, error) {
+	var data []models.Business
+
+	query := func(c *mgo.Collection) error {
+		return c.Find(bson.M{"orderID": orderID, "month": month, "year": year}).All(&data)
+	}
+
+	err := executeQuery(businessCollectionName, query)
+	if err != nil {
+		return data, err
+	}
+	return data, nil
+}
+
 // InsertOrderTax 新增用户
 func InsertOrderTax(tax models.TaxInfo) string {
 	tax.ID = bson.NewObjectId().Hex()
