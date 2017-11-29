@@ -49,6 +49,7 @@ func GetUserByID(userID string) models.User {
 	return user
 }
 
+// UpdateUserByID ..
 func UpdateUserByID(user models.User) models.User {
 
 	us := GetUserByID(user.ID.Hex())
@@ -110,7 +111,7 @@ func GetUsersByEnterPrise() []models.User {
 	return users
 }
 
-// GetUserByOpenID
+// GetUserByOpenID ...
 func GetUserByOpenID(openID string) models.User {
 
 	var user models.User

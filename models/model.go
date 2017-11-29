@@ -21,7 +21,7 @@ type User struct {
 	UserName    string        `bson:"username" json:"username,omitempty"`
 	Password    string        `bson:"password" json:"password,omitempty"`
 	Salt        string        `bson:"salt" json:"-"`
-	Nick        string        `bson:"nick" json:"nick,omitempty"`
+	Nick        string        `bson:"nick" json:"nick"`
 	Email       string        `bson:"email" json:"email,omitempty"`
 	Name        string        `bson:"name" json:"name,omitempty"`
 	Phone       string        `bson:"phone" json:"phone,omitempty"`
@@ -41,6 +41,7 @@ type Order struct {
 	Views     []string      `bson:"views" json:"views"`     //都谁可查看订单
 	Editors   []string      `bson:"editors" json:"editors"` //都谁可编辑订单
 	CreatedAt time.Time     `bson:"createdAt" json:"createdAt"`
+	ExpiredAt time.Time     `bson:"expiredAt" json:"expiredAt"`
 	Status    int           `bson:"status" json:"status"`
 	Company   string        `bson:"companyName" json:"companyName"`
 	SalerID   *mgo.DBRef    `bson:"saler,omitempty" json:"salerId,omitempty"`

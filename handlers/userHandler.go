@@ -3,6 +3,7 @@ package handlers
 import (
 	"net/http"
 	"strconv"
+
 	"github.com/laidingqing/feichong/helpers"
 	"github.com/laidingqing/feichong/managers"
 	"github.com/laidingqing/feichong/models"
@@ -11,7 +12,6 @@ import (
 const userIDParam = "userId"
 const userPageParam = "page"
 const userSizeParam = "size"
-
 
 const orderPageParam = "page"
 const orderSizeParam = "size"
@@ -41,8 +41,7 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	helpers.SetResponse(w, http.StatusOK, model)
 }
 
-
-// Update User Profile
+// PutUserByID Update User Profile ...
 func PutUserByID(w http.ResponseWriter, r *http.Request) {
 	var user models.User
 	helpers.GetUserBody(w, r, &user)
@@ -71,6 +70,7 @@ func SelfUsers(w http.ResponseWriter, r *http.Request) {
 	helpers.SetResponse(w, http.StatusOK, users)
 }
 
+// EnterPriseUsers ...
 func EnterPriseUsers(w http.ResponseWriter, r *http.Request) {
 	users := managers.GetUsersByEnterPrise()
 	helpers.SetResponse(w, http.StatusOK, users)
@@ -84,7 +84,7 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 
 	isUser := managers.GetUserByUserName(user.UserName)
 
-	if isUser.Password != helpers.CalculatePassHash(isUser.Password, isUser.Salt){
+	if isUser.Password != helpers.CalculatePassHash(isUser.Password, isUser.Salt) {
 		helpers.SetResponse(w, http.StatusBadRequest, models.ErrUserNotFound)
 	}
 

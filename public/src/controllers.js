@@ -45,13 +45,18 @@ define(function() {
     }
     $scope.showFormModal = function () {
         var modalInstance = $uibModal.open({
-            templateUrl: '../components/orderFormModal.html?5',
+            templateUrl: '../components/orderFormModal.html?6',
             controller: controllers.NewOrderCtrl,
             size: 'lg',
             resolve: {
             }
         });
-        return modalInstance;
+        modalInstance.result.then(function (newOutputData) {
+          console.log(newOutputData)
+            if(newOutputData){
+              queryList(1)
+            }
+        });
     }
     $scope.queryList($scope.currentPage)
   }

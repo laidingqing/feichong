@@ -44,11 +44,30 @@ func GetOrderByID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// GetOrdersByUser ...
+func GetOrdersByUser(w http.ResponseWriter, r *http.Request) {
+
+	userID := helpers.GetParam(r, userIDParam)
+
+	models, err := managers.GetOrdersByUser(userID)
+
+	if err != nil {
+		helpers.SetResponse(w, http.StatusNotFound, nil)
+	} else {
+		helpers.SetResponse(w, http.StatusOK, models)
+	}
+}
+
 // PostOrder create user
 func PostOrder(w http.ResponseWriter, r *http.Request) {
 
 	var orderReq models.Order
 	helpers.GetOrderBody(w, r, &orderReq)
+
+	user := managers.GetUserByID(orderReq.UserInfo.ID.Hex())
+	if user.CompanyName != "" {
+		orderReq.Company = user.CompanyName
+	}
 
 	order, err := managers.InsertOrder(orderReq)
 

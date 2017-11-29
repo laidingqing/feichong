@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/laidingqing/feichong/helpers"
-	"github.com/laidingqing/feichong/models"
 	"github.com/laidingqing/feichong/managers"
+	"github.com/laidingqing/feichong/models"
 )
 
 const codeParam = "code"
@@ -18,22 +18,24 @@ func LoginSession(w http.ResponseWriter, r *http.Request) {
 	log.Log("code", weixin.Code, "encrypted", weixin.EncryptedData, "iv", weixin.Iv)
 	session, errCode, err := helpers.GetSessionID(weixin.Code)
 
-	if err != nil{
+	if err != nil {
 		helpers.SetResponse(w, http.StatusBadRequest, err)
 	}
-  // 创建用户
+	// 创建用户
 	user := managers.GetUserByOpenID(session.OpenID)
-	if( user.ID.Hex() == ""){
+	if user.ID.Hex() == "" {
 		//New User
 		var wxUser = models.User{
-			Nick: weixin.UserInfo.NickName,
-			Avatar: weixin.UserInfo.AvatarUrl,
+			Nick:   weixin.UserInfo.NickName,
+			Avatar: weixin.UserInfo.AvatarURL,
 			OpenID: session.OpenID,
 		}
-		managers.InsertUser(wxUser)
+		userID := managers.InsertUser(wxUser)
+		session.UserID = userID
 		errCode = 0
-	}else{
+	} else {
 		//Update User
+		session.UserID = user.ID.Hex()
 	}
 
 	if errCode == 0 {

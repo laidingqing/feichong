@@ -28,6 +28,7 @@ type Jscode2Session struct {
 	ExpiresIn  int64  `json:"expiresIn"`
 	OpenID     string `json:"openID"`
 	SessionKey string `json:"sessionKey"`
+	UserID     string `json:"userId,omitempty"`
 }
 
 // WxUserInfoWater ..
@@ -52,7 +53,7 @@ type TestStorage struct {
 	SessionStorage
 }
 
-//get session by sessionId
+// Get get session by sessionId
 func (this *TestStorage) Get(sessionId string) (Session, error) {
 	this.Lk.Lock()
 	defer this.Lk.Unlock()
