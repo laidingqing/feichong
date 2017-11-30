@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/laidingqing/feichong/helpers"
@@ -81,47 +80,8 @@ func GetBusinessByOrderID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// GetCapitalInfosByOrder 根据订单号查询指定月份资金情况
-func GetCapitalInfosByOrder(w http.ResponseWriter, r *http.Request) {
-	orderID := helpers.GetParam(r, busOrderIDParam)
-	if true {
-		helpers.SetResponse(w, http.StatusOK, nil)
-	} else {
-		helpers.SetResponse(w, http.StatusNotFound, orderID)
-	}
-}
-
-// GetTaxInfosByOrder 根据订单号查询指定月份纳税情况
-func GetTaxInfosByOrder(w http.ResponseWriter, r *http.Request) {
-	orderID := helpers.GetParam(r, busOrderIDParam)
-	month := helpers.GetParam(r, businessMonthParam)
-	vMonth, err := strconv.Atoi(month)
-
-	if err != nil {
-		helpers.SetResponse(w, http.StatusNotFound, err)
-	}
-
-	tax, err := managers.GetOrderTaxs(orderID, vMonth)
-
-	if err != nil {
-		helpers.SetResponse(w, http.StatusNotFound, err)
-	} else {
-		helpers.SetResponse(w, http.StatusOK, tax)
-	}
-}
-
-// GetProfitInfosByOrder 根据订单号查询指定月份利润情况
-func GetProfitInfosByOrder(w http.ResponseWriter, r *http.Request) {
-	orderID := helpers.GetParam(r, busOrderIDParam)
-	if true {
-		helpers.SetResponse(w, http.StatusOK, nil)
-	} else {
-		helpers.SetResponse(w, http.StatusNotFound, orderID)
-	}
-}
-
-// AddProfitInfoByOrder 增加订单纳税情况
-func AddProfitInfoByOrder(w http.ResponseWriter, r *http.Request) {
+// PutProfitInfoByOrder 增加订单纳税情况
+func PutProfitInfoByOrder(w http.ResponseWriter, r *http.Request) {
 	orderID := helpers.GetParam(r, busOrderIDParam)
 	var profit models.ProfitInfo
 	helpers.GetProfitInfoBody(w, r, &profit)
@@ -132,24 +92,24 @@ func AddProfitInfoByOrder(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// AddCapitalInfoByOrder 增加订单资金情况
-func AddCapitalInfoByOrder(w http.ResponseWriter, r *http.Request) {
-	orderID := helpers.GetParam(r, busOrderIDParam)
-
+// PutCapitalInfoByOrder 增加订单资金情况
+func PutCapitalInfoByOrder(w http.ResponseWriter, r *http.Request) {
+	businessID := helpers.GetParam(r, businessIDParam)
+	log := helpers.NewLogger()
+	log.Log("businessID", businessID)
 	var capital models.CapitalInfo
 
 	helpers.GetCapitalInfoBody(w, r, &capital)
-	capital.OrderID = orderID
 
 	if true {
-		helpers.SetResponse(w, http.StatusOK, nil)
+		helpers.SetResponse(w, http.StatusOK, "ok")
 	} else {
-		helpers.SetResponse(w, http.StatusNotFound, orderID)
+		helpers.SetResponse(w, http.StatusNotFound, "")
 	}
 }
 
-// AddTaxInfoByOrder 增加订单资金情况
-func AddTaxInfoByOrder(w http.ResponseWriter, r *http.Request) {
+// PutTaxInfoByOrder 增加订单资金情况
+func PutTaxInfoByOrder(w http.ResponseWriter, r *http.Request) {
 	orderID := helpers.GetParam(r, busOrderIDParam)
 	var tax models.TaxInfo
 	tax.OrderID = orderID

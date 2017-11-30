@@ -225,4 +225,58 @@ define(['angular'], function(angular) {
       }
       return Order;
     }])
-});
+    .factory('BusinessService', ['$http', 'Config', function($http, Config) {
+      var Business = {
+        type: 'business',
+        putCapitalInfo: function(businessId, data, callback){
+          var jsonObject = angular.toJson(data);
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.put(Config.url + this.type + '/' + businessId +"/captials/", jsonObject, {
+              headers: headers
+            })
+            .then(function(response) {
+              console.log(response)
+              callback(response);
+            })
+            .catch(function(err) {
+              callback(err);
+            })
+        },
+        putProfitInfo: function(businessId, data, callback){
+          var jsonObject = angular.toJson(data);
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.put(Config.url + this.type + '/' + businessId +"/profits/", jsonObject, {
+              headers: headers
+            })
+            .then(function(response) {
+              console.log(response)
+              callback(response);
+            })
+            .catch(function(err) {
+              callback(err);
+            })
+        },
+        putTaxInfo: function(businessId, data, callback){
+          var jsonObject = angular.toJson(data);
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.put(Config.url + this.type + '/' + businessId +"/tax/", jsonObject, {
+              headers: headers
+            })
+            .then(function(response) {
+              console.log(response)
+              callback(response);
+            })
+            .catch(function(err) {
+              callback(err);
+            })
+        }
+      }
+      return Business;
+    }])
+})

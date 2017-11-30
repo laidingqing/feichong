@@ -87,12 +87,3 @@ func PostOrder(w http.ResponseWriter, r *http.Request) {
 		helpers.SetResponse(w, http.StatusBadRequest, err)
 	}
 }
-
-// PutOrderByViews 更新订单可见用户编号
-func PutOrderByViews(w http.ResponseWriter, r *http.Request) {
-
-	if true {
-		helpers.SetResponse(w, http.StatusBadRequest, nil)
-	}
-	helpers.SetResponse(w, http.StatusCreated, nil)
-}

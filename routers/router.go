@@ -113,52 +113,24 @@ func init() {
 	})
 
 	routes = append(routes, Route{
-		Name:        "OrderUpdateView",
+		Name:        "OrderProfitUpdate",
 		Method:      "PUT",
-		Pattern:     "/api/orders/{orderId}/views/",
-		HandlerFunc: handlers.PutOrderByViews,
+		Pattern:     "/api/business/{businessId}/profits/",
+		HandlerFunc: handlers.PutProfitInfoByOrder,
 	})
 
 	routes = append(routes, Route{
-		Name:        "OrderProfitCreate",
-		Method:      "POST",
-		Pattern:     "/api/orders/{orderId}/profits/",
-		HandlerFunc: handlers.AddProfitInfoByOrder,
+		Name:        "OrderTaxPut",
+		Method:      "PUT",
+		Pattern:     "/api/business/{businessId}/tax/",
+		HandlerFunc: handlers.PutTaxInfoByOrder,
 	})
 
 	routes = append(routes, Route{
-		Name:        "OrderProfitGet",
-		Method:      "GET",
-		Pattern:     "/api/orders/{orderId}/profits/{month}/",
-		HandlerFunc: handlers.GetProfitInfosByOrder,
-	})
-
-	routes = append(routes, Route{
-		Name:        "OrderTaxCreate",
-		Method:      "POST",
-		Pattern:     "/api/orders/{orderId}/tax",
-		HandlerFunc: handlers.AddTaxInfoByOrder,
-	})
-
-	routes = append(routes, Route{
-		Name:        "OrderTaxGet",
-		Method:      "GET",
-		Pattern:     "/api/orders/{orderId}/tax/{month}",
-		HandlerFunc: handlers.GetTaxInfosByOrder,
-	})
-
-	routes = append(routes, Route{
-		Name:        "OrderCaptialCreate",
-		Method:      "POST",
-		Pattern:     "/api/orders/{orderId}/captials",
-		HandlerFunc: handlers.AddCapitalInfoByOrder,
-	})
-
-	routes = append(routes, Route{
-		Name:        "OrderCaptialGet",
-		Method:      "GET",
-		Pattern:     "/api/orders/{orderId}/captials/{month}",
-		HandlerFunc: handlers.GetCapitalInfosByOrder,
+		Name:        "OrderCaptialUpdate",
+		Method:      "PUT",
+		Pattern:     "/api/business/{businessId}/capitals/",
+		HandlerFunc: handlers.PutCapitalInfoByOrder,
 	})
 
 	// 咨询接口
@@ -166,14 +138,14 @@ func init() {
 		Name:        "ConsultCreate",
 		Method:      "POST",
 		Pattern:     "/api/consults",
-		HandlerFunc: handlers.AddCapitalInfoByOrder,
+		HandlerFunc: handlers.PutCapitalInfoByOrder, //TODO Change
 	})
 
 	routes = append(routes, Route{
 		Name:        "ConsultGet",
 		Method:      "GET",
 		Pattern:     "/api/consults",
-		HandlerFunc: handlers.GetCapitalInfosByOrder,
+		HandlerFunc: handlers.PutCapitalInfoByOrder, //TODO Change
 	})
 
 	// weixin route
