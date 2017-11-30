@@ -3,6 +3,7 @@ package managers
 import (
 	"time"
 
+	"github.com/laidingqing/feichong/helpers"
 	"github.com/laidingqing/feichong/models"
 
 	mgo "gopkg.in/mgo.v2"
@@ -11,7 +12,7 @@ import (
 
 // InsertBusinessData 新增订单业务数据
 func InsertBusinessData(biz models.Business) string {
-	biz.ID = bson.NewObjectId().Hex()
+	biz.ID = bson.NewObjectId()
 	biz.CreatedAt = time.Now()
 	query := func(c *mgo.Collection) error {
 		return c.Insert(biz)
@@ -22,7 +23,7 @@ func InsertBusinessData(biz models.Business) string {
 		return ""
 	}
 
-	return biz.ID
+	return biz.ID.Hex()
 }
 
 // FindOrderBusiness ...
@@ -40,20 +41,28 @@ func FindOrderBusiness(orderID string) ([]models.Business, error) {
 	return data, nil
 }
 
+// FindBusinessByID ...
+func FindBusinessByID(businessID string) (models.Business, error) {
+	var data models.Business
+
+	query := func(c *mgo.Collection) error {
+		return c.FindId(bson.ObjectIdHex(businessID)).One(&data)
+	}
+
+	err := executeQuery(businessCollectionName, query)
+
+	log := helpers.NewLogger()
+	log.Log("data", data.ID)
+	if err != nil {
+		return data, err
+	}
+	return data, nil
+}
+
 // InsertOrderTax 新增用户
 func InsertOrderTax(tax models.TaxInfo) string {
-	tax.ID = bson.NewObjectId().Hex()
-	tax.CreatedAt = time.Now()
-	query := func(c *mgo.Collection) error {
-		return c.Insert(tax)
-	}
 
-	err := executeQuery(orderTaxsCollectionName, query)
-	if err != nil {
-		return ""
-	}
-
-	return tax.ID
+	return ""
 }
 
 // GetOrderTaxs 新增用户

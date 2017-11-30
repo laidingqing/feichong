@@ -1,0 +1,37 @@
+<div class="modal-header">
+ <h3 class="modal-title">资金情况</h3>
+</div>
+<div class="modal-body card" ng-init="init()">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>现金(元)</label>
+        <input class="form-control" ng-model="capitalInfo.cashAmt" ng-value="capitalInfo.cashAmt"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>存款(元)</label>
+        <input class="form-control" ng-model="capitalInfo.depositAmt" ng-value="capitalInfo.depositAmt"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>应收款(元)</label>
+        <input class="form-control" ng-model="capitalInfo.receiveAmt" ng-value="capitalInfo.receiveAmt"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>应付款(元)</label>
+        <input class="form-control" ng-model="capitalInfo.payAmt" ng-model="capitalInfo.payAmt"/>
+      </div>
+    </div>
+  </div>
+</div>

@@ -204,13 +204,13 @@ define(function() {
 
   controllers.UpdateProfileCtrl.$inject = ['$scope', '$uibModalInstance', 'UserService', 'updateUserId'];
 
-  controllers.BusinessCtrl = function($scope, $stateParams, UserService, OrderService){
+  controllers.BusinessCtrl = function($scope, $uibModal, $stateParams, UserService, OrderService){
     console.log($stateParams, $stateParams.id)
     $scope.business = []
     var init = function(){
       OrderService.getBusinessByOrder($stateParams.id, function(data){
         $scope.business = data || []
-        console.log(response)
+        console.log(data)
       }, function(err){
         console.log(err)
       })
@@ -218,9 +218,64 @@ define(function() {
 
     init()
 
+    $scope.showCapital = function(orderId, businessId){
+      var modalInstance = $uibModal.open({
+          templateUrl: '../components/capitalInfoModal.html?1',
+          controller: function($scope, OrderService){
+            $scope.capitalInfo = {}
+            OrderService.getBusinessByID(orderId, businessId, function(data){
+              $scope.capitalInfo = data.capitalInfo
+              console.log(data.capitalInfo)
+            }, function(err){
+              console.log(err)
+            })
+          },
+          size: 'lg',
+          resolve: {
+
+          }
+      });
+    }
+    $scope.showProfit = function(orderId, businessId){
+      var modalInstance = $uibModal.open({
+          templateUrl: '../components/profitInfoModal.html?1',
+          controller: function($scope, OrderService){
+            $scope.profitInfo = {}
+            OrderService.getBusinessByID(orderId, businessId, function(data){
+              $scope.ProfitInfo = data.profitInfo
+              console.log(data.profitInfo)
+            }, function(err){
+              console.log(err)
+            })
+
+          },
+          size: 'lg',
+          resolve: {
+
+          }
+      });
+    }
+    $scope.showTax = function(orderId, businessId){
+      var modalInstance = $uibModal.open({
+          templateUrl: '../components/taxInfoModal.html?1',
+          controller: function($scope, OrderService){
+            $scope.taxInfo = {}
+            OrderService.getBusinessByID(orderId, businessId, function(data){
+              $scope.taxInfo = data.taxInfo
+              console.log(data.taxInfo)
+            }, function(err){
+              console.log(err)
+            })
+          },
+          size: 'lg',
+          resolve: {
+
+          }
+      });
+    }
   }
 
-  controllers.BusinessCtrl.$inject = ['$scope', '$stateParams', 'UserService', 'OrderService'];
+  controllers.BusinessCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'UserService', 'OrderService'];
 
   return controllers;
 });

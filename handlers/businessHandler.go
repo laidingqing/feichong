@@ -56,6 +56,19 @@ func GeneratorBusinessFinData(order models.Order) {
 	}
 }
 
+// GetBusinessByID 根据订单编号查询业务情况
+func GetBusinessByID(w http.ResponseWriter, r *http.Request) {
+	businessID := helpers.GetParam(r, businessIDParam)
+	log := helpers.NewLogger()
+	log.Log("businessID", businessID)
+	business, err := managers.FindBusinessByID(businessID)
+	if err != nil {
+		helpers.SetResponse(w, http.StatusBadRequest, err)
+	} else {
+		helpers.SetResponse(w, http.StatusOK, business)
+	}
+}
+
 // GetBusinessByOrderID 根据订单编号查询业务情况
 func GetBusinessByOrderID(w http.ResponseWriter, r *http.Request) {
 	orderID := helpers.GetParam(r, busOrderIDParam)

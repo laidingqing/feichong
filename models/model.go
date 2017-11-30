@@ -27,7 +27,6 @@ const (
 )
 
 // Pagination 分页
-
 type Pagination struct {
 	Data       interface{} `bson:"-" json:"data"`
 	TotalCount int         `bson:"-" json:"totalCount"`
@@ -72,7 +71,7 @@ type Order struct {
 
 // Business 业务信息-交接单
 type Business struct {
-	ID          string         `bson:"_id" json:"id"`
+	ID          bson.ObjectId  `bson:"_id" json:"id"`
 	Seq         int            `bson:"sorter" json:"-"`
 	OrderID     string         `bson:"orderID" json:"orderID"`
 	CreatedAt   time.Time      `bson:"createdAt" json:"createdAt"`
@@ -89,7 +88,6 @@ type Business struct {
 
 // CapitalInfo 资金情况
 type CapitalInfo struct {
-	ID         string  `bson:"_id" json:"id"`
 	OrderID    string  `bson:"orderID" json:"orderID"`
 	Year       int     `bson:"year" json:"year"`
 	Month      int     `bson:"month" json:"month"`
@@ -101,7 +99,6 @@ type CapitalInfo struct {
 
 // ProfitInfo 利润情况
 type ProfitInfo struct {
-	ID       string  `bson:"_id" json:"id"`
 	OrderID  string  `bson:"orderID" json:"orderID"`
 	Year     int     `bson:"year" json:"year"`
 	Month    int     `bson:"month" json:"month"`
@@ -112,7 +109,6 @@ type ProfitInfo struct {
 
 // TaxInfo 纳税情况
 type TaxInfo struct {
-	ID        string    `bson:"_id" json:"id"`
 	OrderID   string    `bson:"orderID" json:"orderID"`
 	Year      int       `bson:"year" json:"year"`
 	Month     int       `bson:"month" json:"month"`
@@ -122,7 +118,7 @@ type TaxInfo struct {
 	CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
 }
 
-// 咨询表单记录
+// Consult 咨询表单记录
 type Consult struct {
 	ID          string    `bson:"_id" json:"id"`
 	From        string    `bson:"from" json:"from"`
@@ -136,5 +132,6 @@ type Consult struct {
 }
 
 var (
+	// ErrUserNotFound 用户不存在
 	ErrUserNotFound = errors.New("用户不存在")
 )

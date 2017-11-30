@@ -99,6 +99,13 @@ func init() {
 	})
 
 	routes = append(routes, Route{
+		Name:        "BusinessGetByBusID",
+		Method:      "GET",
+		Pattern:     "/api/orders/{orderId}/business/{businessId}",
+		HandlerFunc: handlers.GetBusinessByID,
+	})
+
+	routes = append(routes, Route{
 		Name:        "OrderCreate",
 		Method:      "POST",
 		Pattern:     "/api/orders/",
