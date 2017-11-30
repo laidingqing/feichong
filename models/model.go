@@ -89,6 +89,7 @@ type Business struct {
 // CapitalInfo 资金情况
 type CapitalInfo struct {
 	OrderID    string  `bson:"orderID" json:"orderID"`
+	BusinessID string  `bson:"businessID" json:"businessID"`
 	Year       int     `bson:"year" json:"year"`
 	Month      int     `bson:"month" json:"month"`
 	CashAmt    float64 `bson:"cashAmt" json:"cashAmt"`       //现金
@@ -99,23 +100,25 @@ type CapitalInfo struct {
 
 // ProfitInfo 利润情况
 type ProfitInfo struct {
-	OrderID  string  `bson:"orderID" json:"orderID"`
-	Year     int     `bson:"year" json:"year"`
-	Month    int     `bson:"month" json:"month"`
-	InAmt    float64 `bson:"inAmt" json:"inAmt"`
-	OutAmt   float64 `bson:"outAmt" json:"outAmt"`
-	TotalAmt float64 `bson:"totalAmt" json:"totalAmt"`
+	OrderID    string  `bson:"orderID" json:"orderID"`
+	BusinessID string  `bson:"businessID" json:"businessID"`
+	Year       int     `bson:"year" json:"year"`
+	Month      int     `bson:"month" json:"month"`
+	InAmt      float64 `bson:"inAmt" json:"inAmt"`
+	OutAmt     float64 `bson:"outAmt" json:"outAmt"`
+	TotalAmt   float64 `bson:"totalAmt" json:"totalAmt"`
 }
 
 // TaxInfo 纳税情况
 type TaxInfo struct {
-	OrderID   string    `bson:"orderID" json:"orderID"`
-	Year      int       `bson:"year" json:"year"`
-	Month     int       `bson:"month" json:"month"`
-	VatAmt    float64   `bson:"vatAmt" json:"vatAmt"` //增值税
-	AbbAmt    float64   `bson:"abbAmt" json:"abbAmt"` //城建税
-	Other     float64   `bson:"other" json:"other"`   //其它
-	CreatedAt time.Time `bson:"createdAt" json:"createdAt"`
+	OrderID    string    `bson:"orderID" json:"orderID"`
+	BusinessID string    `bson:"businessID" json:"businessID"`
+	Year       int       `bson:"year" json:"year"`
+	Month      int       `bson:"month" json:"month"`
+	VatAmt     float64   `bson:"vatAmt" json:"vatAmt"` //增值税
+	AbbAmt     float64   `bson:"abbAmt" json:"abbAmt"` //城建税
+	Other      float64   `bson:"other" json:"other"`   //其它
+	CreatedAt  time.Time `bson:"createdAt" json:"createdAt"`
 }
 
 // Consult 咨询表单记录

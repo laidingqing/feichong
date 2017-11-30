@@ -82,44 +82,51 @@ func GetBusinessByOrderID(w http.ResponseWriter, r *http.Request) {
 
 // PutProfitInfoByOrder 增加订单纳税情况
 func PutProfitInfoByOrder(w http.ResponseWriter, r *http.Request) {
-	orderID := helpers.GetParam(r, busOrderIDParam)
+	businessID := helpers.GetParam(r, businessIDParam)
 	var profit models.ProfitInfo
+
+	profit.BusinessID = businessID
+
 	helpers.GetProfitInfoBody(w, r, &profit)
-	if true {
-		helpers.SetResponse(w, http.StatusOK, nil)
+	res, err := managers.UpdateProfitByBusiness(profit)
+
+	if err == nil {
+		helpers.SetResponse(w, http.StatusOK, res)
 	} else {
-		helpers.SetResponse(w, http.StatusNotFound, orderID)
+		helpers.SetResponse(w, http.StatusBadRequest, err)
 	}
 }
 
 // PutCapitalInfoByOrder 增加订单资金情况
 func PutCapitalInfoByOrder(w http.ResponseWriter, r *http.Request) {
 	businessID := helpers.GetParam(r, businessIDParam)
-	log := helpers.NewLogger()
-	log.Log("businessID", businessID)
 	var capital models.CapitalInfo
 
-	helpers.GetCapitalInfoBody(w, r, &capital)
+	capital.BusinessID = businessID
 
-	if true {
-		helpers.SetResponse(w, http.StatusOK, "ok")
+	helpers.GetCapitalInfoBody(w, r, &capital)
+	res, err := managers.UpdateCapitalByBusiness(capital)
+
+	if err == nil {
+		helpers.SetResponse(w, http.StatusOK, res)
 	} else {
-		helpers.SetResponse(w, http.StatusNotFound, "")
+		helpers.SetResponse(w, http.StatusBadRequest, err)
 	}
 }
 
 // PutTaxInfoByOrder 增加订单资金情况
 func PutTaxInfoByOrder(w http.ResponseWriter, r *http.Request) {
-	orderID := helpers.GetParam(r, busOrderIDParam)
+	businessID := helpers.GetParam(r, businessIDParam)
 	var tax models.TaxInfo
-	tax.OrderID = orderID
+
+	tax.BusinessID = businessID
+
 	helpers.GetTaxInfoBody(w, r, &tax)
+	res, err := managers.UpdateTaxByBusiness(tax)
 
-	id := managers.InsertOrderTax(tax)
-
-	if true {
-		helpers.SetResponse(w, http.StatusOK, id)
+	if err == nil {
+		helpers.SetResponse(w, http.StatusOK, res)
 	} else {
-		helpers.SetResponse(w, http.StatusNotFound, id)
+		helpers.SetResponse(w, http.StatusBadRequest, err)
 	}
 }

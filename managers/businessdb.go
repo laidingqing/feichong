@@ -14,6 +14,15 @@ import (
 func InsertBusinessData(biz models.Business) string {
 	biz.ID = bson.NewObjectId()
 	biz.CreatedAt = time.Now()
+	biz.CapitalInfo = models.CapitalInfo{
+		BusinessID: biz.ID.Hex(),
+	}
+	biz.TaxInfo = models.TaxInfo{
+		BusinessID: biz.ID.Hex(),
+	}
+	biz.ProfitInfo = models.ProfitInfo{
+		BusinessID: biz.ID.Hex(),
+	}
 	query := func(c *mgo.Collection) error {
 		return c.Insert(biz)
 	}
@@ -59,43 +68,62 @@ func FindBusinessByID(businessID string) (models.Business, error) {
 	return data, nil
 }
 
-// InsertOrderTax 新增用户
-func InsertOrderTax(tax models.TaxInfo) string {
+// UpdateCapitalByBusiness ..
+func UpdateCapitalByBusiness(capital models.CapitalInfo) (models.CapitalInfo, error) {
 
-	return ""
+	business, err := FindBusinessByID(capital.BusinessID)
+
+	if err != nil {
+		return models.CapitalInfo{}, err
+	}
+
+	business.CapitalInfo = capital
+
+	query := func(c *mgo.Collection) error {
+		return c.UpdateId(bson.ObjectIdHex(capital.BusinessID), business)
+	}
+
+	executeQuery(businessCollectionName, query)
+
+	return business.CapitalInfo, nil
 }
 
-// GetOrderTaxs 新增用户
-func GetOrderTaxs(orderID string, month int) (models.TaxInfo, error) {
+// UpdateProfitByBusiness ..
+func UpdateProfitByBusiness(profit models.ProfitInfo) (models.ProfitInfo, error) {
 
-	var tax models.TaxInfo
-	year, _, _ := time.Now().Date()
-	query := func(c *mgo.Collection) error {
-		return c.Find(bson.M{"orderID": orderID, "month": month, "year": year}).One(&tax)
-	}
+	business, err := FindBusinessByID(profit.BusinessID)
 
-	err := executeQuery(orderTaxsCollectionName, query)
 	if err != nil {
-		return tax, nil
+		return models.ProfitInfo{}, err
 	}
 
-	return tax, nil
+	business.ProfitInfo = profit
+
+	query := func(c *mgo.Collection) error {
+		return c.UpdateId(bson.ObjectIdHex(profit.BusinessID), business)
+	}
+
+	executeQuery(businessCollectionName, query)
+
+	return business.ProfitInfo, nil
 }
 
-// GetOrderCapitals ...
-func GetOrderCapitals(orderID string, month int) (models.CapitalInfo, error) {
+// UpdateTaxByBusiness ..
+func UpdateTaxByBusiness(tax models.TaxInfo) (models.TaxInfo, error) {
 
-	var capital models.CapitalInfo
-	year, _, _ := time.Now().Date()
-	query := func(c *mgo.Collection) error {
-		bs := bson.M{"orderID": orderID, "year": year}
-		return c.Find(bs).One(&capital)
-	}
+	business, err := FindBusinessByID(tax.BusinessID)
 
-	err := executeQuery(orderTaxsCollectionName, query)
 	if err != nil {
-		return capital, nil
+		return models.TaxInfo{}, err
 	}
 
-	return capital, nil
+	business.TaxInfo = tax
+
+	query := func(c *mgo.Collection) error {
+		return c.UpdateId(bson.ObjectIdHex(tax.BusinessID), business)
+	}
+
+	executeQuery(businessCollectionName, query)
+
+	return business.TaxInfo, nil
 }
