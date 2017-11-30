@@ -6,7 +6,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <label>增值税(元)</label>
-        <input class="form-control" ng-model=""/>
+        <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.vatAmt"/>
       </div>
     </div>
   </div>
@@ -14,7 +14,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <label>城建税(元)</label>
-        <input class="form-control" ng-model=""/>
+        <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.abbAmt"/>
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <label>其它(元)</label>
-        <input class="form-control" ng-model=""/>
+        <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.other"/>
       </div>
     </div>
   </div>

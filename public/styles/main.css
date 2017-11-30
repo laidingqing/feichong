@@ -329,3 +329,6 @@
   display: table;
   clear: both;
 }
+.business h4{
+  padding-left: 15px;
+}

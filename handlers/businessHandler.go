@@ -28,6 +28,7 @@ func GeneratorBusinessFinData(order models.Order) {
 	var next = false
 	for i := 0; i < 12; i++ {
 		business := models.Business{
+			OrderNO:   order.OrderNO,
 			OrderID:   order.ID.Hex(),
 			Year:      orderYear,
 			Month:     orderMonth,
@@ -101,10 +102,13 @@ func PutProfitInfoByOrder(w http.ResponseWriter, r *http.Request) {
 func PutCapitalInfoByOrder(w http.ResponseWriter, r *http.Request) {
 	businessID := helpers.GetParam(r, businessIDParam)
 	var capital models.CapitalInfo
-
 	capital.BusinessID = businessID
 
 	helpers.GetCapitalInfoBody(w, r, &capital)
+
+	log := helpers.NewLogger()
+	log.Log("BusinessID", capital.BusinessID)
+
 	res, err := managers.UpdateCapitalByBusiness(capital)
 
 	if err == nil {

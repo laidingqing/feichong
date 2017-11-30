@@ -228,12 +228,12 @@ define(['angular'], function(angular) {
     .factory('BusinessService', ['$http', 'Config', function($http, Config) {
       var Business = {
         type: 'business',
-        putCapitalInfo: function(businessId, data, callback){
+        putCapitalInfo: function(businessId, data, callback, error){
           var jsonObject = angular.toJson(data);
           var headers = {
             'Content-Type': 'application/json'
           };
-          $http.put(Config.url + this.type + '/' + businessId +"/captials/", jsonObject, {
+          $http.put(Config.url + this.type + '/' + businessId +"/capitals/", jsonObject, {
               headers: headers
             })
             .then(function(response) {
@@ -241,10 +241,10 @@ define(['angular'], function(angular) {
               callback(response);
             })
             .catch(function(err) {
-              callback(err);
+              error(err);
             })
         },
-        putProfitInfo: function(businessId, data, callback){
+        putProfitInfo: function(businessId, data, callback, error){
           var jsonObject = angular.toJson(data);
           var headers = {
             'Content-Type': 'application/json'
@@ -257,10 +257,10 @@ define(['angular'], function(angular) {
               callback(response);
             })
             .catch(function(err) {
-              callback(err);
+              error(err);
             })
         },
-        putTaxInfo: function(businessId, data, callback){
+        putTaxInfo: function(businessId, data, callback, error){
           var jsonObject = angular.toJson(data);
           var headers = {
             'Content-Type': 'application/json'
@@ -273,7 +273,7 @@ define(['angular'], function(angular) {
               callback(response);
             })
             .catch(function(err) {
-              callback(err);
+              error(err);
             })
         }
       }

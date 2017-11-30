@@ -74,6 +74,7 @@ type Business struct {
 	ID          bson.ObjectId  `bson:"_id" json:"id"`
 	Seq         int            `bson:"sorter" json:"-"`
 	OrderID     string         `bson:"orderID" json:"orderID"`
+	OrderNO     string         `bson:"orderNO" json:"orderNO"`
 	CreatedAt   time.Time      `bson:"createdAt" json:"createdAt"`
 	Description string         `bson:"description" json:"description"`
 	Year        int            `bson:"year" json:"year"`

@@ -88,9 +88,9 @@ define(function() {
       })
     }
 
-    $scope.trackDetail = function(orderId){
+    $scope.trackDetail = function(orderId, orderNO){
       console.log(orderId, $state)
-      $state.go('dashboard.business', {id: orderId });
+      $state.go('dashboard.business', {id: orderId, orderNO: orderNO });
     }
 
   }
@@ -207,6 +207,7 @@ define(function() {
   controllers.BusinessCtrl = function($scope, $uibModal, $stateParams, UserService, OrderService, BusinessService){
     console.log($stateParams, $stateParams.id)
     $scope.business = []
+    $scope.orderNO = $stateParams.orderNO
     var init = function(){
       OrderService.getBusinessByOrder($stateParams.id, function(data){
         $scope.business = data || []
@@ -220,8 +221,10 @@ define(function() {
 
     $scope.showCapital = function(orderId, businessId){
       var modalInstance = $uibModal.open({
-          templateUrl: '../components/capitalInfoModal.html?1',
+          templateUrl: '../components/capitalInfoModal.html?2',
           controller: function($scope, $uibModalInstance, OrderService){
+            $scope.err = false
+            $scope.errorText = ""
             $scope.capitalInfo = {}
             OrderService.getBusinessByID(orderId, businessId, function(data){
               $scope.capitalInfo = data.capitalInfo
@@ -233,8 +236,15 @@ define(function() {
                 $uibModalInstance.close();
             }
             $scope.ok = function(){
-              BusinessService.putCapitalInfo(businessId, $scope.capitalInfo, function(data){
-                console.log($scope.capitalInfo, data)
+              BusinessService.putCapitalInfo(businessId, $scope.capitalInfo, function(res){
+                if( res.status == 200){
+                  $scope.capitalInfo = data
+                  console.log($scope.capitalInfo, data)
+                  $uibModalInstance.close();
+                }
+              }, function(err){
+                $scope.err = true
+                $scope.errorText = err.message
               })
             }
           },
@@ -243,14 +253,22 @@ define(function() {
 
           }
       });
+
+      modalInstance.result.then(function(){
+
+      }, function(res){
+
+      })
     }
     $scope.showProfit = function(orderId, businessId){
       var modalInstance = $uibModal.open({
           templateUrl: '../components/profitInfoModal.html?1',
           controller: function($scope, $uibModalInstance, OrderService){
             $scope.profitInfo = {}
+            $scope.err = false
+            $scope.errorText = ""
             OrderService.getBusinessByID(orderId, businessId, function(data){
-              $scope.ProfitInfo = data.profitInfo
+              $scope.profitInfo = data.profitInfo
               console.log(data.profitInfo)
             }, function(err){
               console.log(err)
@@ -260,8 +278,15 @@ define(function() {
                 $uibModalInstance.close();
             }
             $scope.ok = function(){
-              BusinessService.putProfitInfo(businessId, $scope.profitInfo, function(data){
-                console.log($scope.profitInfo, data)
+              BusinessService.putProfitInfo(businessId, $scope.profitInfo, function(res){
+                if(res.status == 200){
+                  $scope.profitInfo = res.data
+                  console.log(data.profitInfo)
+                  $uibModalInstance.close();
+                }
+              }, function(err){
+                $scope.err = true
+                $scope.errorText = err.message
               })
             }
 
@@ -271,25 +296,39 @@ define(function() {
 
           }
       });
+      modalInstance.result.then(function(){
+
+      }, function(res){
+
+      })
     }
-    $scope.showTax = function(orderId, $uibModalInstance, businessId){
+    $scope.showTax = function(orderId, businessId){
       var modalInstance = $uibModal.open({
           templateUrl: '../components/taxInfoModal.html?1',
-          controller: function($scope, OrderService){
+          controller: function($scope, $uibModalInstance, OrderService){
+            $scope.err = false
+            $scope.errorText = ""
             $scope.taxInfo = {}
             OrderService.getBusinessByID(orderId, businessId, function(data){
               $scope.taxInfo = data.taxInfo
               console.log(data.taxInfo)
             }, function(err){
-              console.log(err)
+              $scope.err = true
+              $scope.errorText = err.message
             })
 
             $scope.cancel = function(){
                 $uibModalInstance.close();
             }
             $scope.ok = function(){
-              BusinessService.putTaxInfo(businessId, $scope.taxInfo, function(data){
-                console.log($scope.taxInfo, data)
+              BusinessService.putTaxInfo(businessId, $scope.taxInfo, function(res){
+                if( res.status == 200){
+                  $scope.taxInfo = data.taxInfo
+                  console.log($scope.taxInfo, res)
+                  $uibModalInstance.close();
+                }
+              }, function(err){
+                console.log(err)
               })
             }
           },
@@ -298,6 +337,11 @@ define(function() {
 
           }
       });
+      modalInstance.result.then(function(){
+
+      }, function(res){
+
+      })
     }
   }
 

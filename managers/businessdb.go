@@ -70,9 +70,9 @@ func FindBusinessByID(businessID string) (models.Business, error) {
 
 // UpdateCapitalByBusiness ..
 func UpdateCapitalByBusiness(capital models.CapitalInfo) (models.CapitalInfo, error) {
-
 	business, err := FindBusinessByID(capital.BusinessID)
-
+	log := helpers.NewLogger()
+	log.Log("data", business.ID)
 	if err != nil {
 		return models.CapitalInfo{}, err
 	}
