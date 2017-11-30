@@ -56,6 +56,7 @@ func UpdateUserByID(user models.User) models.User {
 
 	us.UserName = user.UserName
 	us.Email = user.Email
+	us.Name = user.Name
 	us.CompanyName = user.CompanyName
 	us.Phone = user.Phone
 	us.Admin = user.Admin

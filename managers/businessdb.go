@@ -50,6 +50,21 @@ func FindOrderBusiness(orderID string) ([]models.Business, error) {
 	return data, nil
 }
 
+// FindOrderBusinessByDate ...
+func FindOrderBusinessByDate(orderID string, year int, month int) (models.Business, error) {
+	var data models.Business
+
+	query := func(c *mgo.Collection) error {
+		return c.Find(bson.M{"orderID": orderID, "year": year, "month": month}).One(&data)
+	}
+
+	err := executeQuery(businessCollectionName, query)
+	if err != nil {
+		return data, err
+	}
+	return data, nil
+}
+
 // FindBusinessByID ...
 func FindBusinessByID(businessID string) (models.Business, error) {
 	var data models.Business

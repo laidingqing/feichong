@@ -63,10 +63,10 @@ type Order struct {
 	UserID      *mgo.DBRef    `bson:"userid,omitempty" json:"userId,omitempty"`
 	ServiceID   *mgo.DBRef    `bson:"serviceid,omitempty" json:"serviceId,omitempty"` //客服
 	AdviserID   *mgo.DBRef    `bson:"adviserid,omitempty" json:"adviserId,omitempty"` //财务顾问
-	SalerInfo   User          `bson:"-" json:"salerInfo"`
-	UserInfo    User          `bson:"-" json:"userInfo"`
-	ServiceInfo *mgo.DBRef    `bson:"-" json:"serviceInfo"`
-	AdviserInfo *mgo.DBRef    `bson:"-" json:"adviserInfo"`
+	SalerInfo   User          `bson:"-" json:"salerInfo"`                             //业务员
+	UserInfo    User          `bson:"-" json:"userInfo"`                              //所属用户
+	ServiceInfo User          `bson:"-" json:"serviceInfo"`                           //客服
+	AdviserInfo User          `bson:"-" json:"adviserInfo"`                           //顾问
 }
 
 // Business 业务信息-交接单

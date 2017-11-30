@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/laidingqing/feichong/helpers"
@@ -127,6 +128,24 @@ func PutTaxInfoByOrder(w http.ResponseWriter, r *http.Request) {
 
 	helpers.GetTaxInfoBody(w, r, &tax)
 	res, err := managers.UpdateTaxByBusiness(tax)
+
+	if err == nil {
+		helpers.SetResponse(w, http.StatusOK, res)
+	} else {
+		helpers.SetResponse(w, http.StatusBadRequest, err)
+	}
+}
+
+// GetBusinessInfoByOrder ...
+func GetBusinessInfoByOrder(w http.ResponseWriter, r *http.Request) {
+	businessID := helpers.GetParam(r, businessIDParam)
+	year := helpers.GetInParam(r, businessYearParam)
+	month := helpers.GetInParam(r, businessMonthParam)
+
+	vYear, _ := strconv.Atoi(year)
+	vMonth, _ := strconv.Atoi(month)
+
+	res, err := managers.FindOrderBusinessByDate(businessID, vYear, vMonth)
 
 	if err == nil {
 		helpers.SetResponse(w, http.StatusOK, res)
