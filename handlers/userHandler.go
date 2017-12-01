@@ -12,6 +12,7 @@ import (
 const userIDParam = "userId"
 const userPageParam = "page"
 const userSizeParam = "size"
+const userNameParam = "username"
 
 const orderPageParam = "page"
 const orderSizeParam = "size"
@@ -45,7 +46,26 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 func PutUserByID(w http.ResponseWriter, r *http.Request) {
 	var user models.User
 	helpers.GetUserBody(w, r, &user)
-	managers.UpdateUserByID(user)
+	model := managers.UpdateUserByID(user)
+	helpers.SetResponse(w, http.StatusOK, model)
+}
+
+// PutUserSecurity Update User Profile ...
+func PutUserSecurity(w http.ResponseWriter, r *http.Request) {
+	userID := helpers.GetParam(r, userIDParam)
+	var user models.User
+	helpers.GetUserBody(w, r, &user)
+	user.Salt = user.UserName
+	user.Password = helpers.CalculatePassHash(user.Password, user.Salt)
+	model, err := managers.UpdateUserPasswordAndName(userID, user.UserName, user.Password)
+	if err != nil {
+		helpers.SetResponse(w, http.StatusBadRequest, err)
+	} else {
+		helpers.SetResponse(w, http.StatusOK, models.User{
+			ID: model.ID,
+		})
+	}
+
 }
 
 // PostUser create user
@@ -90,4 +110,14 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 
 	helpers.SetResponse(w, http.StatusCreated, isUser)
 
+}
+
+// CheckUserName ...
+func CheckUserName(w http.ResponseWriter, r *http.Request) {
+	var user models.User
+	username := helpers.GetInParam(r, userNameParam)
+	log := helpers.NewLogger()
+	log.Log("username", username)
+	user = managers.GetUserByUserName(username)
+	helpers.SetResponse(w, http.StatusOK, user)
 }

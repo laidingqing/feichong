@@ -70,11 +70,27 @@ func UpdateUserByID(user models.User) models.User {
 	return user
 }
 
+// UpdateUserPasswordAndName ..
+func UpdateUserPasswordAndName(userID string, username string, password string) (models.User, error) {
+
+	us := GetUserByID(userID)
+
+	us.UserName = username
+	us.Password = password
+
+	query := func(c *mgo.Collection) error {
+		return c.UpdateId(bson.ObjectIdHex(userID), us)
+	}
+
+	err := executeQuery(userCollectionName, query)
+
+	return us, err
+}
+
 // GetUserByUserName 根据用户获取用户信息
 func GetUserByUserName(username string) models.User {
 
 	var user models.User
-
 	query := func(c *mgo.Collection) error {
 		return c.Find(bson.M{"username": username}).One(&user)
 	}

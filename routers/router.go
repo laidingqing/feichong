@@ -42,6 +42,20 @@ func init() {
 	})
 
 	routes = append(routes, Route{
+		Name:        "PutUserSecurity",
+		Method:      "PUT",
+		Pattern:     "/api/users/{userId}/security",
+		HandlerFunc: handlers.PutUserSecurity,
+	})
+
+	routes = append(routes, Route{
+		Name:        "UserGetById",
+		Method:      "GET",
+		Pattern:     "/api/checkname/",
+		HandlerFunc: handlers.CheckUserName,
+	})
+
+	routes = append(routes, Route{
 		Name:        "UpdateUser",
 		Method:      "PUT",
 		Pattern:     "/api/users/{userId}/",

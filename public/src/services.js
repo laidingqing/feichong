@@ -110,6 +110,36 @@ define(['angular'], function(angular) {
               error(err);
             })
         },
+        checkUserName: function(username, success, error) {
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.get(Config.url + "/checkname/", { params: { "username": username} }, {
+              headers: headers
+            })
+            .then(function(response) {
+              success(response.data);
+            })
+            .catch(function(err) {
+              error(err);
+            })
+        },
+        putUserSecurity: function(user, callback) {
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          var jsonObject = angular.toJson(user);
+          $http.put(Config.url + this.type + '/' + user.id +"/security/", jsonObject, {
+              headers: headers
+            })
+            .then(function(response) {
+              console.log(response)
+              callback(response);
+            })
+            .catch(function(err) {
+              callback(err);
+            })
+        },
         getUserBySelf: function(success, error) {
           var headers = {
             'Content-Type': 'application/json'

@@ -174,6 +174,52 @@ define(function() {
           }
       });
     }
+    //更新登录信息
+    $scope.upateSession = function(id){
+      var modalInstance = $uibModal.open({
+          templateUrl: '../components/securityModal.html?1',
+          controller: function($scope, $uibModalInstance, UserService, updateUserId){
+              $scope.user = {}
+              $scope.error = false
+              console.log("更新登录会话信息", updateUserId)
+              UserService.getUser(updateUserId, function(res){
+                $scope.user = res
+              }, function(err){
+                $scope.error = true
+                $scope.errorText = err
+              })
+
+              $scope.submit = function(){
+                UserService.checkUserName($scope.user.username, function(res){
+                    console.log(res)
+                    if( res.id != ""){
+                      console.log("已存在用户")
+                      $scope.error = true
+                      $scope.errText = "已存在相同的登录用户名，请重新输入！"
+                    }else{
+                      UserService.putUserSecurity($scope.user, function(data){
+                        console.log(data)v     ft
+                      })
+                    }
+                }, function(err){
+                  console.log(err)
+                })
+              }
+          },
+          size: 'lg',
+          resolve: {
+            updateUserId: function(){
+              return id
+            }
+          }
+      });
+      modalInstance.result.then(function (newOutputData) {
+        console.log(newOutputData)
+          if(newOutputData){
+            queryList(1)
+          }
+      });
+    }
   }
   controllers.CustomersCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'UserService'];
 

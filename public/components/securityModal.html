@@ -1,0 +1,33 @@
+<div class="modal-header">
+ <h3 class="modal-title">修改登录信息</h3>
+</div>
+<div class="modal-body card" ng-init="init()">
+  <div data-ng-if="error" class="alert alert-danger">
+      <span>{{errText}}</span>
+  </div>
+ <div class="row">
+   <div class="col-md-6">
+     <div class="form-group">
+       <label>微信昵称</label>
+       <input class="form-control" ng-model="user.nick" disabled/>
+     </div>
+   </div>
+   <div class="col-md-6">
+     <div class="form-group">
+       <label>登录用户名</label>
+       <input class="form-control" ng-model="user.username" placeholder="输入登录用户名"/>
+     </div>
+   </div>
+ </div>
+ <div class="row">
+   <div class="col-md-12">
+     <div class="form-group">
+       <label>登录密码</label>
+       <input class="form-control" type="password" ng-model="user.password" placeholder="请输入一个登录密码"/>
+     </div>
+   </div>
+ </div>
+<div class="modal-footer">
+ <button class="btn btn-sm btn-default" type="button" ng-click="cancel()">取消</button>
+ <button class="btn btn-sm btn-info" type="button" ng-click="submit()">更新</button>
+</div>
