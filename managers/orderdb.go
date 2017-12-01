@@ -79,13 +79,29 @@ func GetOrderByID(orderID string) (models.Order, error) {
 	return order, err
 }
 
+// DeleteOrderByID remove
+func DeleteOrderByID(orderID string) error {
+
+	if !bson.IsObjectIdHex(orderID) {
+		return nil
+	}
+
+	query := func(c *mgo.Collection) error {
+		return c.Update(bson.M{"_id": bson.ObjectIdHex(orderID)}, bson.M{"status": int(models.OrderStatusDeleted)})
+	}
+
+	err := executeQuery(orderCollectionName, query)
+
+	return err
+}
+
 // GetOrdersByUser ...
 func GetOrdersByUser(userID string) ([]models.Order, error) {
 
 	var orders []models.Order
 
 	query := func(c *mgo.Collection) error {
-		return c.Find(bson.M{"userid.$id": bson.ObjectIdHex(userID)}).All(&orders)
+		return c.Find(bson.M{"userid.$id": bson.ObjectIdHex(userID), "status": int(models.OrderStatusDoing)}).All(&orders)
 	}
 
 	err := executeQuery(orderCollectionName, query)
@@ -116,6 +132,7 @@ func PutOrder(orderID string, order models.Order) (models.Order, error) {
 func InsertOrder(order models.Order) (models.Order, error) {
 	order.ID = bson.NewObjectId()
 	order.CreatedAt = time.Now()
+	order.Status = models.OrderStatusDoing
 	query := func(c *mgo.Collection) error {
 		return c.Insert(order)
 	}

@@ -44,6 +44,19 @@ func GetOrderByID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// DeleteOrderByID ..
+func DeleteOrderByID(w http.ResponseWriter, r *http.Request) {
+
+	orderID := helpers.GetParam(r, orderIDParam)
+	err := managers.DeleteOrderByID(orderID)
+
+	if err != nil {
+		helpers.SetResponse(w, http.StatusNotFound, err)
+	} else {
+		helpers.SetResponse(w, http.StatusOK, orderID)
+	}
+}
+
 // GetOrdersByUser ...
 func GetOrdersByUser(w http.ResponseWriter, r *http.Request) {
 

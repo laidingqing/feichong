@@ -26,6 +26,18 @@ const (
 	BusinessStatusFinish
 )
 
+// OrderStatus 订单状态
+type OrderStatus int
+
+const (
+	// OrderStatusUnknown 未知
+	OrderStatusUnknown OrderStatus = iota
+	// OrderStatusDoing 正常
+	OrderStatusDoing
+	// BusinessStatusDeleted 删除
+	OrderStatusDeleted
+)
+
 // Pagination 分页
 type Pagination struct {
 	Data       interface{} `bson:"-" json:"data"`
@@ -57,7 +69,7 @@ type Order struct {
 	StartMonth  int           `bson:"startMonth" json:"startMonth"`
 	CreatedAt   time.Time     `bson:"createdAt" json:"createdAt"`
 	ExpiredAt   time.Time     `bson:"expiredAt" json:"expiredAt"`
-	Status      int           `bson:"status" json:"status"`
+	Status      OrderStatus   `bson:"status" json:"status"`
 	Company     string        `bson:"companyName" json:"companyName"`
 	SalerID     *mgo.DBRef    `bson:"saler,omitempty" json:"salerId,omitempty"` //业务
 	UserID      *mgo.DBRef    `bson:"userid,omitempty" json:"userId,omitempty"`
