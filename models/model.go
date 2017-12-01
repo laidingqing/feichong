@@ -135,6 +135,11 @@ type Consult struct {
 	Biz         string    `bson:"biz" json:"biz"`
 }
 
+type FeedBack struct {
+	Star    int    `json:"star"`    //客户评星
+	Comment string `json:"comment"` //客户评价
+}
+
 var (
 	// ErrUserNotFound 用户不存在
 	ErrUserNotFound = errors.New("用户不存在")

@@ -153,3 +153,18 @@ func GetBusinessInfoByOrder(w http.ResponseWriter, r *http.Request) {
 		helpers.SetResponse(w, http.StatusBadRequest, err)
 	}
 }
+
+// PutFeedbackByBusiness ...
+func PutFeedbackByBusiness(w http.ResponseWriter, r *http.Request) {
+	businessID := helpers.GetParam(r, businessIDParam)
+	var fb models.FeedBack
+	helpers.GetFeedbackBody(w, r, &fb)
+
+	res, err := managers.UpdateFeedbackBusiness(businessID, fb)
+
+	if err == nil {
+		helpers.SetResponse(w, http.StatusOK, res)
+	} else {
+		helpers.SetResponse(w, http.StatusBadRequest, err)
+	}
+}

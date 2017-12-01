@@ -154,6 +154,12 @@ func init() {
 		HandlerFunc: handlers.GetBusinessInfoByOrder,
 	})
 
+	routes = append(routes, Route{
+		Name:        "BusinessDataFind",
+		Method:      "GET",
+		Pattern:     "/api/business/{businessId}/feedback/",
+		HandlerFunc: handlers.PutFeedbackByBusiness,
+	})
 	// 咨询接口
 	routes = append(routes, Route{
 		Name:        "ConsultCreate",

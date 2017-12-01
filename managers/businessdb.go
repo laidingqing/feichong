@@ -103,6 +103,24 @@ func UpdateCapitalByBusiness(capital models.CapitalInfo) (models.CapitalInfo, er
 	return business.CapitalInfo, nil
 }
 
+// UpdateFeedbackBusiness ..
+func UpdateFeedbackBusiness(businessID string, feedback models.FeedBack) (models.Business, error) {
+	business, err := FindBusinessByID(businessID)
+	if err != nil {
+		return models.Business{}, err
+	}
+	business.Star = feedback.Star
+	business.Comment = feedback.Comment
+
+	query := func(c *mgo.Collection) error {
+		return c.UpdateId(bson.ObjectIdHex(businessID), business)
+	}
+
+	executeQuery(businessCollectionName, query)
+
+	return business, nil
+}
+
 // UpdateProfitByBusiness ..
 func UpdateProfitByBusiness(profit models.ProfitInfo) (models.ProfitInfo, error) {
 
