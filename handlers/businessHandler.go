@@ -168,3 +168,31 @@ func PutFeedbackByBusiness(w http.ResponseWriter, r *http.Request) {
 		helpers.SetResponse(w, http.StatusBadRequest, err)
 	}
 }
+
+// GetConsults ..
+func GetConsults(w http.ResponseWriter, r *http.Request) {
+	page := helpers.GetInParam(r, orderPageParam)
+	size := helpers.GetInParam(r, orderSizeParam)
+	pageIndex, _ := strconv.Atoi(page)
+	pageSize, _ := strconv.Atoi(size)
+	res, err := managers.GetFeedbacks(pageIndex, pageSize)
+
+	if err == nil {
+		helpers.SetResponse(w, http.StatusOK, res)
+	} else {
+		helpers.SetResponse(w, http.StatusBadRequest, err)
+	}
+
+}
+
+// PostConsults ...
+func PostConsults(w http.ResponseWriter, r *http.Request) {
+	var consult models.Consult
+	helpers.GetSiteFeedbackBody(w, r, &consult)
+	resp, err := managers.PostFeedbacks(consult)
+	if err == nil {
+		helpers.SetResponse(w, http.StatusOK, resp)
+	} else {
+		helpers.SetResponse(w, http.StatusBadRequest, err)
+	}
+}

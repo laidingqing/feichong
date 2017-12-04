@@ -1,0 +1,40 @@
+<div>
+
+  <div class="card">
+    <div class="header">
+      <h4 class="title">网站、小程序业务咨询</h4>
+    </div>
+
+    <div class="content table-responsive table-full-width">
+      <table class="table table-hover table-striped" id="paninationData">
+        <thead>
+          <tr>
+            <th>来自</th>
+            <th>姓名</th>
+            <th>咨询业务</th>
+            <th>公司名称</th>
+            <th>电话</th>
+            <th>描述</th>
+            <th>咨询日期</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in pagination.data">
+            <td>{{}}</td>
+            <td>{{}}</td>
+            <td>{{}}</td>
+            <td>{{}}</td>
+            <td>{{}}</td>
+            <td>{{}}</td>
+            <td><span ng-bind="item.createdAt | date: 'yyyy-MM-dd'"></span></td>
+          </tr>
+        </tbody>
+
+      </table>
+
+      <ul uib-pagination class="pagination-sm pagination-custom" boundary-links="true" rotate="false" total-items="totalItems" ng-change="pageChange()" max-size="10" ng-model="currentPage" items-per-page="pageSize" first-text="首页" last-text="最后一页" next-text="下一页"
+        previous-text="上一页">
+      </ul>
+    </div>
+  </div>
+</div>

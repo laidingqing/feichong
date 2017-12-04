@@ -136,15 +136,15 @@ type TaxInfo struct {
 
 // Consult 咨询表单记录
 type Consult struct {
-	ID          string    `bson:"_id" json:"id"`
-	From        string    `bson:"from" json:"from"`
-	Invite      string    `bson:"invite" json:"invite"`
-	Name        string    `bson:"name" json:"name"`
-	Phone       string    `bson:"phone" json:"phone"`
-	Description string    `bson:"description" json:"description"`
-	CreatedAt   time.Time `bson:"createdAt" json:"createdAt"`
-	Catalog     string    `bson:"catalog" json:"catalog"`
-	Biz         string    `bson:"biz" json:"biz"`
+	ID          bson.ObjectId `bson:"_id" json:"id"`
+	From        string        `bson:"from" json:"from"`
+	Invite      string        `bson:"invite" json:"invite"`
+	Name        string        `bson:"name" json:"name"`
+	Phone       string        `bson:"phone" json:"phone"`
+	Description string        `bson:"description" json:"description"`
+	CreatedAt   time.Time     `bson:"createdAt" json:"createdAt"`
+	Catalog     string        `bson:"catalog" json:"catalog"`
+	Biz         string        `bson:"biz" json:"biz"`
 }
 
 type FeedBack struct {

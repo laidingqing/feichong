@@ -167,19 +167,20 @@ func init() {
 		Pattern:     "/api/business/{businessId}/feedback/",
 		HandlerFunc: handlers.PutFeedbackByBusiness,
 	})
-	// 咨询接口
+	// 咨询接口 查询
 	routes = append(routes, Route{
 		Name:        "ConsultCreate",
 		Method:      "POST",
 		Pattern:     "/api/consults",
-		HandlerFunc: handlers.PutCapitalInfoByOrder, //TODO Change
+		HandlerFunc: handlers.PostConsults,
 	})
 
+	// 咨询接口， 新建
 	routes = append(routes, Route{
 		Name:        "ConsultGet",
 		Method:      "GET",
 		Pattern:     "/api/consults",
-		HandlerFunc: handlers.PutCapitalInfoByOrder, //TODO Change
+		HandlerFunc: handlers.GetConsults,
 	})
 
 	// weixin route

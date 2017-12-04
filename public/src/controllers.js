@@ -393,5 +393,10 @@ define(function() {
 
   controllers.BusinessCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'UserService', 'OrderService', 'BusinessService'];
 
+  controllers.FeedbackCtrl = function($scope, $uibModal, $stateParams, UserService, OrderService, BusinessService){
+
+  }
+  controllers.BusinessCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'UserService', 'OrderService', 'BusinessService'];
+
   return controllers;
 });

@@ -160,3 +160,36 @@ func UpdateTaxByBusiness(tax models.TaxInfo) (models.TaxInfo, error) {
 
 	return business.TaxInfo, nil
 }
+
+// GetFeedbacks 获取所有咨询列表
+func GetFeedbacks(page int, size int) (models.Pagination, error) {
+	bsonQuery := bson.M{} // 查询条件
+	var consults []models.Consult
+	session := getSession()
+	defer session.Close()
+	c := session.DB(databaseName).C(orderCollectionName)
+	q := c.Find(bsonQuery)
+	total, err := q.Count()
+	q.All(&consults)
+	return models.Pagination{
+		Data:       consults,
+		TotalCount: total,
+	}, err
+}
+
+// PostFeedbacks 获取所有咨询列表
+func PostFeedbacks(model models.Consult) (models.Consult, error) {
+	model.ID = bson.NewObjectId()
+	model.CreatedAt = time.Now()
+	query := func(c *mgo.Collection) error {
+		return c.Insert(model)
+	}
+	err := executeQuery(orderCollectionName, query)
+	if err != nil {
+		return models.Consult{
+			ID: "",
+		}, err
+	}
+
+	return model, nil
+}
