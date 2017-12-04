@@ -3,26 +3,77 @@
 </div>
 <div class="modal-body card" ng-init="init()">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>申报时间</label>
+        <div class='input-group date' datetimepicker  id='datetimepicker1'>
+            <input type='text' class="form-control"  ng-model="taxInfo.reportedAt"/>
+            <span class="input-group-addon">  
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>是否申报</label>
+        <input class="form-control" type="checkbox" currency-format="number" ng-model="taxInfo.reported"/>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>税金</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.taxAmt"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
       <div class="form-group">
         <label>增值税(元)</label>
         <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.vatAmt"/>
       </div>
     </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>个税(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.personAmt"/>
+      </div>
+    </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <div class="form-group">
         <label>城建税(元)</label>
         <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.abbAmt"/>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>教育费附加(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.educationAmt"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>地方教育费(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.localAmt"/>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>水利基金(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.waterAmt"/>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-        <label>其它(元)</label>
-        <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.other"/>
+        <label>地方教育费(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="taxInfo.taxAmt"/>
       </div>
     </div>
   </div>

@@ -5,21 +5,78 @@
     </div>
     <div class="content table-responsive table-full-width">
       <ul class="business-wrap clear">
-          <li class="business-item" ng-repeat="b in business">
-            <div class="card card-user">
-                <div class="content">
-                    <p class="description text-center">{{b.year}}年/{{b.month}}月份 <br/>
-                      <small>当前交接状态：{{b.catalog | BusinessStatus}}</small>
-                    </p>
+        <li class="business-item" ng-repeat="b in business">
+          <div class="card card-user">
+            <div class="content">
+              <p class="description text-center">{{b.year}}年/{{b.month}}月份
+              </p>
+              <div>
+                <div class="table-full-width">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="checkbox">
+                            <input id="checkbox1" type="checkbox">
+                            <label for="checkbox1"></label>
+                          </div>
+                        </td>
+                        <td>取单</td>
+                        <td>时间</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="checkbox">
+                            <input id="checkbox2" type="checkbox">
+                            <label for="checkbox2"></label>
+                          </div>
+                        </td>
+                        <td>做账</td>
+                        <td>时间</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="checkbox">
+                            <input id="checkbox3" type="checkbox">
+                            <label for="checkbox3"></label>
+                          </div>
+                        </td>
+                        <td>报税</td>
+                        <td>时间</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="checkbox">
+                            <input id="checkbox4" type="checkbox">
+                            <label for="checkbox4"></label>
+                          </div>
+                        </td>
+                        <td>回访</td>
+                        <td>时间</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="checkbox">
+                            <input id="checkbox5" type="checkbox">
+                            <label for="checkbox5"></label>
+                          </div>
+                        </td>
+                        <td>完成</td>
+                        <td>时间</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-                <hr>
-                <div class="text-center">
-                    <a href="javascript:;" ng-click="showCapital(b.orderID, b.id)">资金情况</a>
-                    <a href="javascript:;" ng-click="showProfit(b.orderID, b.id)">利润情况</a>
-                    <a href="javascript:;" ng-click="showTax(b.orderID, b.id)">报税情况</a>
-                </div>
+              </div>
             </div>
-          </li>
+            <hr>
+            <div class="text-center">
+              <!-- <a href="javascript:;" ng-click="showCapital(b.orderID, b.id)">资金情况</a> -->
+              <a href="javascript:;" ng-click="showProfit(b.orderID, b.id)">利润情况</a>
+              <a href="javascript:;" ng-click="showTax(b.orderID, b.id)">报税情况</a>
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
   </div>

@@ -83,23 +83,28 @@ type Order struct {
 
 // Business 业务信息-交接单
 type Business struct {
-	ID          bson.ObjectId  `bson:"_id" json:"id"`
-	Seq         int            `bson:"sorter" json:"-"`
-	OrderID     string         `bson:"orderID" json:"orderID"`
-	OrderNO     string         `bson:"orderNO" json:"orderNO"`
-	CreatedAt   time.Time      `bson:"createdAt" json:"createdAt"`
-	Description string         `bson:"description" json:"description"`
-	Year        int            `bson:"year" json:"year"`
-	Month       int            `bson:"month" json:"month"`
-	Catalog     BusinessStatus `bson:"catalog" json:"catalog"` //业务类型: 未知、取单、做账、报税、回访
-	Star        int            `bson:"star" json:"star"`       //客户评星
-	Comment     string         `bson:"comment" json:"comment"` //客户评价
-	CapitalInfo CapitalInfo    `bson:"capitalInfo" json:"capitalInfo"`
-	ProfitInfo  ProfitInfo     `bson:"profitInfo" json:"profitInfo"`
-	TaxInfo     TaxInfo        `bson:"taxInfo" json:"taxInfo"`
+	ID          bson.ObjectId      `bson:"_id" json:"id"`
+	Seq         int                `bson:"sorter" json:"-"`
+	OrderID     string             `bson:"orderID" json:"orderID"`
+	OrderNO     string             `bson:"orderNO" json:"orderNO"`
+	CreatedAt   time.Time          `bson:"createdAt" json:"createdAt"`
+	Description string             `bson:"description" json:"description"`
+	Year        int                `bson:"year" json:"year"`
+	Month       int                `bson:"month" json:"month"`
+	Star        int                `bson:"star" json:"star"`       //客户评星
+	Comment     string             `bson:"comment" json:"comment"` //客户评价
+	ProfitInfo  ProfitInfo         `bson:"profitInfo" json:"profitInfo"`
+	TaxInfo     TaxInfo            `bson:"taxInfo" json:"taxInfo"`
+	Progress    []BusinessProgress `bson:"progress" json:"progress"`
 }
 
-// CapitalInfo 资金情况
+// BusinessProgress ...
+type BusinessProgress struct {
+	Status    BusinessStatus `bson:"catalog" json:"catalog"`
+	CreatedAt time.Time      `bson:"createdAt" json:"createdAt"`
+}
+
+// CapitalInfo 资金情况, 不用
 type CapitalInfo struct {
 	OrderID    string  `bson:"orderID" json:"orderID"`
 	BusinessID string  `bson:"businessID" json:"businessID"`
@@ -111,7 +116,7 @@ type CapitalInfo struct {
 	PayAmt     float64 `bson:"payAmt" json:"payAmt"`         //应付
 }
 
-// ProfitInfo 利润情况
+// ProfitInfo 利润情况， 待完善
 type ProfitInfo struct {
 	OrderID    string  `bson:"orderID" json:"orderID"`
 	BusinessID string  `bson:"businessID" json:"businessID"`
@@ -124,14 +129,20 @@ type ProfitInfo struct {
 
 // TaxInfo 纳税情况
 type TaxInfo struct {
-	OrderID    string    `bson:"orderID" json:"orderID"`
-	BusinessID string    `bson:"businessID" json:"businessID"`
-	Year       int       `bson:"year" json:"year"`
-	Month      int       `bson:"month" json:"month"`
-	VatAmt     float64   `bson:"vatAmt" json:"vatAmt"` //增值税
-	AbbAmt     float64   `bson:"abbAmt" json:"abbAmt"` //城建税
-	Other      float64   `bson:"other" json:"other"`   //其它
-	CreatedAt  time.Time `bson:"createdAt" json:"createdAt"`
+	OrderID      string    `bson:"orderID" json:"orderID"`
+	BusinessID   string    `bson:"businessID" json:"businessID"`
+	Year         int       `bson:"year" json:"year"`
+	Month        int       `bson:"month" json:"month"`
+	VatAmt       float64   `bson:"vatAmt" json:"vatAmt"`             //增值税
+	PersonAmt    float64   `bson:"personAmt" json:"personAmt"`       //个税
+	AbbAmt       float64   `bson:"abbAmt" json:"abbAmt"`             //城建税
+	EducationAmt float64   `bson:"educationAmt" json:"educationAmt"` //教育附加
+	LocalAmt     float64   `bson:"localAmt" json:"localAmt"`         //地方
+	WaterAmt     float64   `bson:"waterAmt" json:"waterAmt"`         //水利
+	TaxAmt       float64   `bson:"taxAmt" json:"taxAmt"`             //税金
+	Reported     bool      `bson:"reported" json:"reported"`
+	CreatedAt    time.Time `bson:"createdAt" json:"createdAt"`
+	ReportedAt   time.Time `bson:"reportedAt" json:"reportedAt"`
 }
 
 // Consult 咨询表单记录
@@ -139,14 +150,16 @@ type Consult struct {
 	ID          bson.ObjectId `bson:"_id" json:"id"`
 	From        string        `bson:"from" json:"from"`
 	Invite      string        `bson:"invite" json:"invite"`
+	CompanyName string        `bson:"companyName" json:"companyName"`
 	Name        string        `bson:"name" json:"name"`
 	Phone       string        `bson:"phone" json:"phone"`
 	Description string        `bson:"description" json:"description"`
 	CreatedAt   time.Time     `bson:"createdAt" json:"createdAt"`
-	Catalog     string        `bson:"catalog" json:"catalog"`
-	Biz         string        `bson:"biz" json:"biz"`
+	Catalog     string        `bson:"catalog" json:"catalog"` //业务分类
+	Biz         string        `bson:"biz" json:"biz"`         //业务描述
 }
 
+// FeedBack 评价
 type FeedBack struct {
 	Star    int    `json:"star"`    //客户评星
 	Comment string `json:"comment"` //客户评价

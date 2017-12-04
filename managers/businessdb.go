@@ -14,9 +14,9 @@ import (
 func InsertBusinessData(biz models.Business) string {
 	biz.ID = bson.NewObjectId()
 	biz.CreatedAt = time.Now()
-	biz.CapitalInfo = models.CapitalInfo{
-		BusinessID: biz.ID.Hex(),
-	}
+	// biz.CapitalInfo = models.CapitalInfo{
+	// 	BusinessID: biz.ID.Hex(),
+	// }
 	biz.TaxInfo = models.TaxInfo{
 		BusinessID: biz.ID.Hex(),
 	}
@@ -92,15 +92,13 @@ func UpdateCapitalByBusiness(capital models.CapitalInfo) (models.CapitalInfo, er
 		return models.CapitalInfo{}, err
 	}
 
-	business.CapitalInfo = capital
-
 	query := func(c *mgo.Collection) error {
 		return c.UpdateId(bson.ObjectIdHex(capital.BusinessID), business)
 	}
 
 	executeQuery(businessCollectionName, query)
 
-	return business.CapitalInfo, nil
+	return models.CapitalInfo{}, nil
 }
 
 // UpdateFeedbackBusiness ..
@@ -167,7 +165,7 @@ func GetFeedbacks(page int, size int) (models.Pagination, error) {
 	var consults []models.Consult
 	session := getSession()
 	defer session.Close()
-	c := session.DB(databaseName).C(orderCollectionName)
+	c := session.DB(databaseName).C(feedbackCollectionName)
 	q := c.Find(bsonQuery)
 	total, err := q.Count()
 	q.All(&consults)
@@ -184,7 +182,7 @@ func PostFeedbacks(model models.Consult) (models.Consult, error) {
 	query := func(c *mgo.Collection) error {
 		return c.Insert(model)
 	}
-	err := executeQuery(orderCollectionName, query)
+	err := executeQuery(feedbackCollectionName, query)
 	if err != nil {
 		return models.Consult{
 			ID: "",

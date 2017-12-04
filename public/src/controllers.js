@@ -198,7 +198,7 @@ define(function() {
                       $scope.errText = "已存在相同的登录用户名，请重新输入！"
                     }else{
                       UserService.putUserSecurity($scope.user, function(data){
-                        console.log(data)v     ft
+                        console.log(data)
                       })
                     }
                 }, function(err){
@@ -396,7 +396,7 @@ define(function() {
   controllers.FeedbackCtrl = function($scope, $uibModal, $stateParams, UserService, OrderService, BusinessService){
 
   }
-  controllers.BusinessCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'UserService', 'OrderService', 'BusinessService'];
+  controllers.FeedbackCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'UserService', 'OrderService', 'BusinessService'];
 
   return controllers;
 });

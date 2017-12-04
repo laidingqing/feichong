@@ -16,12 +16,18 @@ func GetOrders(w http.ResponseWriter, r *http.Request) {
 	page := helpers.GetInParam(r, orderPageParam)
 	size := helpers.GetInParam(r, orderSizeParam)
 	catalog := helpers.GetInParam(r, orderCatalogParam)
+	orderNO := helpers.GetInParam(r, orderNoParam)
 
 	pageIndex, _ := strconv.Atoi(page)
 	pageSize, _ := strconv.Atoi(size)
 	catalogQuery, _ := strconv.Atoi(catalog)
-
-	orders, err := managers.GetOrders(pageIndex, pageSize, catalogQuery)
+	var orders models.Pagination
+	var err error
+	if orderNO != "" {
+		orders, err = managers.GetOrdersByNO(orderNO)
+	} else {
+		orders, err = managers.GetOrders(pageIndex, pageSize, catalogQuery)
+	}
 
 	if err == nil {
 		helpers.SetResponse(w, http.StatusOK, orders)

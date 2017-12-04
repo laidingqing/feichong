@@ -305,7 +305,7 @@
 
 .business-wrap .business-item{
   width: calc(100% / 4 - 30px);
-  height: 200px;
+  height: 350px;
   position: relative;
   float: left;
   padding: 0;
@@ -331,4 +331,8 @@
 }
 .business h4{
   padding-left: 15px;
+}
+
+.business .table .table{
+  margin-bottom: 10px;
 }

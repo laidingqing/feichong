@@ -112,6 +112,24 @@ func GetOrdersByUser(userID string) ([]models.Order, error) {
 	return orders, err
 }
 
+// GetOrdersByNO 根据合同号查询合同
+func GetOrdersByNO(orderNO string) (models.Pagination, error) {
+	session := getSession()
+	defer session.Close()
+	var orders []models.Order
+	bsonQuery := bson.M{"orderNO": orderNO} // 查询条件
+
+	c := session.DB(databaseName).C(orderCollectionName)
+	q := c.Find(bsonQuery)
+	total, err := q.Count()
+	q.All(&orders)
+
+	return models.Pagination{
+		Data:       orders,
+		TotalCount: total,
+	}, err
+}
+
 // PutOrder 修改订单谁可见
 func PutOrder(orderID string, order models.Order) (models.Order, error) {
 

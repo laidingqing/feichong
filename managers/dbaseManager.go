@@ -6,6 +6,7 @@ const userCollectionName = "users"
 const orderCollectionName = "orders"
 const businessCollectionName = "business"
 const orderTaxsCollectionName = "taxs"
+const feedbackCollectionName = "feedbacks"
 
 //Database connection
 var (

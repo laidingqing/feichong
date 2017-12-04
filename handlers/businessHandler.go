@@ -33,7 +33,6 @@ func GeneratorBusinessFinData(order models.Order) {
 			OrderID:   order.ID.Hex(),
 			Year:      orderYear,
 			Month:     orderMonth,
-			Catalog:   models.BusinessStatusUnknown, //没有状态变化
 			CreatedAt: time.Now(),
 			Seq:       i,
 		}

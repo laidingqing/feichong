@@ -17,6 +17,7 @@ const userNameParam = "username"
 const orderPageParam = "page"
 const orderSizeParam = "size"
 const orderCatalogParam = "catalog"
+const orderNoParam = "orderNo"
 
 // GetUsers ...
 func GetUsers(w http.ResponseWriter, r *http.Request) {
