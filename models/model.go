@@ -65,8 +65,9 @@ type User struct {
 type Order struct {
 	ID          bson.ObjectId `bson:"_id" json:"id"`
 	OrderNO     string        `bson:"orderNO" json:"orderNO"`
-	Catalog     int           `bson:"catalog" json:"catalog"` //订单业务类型, 1: 账务记账，2：企业注册
-	StartMonth  int           `bson:"startMonth" json:"startMonth"`
+	Catalog     int           `bson:"catalog" json:"catalog"`       //订单业务类型, 1: 账务记账，2：企业注册
+	OrderMonth  int           `bson:"orderMonth" json:"orderMonth"` //合同月份
+	StartAt     time.Time     `bson:"startDate" json:"startDate"`
 	CreatedAt   time.Time     `bson:"createdAt" json:"createdAt"`
 	ExpiredAt   time.Time     `bson:"expiredAt" json:"expiredAt"`
 	Status      OrderStatus   `bson:"status" json:"status"`

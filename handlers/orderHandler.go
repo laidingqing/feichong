@@ -89,16 +89,6 @@ func PostOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	order, err := managers.InsertOrder(orderReq)
-	log := helpers.NewLogger()
-	log.Log("catalog", order.Catalog)
-	if order.Catalog == 1 {
-		//账务记账
-		GeneratorBusinessFinData(order)
-	}
-
-	if order.Catalog == 2 {
-		GeneratorBusinessEnterPriseData(order)
-	}
 
 	if err == nil {
 		helpers.SetResponse(w, http.StatusOK, order)

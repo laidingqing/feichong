@@ -151,6 +151,7 @@ func InsertOrder(order models.Order) (models.Order, error) {
 	order.ID = bson.NewObjectId()
 	order.CreatedAt = time.Now()
 	order.Status = models.OrderStatusDoing
+	order.ExpiredAt = order.StartAt.AddDate(0, order.OrderMonth, 0)
 	query := func(c *mgo.Collection) error {
 		return c.Insert(order)
 	}

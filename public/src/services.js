@@ -258,6 +258,22 @@ define(['angular'], function(angular) {
     .factory('BusinessService', ['$http', 'Config', function($http, Config) {
       var Business = {
         type: 'business',
+        createBusiness: function(orderId, data, callback, error){
+          var jsonObject = angular.toJson(data);
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.post(Config.url + 'orders/' + orderId +"/business/", jsonObject, {
+              headers: headers
+            })
+            .then(function(response) {
+              console.log(response)
+              callback(response);
+            })
+            .catch(function(err) {
+              error(err);
+            })
+        },
         putCapitalInfo: function(businessId, data, callback, error){
           var jsonObject = angular.toJson(data);
           var headers = {

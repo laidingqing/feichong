@@ -11,7 +11,7 @@ import (
 )
 
 // InsertBusinessData 新增订单业务数据
-func InsertBusinessData(biz models.Business) string {
+func InsertBusinessData(biz models.Business) (models.Business, error) {
 	biz.ID = bson.NewObjectId()
 	biz.CreatedAt = time.Now()
 	// biz.CapitalInfo = models.CapitalInfo{
@@ -29,10 +29,10 @@ func InsertBusinessData(biz models.Business) string {
 
 	err := executeQuery(businessCollectionName, query)
 	if err != nil {
-		return ""
+		return models.Business{}, err
 	}
 
-	return biz.ID.Hex()
+	return biz, nil
 }
 
 // FindOrderBusiness ...

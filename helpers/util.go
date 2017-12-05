@@ -1,4 +1,5 @@
 package helpers
+
 import (
 	"crypto/sha1"
 	"fmt"

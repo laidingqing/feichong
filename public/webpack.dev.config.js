@@ -41,7 +41,8 @@ module.exports = {
             template: 'ejs/index.html',
             inject: 'body',
             filename: '../index.html',
-            chunks: ["angular", 'bootstrap', "main"]
+            chunks: ["angular", 'bootstrap', "main"],
+            chunksSortMode: 'manual'
         }),
         new CopyWebpackPlugin([
           { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'bootstrap/css' },

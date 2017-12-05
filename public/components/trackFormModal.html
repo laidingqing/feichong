@@ -1,0 +1,25 @@
+<div class="modal-header">
+ <h3 class="modal-title">为合同增加工作清单</h3>
+</div>
+<div class="modal-body card" ng-init="init()">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>选择年份</label>
+        <select-date start-year="2017" end-year="2027" ng-model="data.selectDate"></select-date>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>描述(可选)</label>
+        <textarea rows="5" class="form-control" ng-model="data.description" placeholder="这里可以备注工作" value=""></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-sm btn-default" type="button" ng-click="cancel()">取消</button>
+  <button class="btn btn-sm btn-primary" type="button" ng-click="submit()">更新</button>
+</div>

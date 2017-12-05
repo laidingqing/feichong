@@ -23,11 +23,12 @@ func GeneratorBusinessEnterPriseData(order models.Order) {
 // GeneratorBusinessFinData ..
 func GeneratorBusinessFinData(order models.Order) {
 	var year = int(order.CreatedAt.Year())
-	var orderMonth = order.StartMonth
+	var orderMonth = int(order.StartAt.Month())
 	var orderYear = int(order.CreatedAt.Year())
+
 	var month = 0
 	var next = false
-	for i := 0; i < 12; i++ {
+	for i := 0; i < order.OrderMonth; i++ {
 		business := models.Business{
 			OrderNO:   order.OrderNO,
 			OrderID:   order.ID.Hex(),
@@ -39,7 +40,7 @@ func GeneratorBusinessFinData(order models.Order) {
 
 		managers.InsertBusinessData(business)
 
-		if orderMonth < 12 {
+		if orderMonth < order.OrderMonth {
 			orderMonth++
 			month = i
 		} else {
@@ -74,6 +75,22 @@ func GetBusinessByOrderID(w http.ResponseWriter, r *http.Request) {
 	orderID := helpers.GetParam(r, busOrderIDParam)
 
 	business, err := managers.FindOrderBusiness(orderID)
+	if err != nil {
+		helpers.SetResponse(w, http.StatusBadRequest, err)
+	} else {
+		helpers.SetResponse(w, http.StatusOK, business)
+	}
+}
+
+// CreateBusinessByOrderID ...
+func CreateBusinessByOrderID(w http.ResponseWriter, r *http.Request) {
+	orderID := helpers.GetParam(r, busOrderIDParam)
+	var business models.Business
+
+	helpers.GetBusinessBody(w, r, &business)
+	business.OrderID = orderID
+	business, err := managers.InsertBusinessData(business)
+
 	if err != nil {
 		helpers.SetResponse(w, http.StatusBadRequest, err)
 	} else {
@@ -124,6 +141,7 @@ func PutTaxInfoByOrder(w http.ResponseWriter, r *http.Request) {
 	var tax models.TaxInfo
 
 	tax.BusinessID = businessID
+	tax.Reported = true
 
 	helpers.GetTaxInfoBody(w, r, &tax)
 	res, err := managers.UpdateTaxByBusiness(tax)

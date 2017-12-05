@@ -63,7 +63,7 @@ define(function() {
   controllers.OrdersCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'OrderService'];
 
   // 业务跟踪控制器
-  controllers.TracksCtrl = function($scope, $rootScope, $state, OrderService) {
+  controllers.TracksCtrl = function($scope, $rootScope, $uibModal, $state, OrderService) {
 
     $scope.totalItems = 64;
     $scope.currentPage = 1;
@@ -94,7 +94,7 @@ define(function() {
     }
 
   }
-  controllers.TracksCtrl.$inject = ['$scope', '$rootScope', '$state', 'OrderService'];
+  controllers.TracksCtrl.$inject = ['$scope', '$rootScope', '$uibModal', '$state', 'OrderService'];
 
   controllers.NewOrderCtrl = function($scope, $uibModalInstance, $filter, OrderService, UserService) {
     $scope.users = []
@@ -252,6 +252,7 @@ define(function() {
 
   controllers.BusinessCtrl = function($scope, $uibModal, $stateParams, UserService, OrderService, BusinessService){
     console.log($stateParams, $stateParams.id)
+    $scope.orderId = $stateParams.id
     $scope.business = []
     $scope.orderNO = $stateParams.orderNO
     var init = function(){
@@ -350,7 +351,7 @@ define(function() {
     }
     $scope.showTax = function(orderId, businessId){
       var modalInstance = $uibModal.open({
-          templateUrl: '../components/taxInfoModal.html?1',
+          templateUrl: '../components/taxInfoModal.html?3',
           controller: function($scope, $uibModalInstance, OrderService){
             $scope.err = false
             $scope.errorText = ""
@@ -369,7 +370,7 @@ define(function() {
             $scope.ok = function(){
               BusinessService.putTaxInfo(businessId, $scope.taxInfo, function(res){
                 if( res.status == 200){
-                  $scope.taxInfo = data.taxInfo
+                  $scope.taxInfo = res.taxInfo
                   console.log($scope.taxInfo, res)
                   $uibModalInstance.close();
                 }
@@ -389,6 +390,57 @@ define(function() {
 
       })
     }
+
+    $scope.showAddFormModal = function (orderId, orderNO) {
+        var modalInstance = $uibModal.open({
+            templateUrl: '../components/trackFormModal.html?3',
+            controller: function($scope, $uibModalInstance, OrderService, BusinessService){
+              var fromYear=$scope.startYear?parseInt($scope.startYear):(new Date()).getFullYear(),
+                    toYear=$scope.endYear?parseInt($scope.endYear):(new Date()).getFullYear()+15,
+                    yearArr=[];
+                for(var i=fromYear;i<=toYear;i++){
+                    yearArr.push(i);
+                }
+                $scope.yearArr=yearArr;
+                $scope.monthArr=[1,2,3,4,5,6,7,8,9,10,11,12];
+                $scope.data = {}
+                $scope.cancel = function(){
+                  $uibModalInstance.close();
+                }
+                $scope.submit = function(){
+                  var body = {
+                    year: $scope.data.selectDate.selectYear,
+                    month: $scope.data.selectDate.selectMonth,
+                    description: $scope.data.description,
+                    orderID: orderId,
+                    orderNO: orderNO
+                  }
+                  BusinessService.createBusiness(orderId, body, function(res){
+                    console.log(res)
+                    $uibModalInstance.close(true);
+                  }, function(err){
+                    console.log(err)
+                  })
+                }
+            },
+            size: 'lg',
+            resolve: {
+              orderId: function(){
+                return orderId
+              },
+              orderNO: function(){
+                return orderNO
+              },
+            }
+        });
+        modalInstance.result.then(function (newOutputData) {
+          console.log(newOutputData)
+            if(newOutputData){
+              init()
+            }
+        });
+    }
+
   }
 
   controllers.BusinessCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'UserService', 'OrderService', 'BusinessService'];

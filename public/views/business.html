@@ -2,72 +2,22 @@
   <div class="card">
     <div class="header business">
       <h4 class="title">订单业务交接单, 合同号：{{orderNO}}</h4>
+      <div>
+        <button class="btn btn-info btn-fill pull-right" ng-click="showAddFormModal(orderId, orderNO)">增加工作清单</button>
+        <div class="clearfix"></div>
+      </div>
     </div>
     <div class="content table-responsive table-full-width">
-      <ul class="business-wrap clear">
+      <ul class="business-wrap clear" ng-if="business.length > 0">
         <li class="business-item" ng-repeat="b in business">
+          <button type="button" ng-click="onRemove(b.id)" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs btn-close">
+              <i class="fa fa-times"></i>
+          </button>
           <div class="card card-user">
             <div class="content">
-              <p class="description text-center">{{b.year}}年/{{b.month}}月份
+              <p class="description text-center">{{b.year}}年/{{b.month}}月工作单
               </p>
-              <div>
-                <div class="table-full-width">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="checkbox">
-                            <input id="checkbox1" type="checkbox">
-                            <label for="checkbox1"></label>
-                          </div>
-                        </td>
-                        <td>取单</td>
-                        <td>时间</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="checkbox">
-                            <input id="checkbox2" type="checkbox">
-                            <label for="checkbox2"></label>
-                          </div>
-                        </td>
-                        <td>做账</td>
-                        <td>时间</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="checkbox">
-                            <input id="checkbox3" type="checkbox">
-                            <label for="checkbox3"></label>
-                          </div>
-                        </td>
-                        <td>报税</td>
-                        <td>时间</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="checkbox">
-                            <input id="checkbox4" type="checkbox">
-                            <label for="checkbox4"></label>
-                          </div>
-                        </td>
-                        <td>回访</td>
-                        <td>时间</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="checkbox">
-                            <input id="checkbox5" type="checkbox">
-                            <label for="checkbox5"></label>
-                          </div>
-                        </td>
-                        <td>完成</td>
-                        <td>时间</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <p class="category">{{b.description}}</p>
             </div>
             <hr>
             <div class="text-center">
