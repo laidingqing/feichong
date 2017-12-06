@@ -4,10 +4,12 @@ var controllers = require('./controllers')
 var services = require('./services')
 var services = require('./filters')
 var services = require('./directive')
+var services = require('./interceptor')
 var bootstrap = require('bootstrap')
-var routerApp = angular.module('dbsApp', ['ui.router', 'ui.bootstrap', 'ui.bootstrap.tpls', '720kb.datepicker', 'app.services', 'app.filters', 'app.directive']);
+var routerApp = angular.module('dbsApp', ['ui.router', 'ui.bootstrap', 'ui.bootstrap.tpls', '720kb.datepicker', 'app.services', 'app.filters', 'app.directive', 'app.interceptor']);
 
-routerApp.config(function ($stateProvider, $urlRouterProvider) {
+routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    $httpProvider.interceptors.push('httpRequestInterceptor');
     $urlRouterProvider.otherwise('/login');
     $stateProvider
         .state('login', { url: '/login', templateUrl: 'views/login.html?6', controller: controllers.HomeCtrl })

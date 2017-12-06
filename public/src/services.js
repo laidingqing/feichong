@@ -29,7 +29,7 @@ define(['angular'], function(angular) {
         },
 
         getToken: function() {
-          return this.token;
+          return localStorage.getItem("token");
         },
 
         getLoggedUserName: function() {
@@ -167,8 +167,10 @@ define(['angular'], function(angular) {
         },
         getUsers: function(page = 0, size = 10, success, error) {
           var headers = {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + User.getToken()
           };
+          console.log(headers)
           $http.get(Config.url + this.type, {
               params: {
                 "page": page,
@@ -194,7 +196,7 @@ define(['angular'], function(angular) {
     .factory('OrderService', ['$http', 'Config', function($http, Config) {
       var Order = {
         type: 'orders',
-        getOrders: function(page = 0, size = 10, orderNO, catalog = 1, success, error) {
+        getOrders: function(page = 0, size = 10, orderNO = "", catalog = 1, success, error) {
           var headers = {
             'Content-Type': 'application/json'
           };

@@ -21,18 +21,22 @@ const orderNoParam = "orderNo"
 
 // GetUsers ...
 func GetUsers(w http.ResponseWriter, r *http.Request) {
-	page := helpers.GetInParam(r, userPageParam)
-	size := helpers.GetInParam(r, userSizeParam)
 
-	pageIndex, _ := strconv.Atoi(page)
-	pageSize, _ := strconv.Atoi(size)
+	helpers.ValidateTokenMiddleware(w, r, func(w http.ResponseWriter, r *http.Request) {
+		page := helpers.GetInParam(r, userPageParam)
+		size := helpers.GetInParam(r, userSizeParam)
 
-	users, err := managers.GetUsers(pageIndex, pageSize)
-	if err == nil {
-		helpers.SetResponse(w, http.StatusOK, users)
-	} else {
-		helpers.SetResponse(w, http.StatusBadRequest, err)
-	}
+		pageIndex, _ := strconv.Atoi(page)
+		pageSize, _ := strconv.Atoi(size)
+
+		users, err := managers.GetUsers(pageIndex, pageSize)
+		if err == nil {
+			helpers.SetResponse(w, http.StatusOK, users)
+		} else {
+			helpers.SetResponse(w, http.StatusBadRequest, err)
+		}
+	})
+
 }
 
 // GetUserByID ..

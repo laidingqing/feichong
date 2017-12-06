@@ -56,7 +56,7 @@ define(function() {
     $scope.queryList = function(page) {
       $scope.data.startIndex = (page - 1) * $scope.pageSize;
       $scope.data.size = $scope.size;
-      OrderService.getOrders($scope.data.startIndex, $scope.data.size, 1, function(res) {
+      OrderService.getOrders($scope.data.startIndex, $scope.data.size, "", 1, function(res) {
         $scope.pagination.data = res.data.data;
         $scope.totalItems = res.totalCount;
         console.log(res.data)
