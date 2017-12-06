@@ -5,7 +5,7 @@ var services = require('./services')
 var services = require('./filters')
 var services = require('./directive')
 var bootstrap = require('bootstrap')
-var routerApp = angular.module('dbsApp', ['ui.router', 'ui.bootstrap', 'ui.bootstrap.tpls', 'app.services', 'app.filters', 'app.directive']);
+var routerApp = angular.module('dbsApp', ['ui.router', 'ui.bootstrap', 'ui.bootstrap.tpls', '720kb.datepicker', 'app.services', 'app.filters', 'app.directive']);
 
 routerApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
@@ -13,8 +13,8 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('login', { url: '/login', templateUrl: 'views/login.html?1', controller: controllers.HomeCtrl })
         .state('dashboard', { url: '/dashboard', templateUrl: 'views/dashboard.html?6', controller: controllers.DashboardCtrl })
         .state('dashboard.customers', { url: '/customers', templateUrl: 'views/customers.html?6', controller: controllers.CustomersCtrl })
-        .state('dashboard.orders', { url: '/orders', templateUrl: 'views/orders.html?7', controller: controllers.OrdersCtrl })
+        .state('dashboard.orders', { url: '/orders', templateUrl: 'views/orders.html?8', controller: controllers.OrdersCtrl })
         .state('dashboard.tracks', { url: '/tracks', templateUrl: 'views/tracks.html?8', controller: controllers.TracksCtrl })
-        .state('dashboard.business', { url: '/business/?:id&:orderNO', params: {'id': null, 'orderNO':null}, templateUrl: 'views/business.html?8', controller: controllers.BusinessCtrl })
-        .state('dashboard.feedback', { url: '/feedback', templateUrl: 'views/feedback.html?5', controller: controllers.FeedbackCtrl })
+        .state('dashboard.business', { url: '/business/?:id&:orderNO', params: {'id': null, 'orderNO':null}, templateUrl: 'views/business.html?10', controller: controllers.BusinessCtrl })
+        .state('dashboard.feedback', { url: '/feedback', templateUrl: 'views/feedback.html?6', controller: controllers.FeedbackCtrl })
 });

@@ -98,6 +98,18 @@ func CreateBusinessByOrderID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// DeleteBusinessByOrderID ..
+func DeleteBusinessByOrderID(w http.ResponseWriter, r *http.Request) {
+	businessID := helpers.GetParam(r, businessIDParam)
+	err := managers.DeleteBusiness(businessID)
+
+	if err != nil {
+		helpers.SetResponse(w, http.StatusBadRequest, err)
+	} else {
+		helpers.SetResponse(w, http.StatusOK, nil)
+	}
+}
+
 // PutProfitInfoByOrder 增加订单纳税情况
 func PutProfitInfoByOrder(w http.ResponseWriter, r *http.Request) {
 	businessID := helpers.GetParam(r, businessIDParam)
@@ -163,7 +175,8 @@ func GetBusinessInfoByOrder(w http.ResponseWriter, r *http.Request) {
 	vMonth, _ := strconv.Atoi(month)
 
 	res, err := managers.FindOrderBusinessByDate(businessID, vYear, vMonth)
-
+	log := helpers.NewLogger()
+	log.Log("err", err)
 	if err == nil {
 		helpers.SetResponse(w, http.StatusOK, res)
 	} else {

@@ -109,7 +109,20 @@ func GetOrdersByUser(userID string) ([]models.Order, error) {
 	log := helpers.NewLogger()
 	log.Log("orders", len(orders))
 
-	return orders, err
+	orderList := []models.Order{}
+	for _, order := range orders {
+		salerID := order.SalerID.Id.(bson.ObjectId)
+		adviserID := order.AdviserID.Id.(bson.ObjectId)
+		serviceID := order.ServiceID.Id.(bson.ObjectId)
+
+		order.SalerInfo = GetUserByID(salerID.Hex())
+		order.AdviserInfo = GetUserByID(adviserID.Hex())
+		order.ServiceInfo = GetUserByID(serviceID.Hex())
+
+		orderList = append(orderList, order)
+	}
+
+	return orderList, err
 }
 
 // GetOrdersByNO 根据合同号查询合同
@@ -151,7 +164,6 @@ func InsertOrder(order models.Order) (models.Order, error) {
 	order.ID = bson.NewObjectId()
 	order.CreatedAt = time.Now()
 	order.Status = models.OrderStatusDoing
-	order.ExpiredAt = order.StartAt.AddDate(0, order.OrderMonth, 0)
 	query := func(c *mgo.Collection) error {
 		return c.Insert(order)
 	}
@@ -163,6 +175,16 @@ func InsertOrder(order models.Order) (models.Order, error) {
 	order.UserID = &mgo.DBRef{
 		Collection: "users",
 		Id:         order.UserInfo.ID,
+	}
+
+	order.ServiceID = &mgo.DBRef{
+		Collection: "users",
+		Id:         order.ServiceInfo.ID,
+	}
+
+	order.AdviserID = &mgo.DBRef{
+		Collection: "users",
+		Id:         order.AdviserInfo.ID,
 	}
 
 	err := executeQuery(orderCollectionName, query)

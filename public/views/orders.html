@@ -30,8 +30,8 @@
             <td>{{item.userInfo.companyName}}</td>
             <td>{{item.type == 1 ? "财务外包": "工商注册"}}</td>
             <td>{{item.salerInfo.nick}}</td>
-            <td><span ng-bind="item.startAt | date: 'yyyy-MM-dd'"></span></td>
-            <td><span ng-bind="item.expireAt | date: 'yyyy-MM-dd'"></span></td>
+            <td><span ng-bind="item.startDate | date: 'yyyy-MM-dd'"></span></td>
+            <td><span ng-bind="item.expiredAt | date: 'yyyy-MM-dd'"></span></td>
             <td><span ng-bind="item.createdAt | date: 'yyyy-MM-dd'"></span></td>
             <td>
               <button type="button" rel="tooltip" title="删除" class="btn btn-danger btn-simple btn-xs">

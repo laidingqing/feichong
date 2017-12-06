@@ -1,6 +1,9 @@
 package managers
 
-import mgo "gopkg.in/mgo.v2"
+import (
+	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
+)
 
 const userCollectionName = "users"
 const orderCollectionName = "orders"
@@ -31,4 +34,12 @@ func executeQuery(collectionName string, s func(*mgo.Collection) error) error {
 	defer session.Close()
 	c := session.DB(databaseName).C(collectionName)
 	return s(c)
+}
+
+func FindRef(ref *mgo.DBRef) *mgo.Query {
+	session := getSession()
+	defer session.Close()
+	c := session.DB(databaseName).C(ref.Collection)
+	id := bson.ObjectIdHex(ref.Id.(string))
+	return c.FindId(id)
 }

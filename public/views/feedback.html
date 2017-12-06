@@ -20,12 +20,12 @@
         </thead>
         <tbody>
           <tr ng-repeat="item in pagination.data">
-            <td>{{}}</td>
-            <td>{{}}</td>
-            <td>{{}}</td>
-            <td>{{}}</td>
-            <td>{{}}</td>
-            <td>{{}}</td>
+            <td>{{item.from}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.catalog}}</td>
+            <td>{{item.companyName}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.description}}</td>
             <td><span ng-bind="item.createdAt | date: 'yyyy-MM-dd'"></span></td>
           </tr>
         </tbody>

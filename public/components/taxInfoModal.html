@@ -6,7 +6,9 @@
     <div class="col-md-4">
       <div class="form-group">
         <label>申报时间</label>
-        <input type='date' class="form-control" ng-model="taxInfo.reportedAt"/>
+        <datepicker date-format="yyyy-MM-dd">
+          <input type='text' class="form-control" ng-model="taxInfo.reportedAt"/>
+        </datepicker>
       </div>
     </div>
     <div class="col-md-4">

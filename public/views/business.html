@@ -7,27 +7,33 @@
         <div class="clearfix"></div>
       </div>
     </div>
+
     <div class="content table-responsive table-full-width">
-      <ul class="business-wrap clear" ng-if="business.length > 0">
-        <li class="business-item" ng-repeat="b in business">
-          <button type="button" ng-click="onRemove(b.id)" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs btn-close">
-              <i class="fa fa-times"></i>
-          </button>
-          <div class="card card-user">
-            <div class="content">
-              <p class="description text-center">{{b.year}}年/{{b.month}}月工作单
-              </p>
-              <p class="category">{{b.description}}</p>
-            </div>
-            <hr>
-            <div class="text-center">
-              <!-- <a href="javascript:;" ng-click="showCapital(b.orderID, b.id)">资金情况</a> -->
-              <a href="javascript:;" ng-click="showProfit(b.orderID, b.id)">利润情况</a>
-              <a href="javascript:;" ng-click="showTax(b.orderID, b.id)">报税情况</a>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
+      <table class="table table-hover table-striped" id="paninationData">
+        <thead>
+          <tr>
+            <th>工作清单日期</th>
+            <th>描述</th>
+            <th>利润情况</th>
+            <th>报税情况</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="b in business">
+            <td>{{b.year}}年/{{b.month}}月</td>
+            <td>{{b.description}}</td>
+            <td><a href="javascript:;" ng-click="showProfit(b.orderID, b.id)">查看/编辑</a></td>
+            <td><a href="javascript:;" ng-click="showTax(b.orderID, b.id)">查看/编辑</a></td>
+            <td>
+              <button type="button" ng-click="removeBus(b.orderID, b.id)" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs btn-close">
+                  <i class="fa fa-times"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
   </div>
 </div>

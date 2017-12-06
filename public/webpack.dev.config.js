@@ -22,7 +22,8 @@ module.exports = {
         bootstrap: [
             './node_modules/bootstrap/dist/js/bootstrap',
             './node_modules/angular-ui-bootstrap/dist/ui-bootstrap',
-            './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls'
+            './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls',
+            './node_modules/angularjs-datepicker/dist/angular-datepicker'
         ],
         main: __dirname + '/src/entry',
     },
@@ -47,6 +48,7 @@ module.exports = {
         new CopyWebpackPlugin([
           { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'bootstrap/css' },
           { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css.map', to: 'bootstrap/css' },
+          { from: 'node_modules/angularjs-datepicker/dist/angular-datepicker.css', to: './' },
           { from: 'node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', to: 'bootstrap/fonts' },
           { from: 'node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg', to: 'bootstrap/fonts' },
           { from: 'node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf', to: 'bootstrap/fonts' },

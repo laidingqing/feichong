@@ -88,8 +88,13 @@ func PostOrder(w http.ResponseWriter, r *http.Request) {
 		orderReq.Company = user.CompanyName
 	}
 
+	log := helpers.NewLogger()
+
+	log.Log("startAt", orderReq.StartAt)
+
 	order, err := managers.InsertOrder(orderReq)
 
+	log.Log("err", err)
 	if err == nil {
 		helpers.SetResponse(w, http.StatusOK, order)
 	} else {

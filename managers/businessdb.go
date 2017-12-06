@@ -35,6 +35,15 @@ func InsertBusinessData(biz models.Business) (models.Business, error) {
 	return biz, nil
 }
 
+// DeleteBusiness ..
+func DeleteBusiness(businessID string) error {
+	query := func(c *mgo.Collection) error {
+		return c.RemoveId(bson.ObjectIdHex(businessID))
+	}
+	err := executeQuery(businessCollectionName, query)
+	return err
+}
+
 // FindOrderBusiness ...
 func FindOrderBusiness(orderID string) ([]models.Business, error) {
 	var data []models.Business
@@ -60,7 +69,7 @@ func FindOrderBusinessByDate(orderID string, year int, month int) (models.Busine
 
 	err := executeQuery(businessCollectionName, query)
 	if err != nil {
-		return data, err
+		return models.Business{}, err
 	}
 	return data, nil
 }

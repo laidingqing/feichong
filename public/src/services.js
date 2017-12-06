@@ -274,6 +274,21 @@ define(['angular'], function(angular) {
               error(err);
             })
         },
+        removeBusiness: function(orderId, businessId, callback, error){
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.delete(Config.url + 'orders/' + orderId +"/business/" + businessId + "/", {}, {
+              headers: headers
+            })
+            .then(function(response) {
+              console.log(response)
+              callback(response);
+            })
+            .catch(function(err) {
+              error(err);
+            })
+        },
         putCapitalInfo: function(businessId, data, callback, error){
           var jsonObject = angular.toJson(data);
           var headers = {
@@ -324,5 +339,24 @@ define(['angular'], function(angular) {
         }
       }
       return Business;
+    }])
+
+    .factory('FeedbackService', ['$http', 'Config', function($http, Config) {
+      var Feedback = {
+        type: 'consults',
+        getFeedbacks: function(page = 0, size = 10, success, error){
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.get(Config.url + this.type, { params: { "page": page, "size": size} }, {headers: headers})
+            .then(function(response) {
+              success(response);
+            })
+            .catch(function(err) {
+              error(err);
+            })
+        }
+      }
+      return Feedback
     }])
 })

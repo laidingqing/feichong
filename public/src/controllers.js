@@ -45,7 +45,7 @@ define(function() {
     }
     $scope.showFormModal = function () {
         var modalInstance = $uibModal.open({
-            templateUrl: '../components/orderFormModal.html?6',
+            templateUrl: '../components/orderFormModal.html?8',
             controller: controllers.NewOrderCtrl,
             size: 'lg',
             resolve: {
@@ -121,6 +121,8 @@ define(function() {
 
     $scope.ok = function(){
         console.log($scope.order)
+        $scope.order.startDate = new Date($scope.order.startDate)
+        $scope.order.expiredAt = new Date($scope.order.expiredAt)
         OrderService.postOrder($scope.order, function(res){
           console.log(res)
           $uibModalInstance.close(true)
@@ -351,7 +353,7 @@ define(function() {
     }
     $scope.showTax = function(orderId, businessId){
       var modalInstance = $uibModal.open({
-          templateUrl: '../components/taxInfoModal.html?3',
+          templateUrl: '../components/taxInfoModal.html?4',
           controller: function($scope, $uibModalInstance, OrderService){
             $scope.err = false
             $scope.errorText = ""
@@ -368,6 +370,9 @@ define(function() {
                 $uibModalInstance.close();
             }
             $scope.ok = function(){
+              $scope.taxInfo.reportedAt = new Date($scope.taxInfo.reportedAt)
+              $scope.taxInfo.reported = true
+              $scope.taxInfo.orderID = orderId
               BusinessService.putTaxInfo(businessId, $scope.taxInfo, function(res){
                 if( res.status == 200){
                   $scope.taxInfo = res.taxInfo
@@ -388,6 +393,16 @@ define(function() {
 
       }, function(res){
 
+      })
+    }
+
+    $scope.removeBus = function(orderId, businessId){
+      BusinessService.removeBusiness(orderId, businessId, function(res){
+        if(res.status == 200){
+          init()
+        }
+      }, function(err){
+        console.log(err)
       })
     }
 
@@ -445,10 +460,32 @@ define(function() {
 
   controllers.BusinessCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'UserService', 'OrderService', 'BusinessService'];
 
-  controllers.FeedbackCtrl = function($scope, $uibModal, $stateParams, UserService, OrderService, BusinessService){
+  controllers.FeedbackCtrl = function($scope, $uibModal, $stateParams, FeedbackService){
+    $scope.totalItems = 64;
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 10;
+
+    $scope.pagination = {};
+    $scope.pagination.data = [];
+
+    $scope.$watch("currentPage", function() {
+      queryList($scope.currentPage);
+    });
+
+    var queryList = function(page) {
+      var page = (page - 1) * $scope.itemsPerPage;
+      var size = $scope.itemsPerPage;
+      FeedbackService.getFeedbacks(page, size, function(res) {
+        $scope.pagination.data = res.data.data;
+        $scope.totalItems = res.totalCount;
+        console.log(res.data)
+      }, function(err) {
+        console.log(err)
+      })
+    }
 
   }
-  controllers.FeedbackCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'UserService', 'OrderService', 'BusinessService'];
+  controllers.FeedbackCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'FeedbackService'];
 
   return controllers;
 });
