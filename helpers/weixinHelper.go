@@ -29,6 +29,7 @@ type Jscode2Session struct {
 	OpenID     string `json:"openID"`
 	SessionKey string `json:"sessionKey"`
 	UserID     string `json:"userId,omitempty"`
+	Name       string `json:"name,omitempty"`
 }
 
 // WxUserInfoWater ..

@@ -6,18 +6,39 @@ define(function() {
   var controllers = {};
 
   // 登录控制器
-  controllers.HomeCtrl = function($scope, $rootScope, $location) {
+  controllers.HomeCtrl = function($scope, $rootScope, $location, UserService) {
+    $scope.data = {
+      username: "",
+      password: ""
+    }
+    $scope.error = false
+    $scope.errText = ""
     $scope.login = function() {
-      $location.path("/dashboard")
+      UserService.session($scope.data, function(res){
+          console.log(res)
+          if( res.status == 200){
+            $location.path("/dashboard")
+          }else{
+            $scope.error = true
+            $scope.errText = "用户名/密码错误"
+          }
+      }, function(err){
+        $scope.error = true
+        $scope.errText = "用户名/密码错误"
+      })
     }
   }
-  controllers.HomeCtrl.$inject = ['$scope', '$rootScope', '$location'];
+  controllers.HomeCtrl.$inject = ['$scope', '$rootScope', '$location', 'UserService'];
 
   // 面板控制器
-  controllers.DashboardCtrl = function($scope, $rootScope) {
+  controllers.DashboardCtrl = function($scope, $rootScope, UserService) {
     $scope.title = "面板"
+    $scope.name = UserService.getLoggedUserName()
+    if( UserService.getToken() == undefined || UserService.getToken() == "undefined"){
+      $location.path("/login")
+    }
   }
-  controllers.DashboardCtrl.$inject = ['$scope', '$rootScope'];
+  controllers.DashboardCtrl.$inject = ['$scope', '$rootScope', 'UserService'];
 
   // 订单控制器
   controllers.OrdersCtrl = function($scope, $rootScope, $uibModal, OrderService) {
@@ -72,6 +93,8 @@ define(function() {
     $scope.pagination = {};
     $scope.pagination.data = [];
 
+    $scope.orderNO = ""
+
     $scope.$watch("currentPage", function() {
       queryList($scope.currentPage);
     });
@@ -79,7 +102,7 @@ define(function() {
     var queryList = function(page) {
       var page = (page - 1) * $scope.itemsPerPage;
       var size = $scope.itemsPerPage;
-      OrderService.getOrders(page, size, 1, function(res) {
+      OrderService.getOrders(page, size, $scope.orderNO, 1, function(res) {
         $scope.pagination.data = res.data.data;
         $scope.totalItems = res.totalCount;
         console.log(res.data)
@@ -87,6 +110,11 @@ define(function() {
         console.log(err)
       })
     }
+
+   $scope.findByOrder = function(){
+     $scope.currentPage = 1
+     queryList($scope.currentPage);
+   }
 
     $scope.trackDetail = function(orderId, orderNO){
       console.log(orderId, $state)

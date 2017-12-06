@@ -38,6 +38,13 @@ func LoginSession(w http.ResponseWriter, r *http.Request) {
 		session.UserID = user.ID.Hex()
 	}
 
+	t, err := helpers.CreateJWT()
+
+	if err != nil {
+		helpers.SetResponse(w, http.StatusForbidden, err)
+	}
+
+	session.SessionKey = t
 	if errCode == 0 {
 		helpers.SetResponse(w, http.StatusOK, session)
 	} else {

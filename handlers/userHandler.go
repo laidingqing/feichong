@@ -99,18 +99,29 @@ func EnterPriseUsers(w http.ResponseWriter, r *http.Request) {
 
 // LoginUser 用户登录
 func LoginUser(w http.ResponseWriter, r *http.Request) {
+	log := helpers.NewLogger()
+	log.Log("username", "dfasdfasdf")
 
 	var user models.User
 	helpers.GetUserBody(w, r, &user)
 
 	isUser := managers.GetUserByUserName(user.UserName)
 
-	if isUser.Password != helpers.CalculatePassHash(isUser.Password, isUser.Salt) {
+	if isUser.Password != helpers.CalculatePassHash(user.Password, isUser.Salt) {
 		helpers.SetResponse(w, http.StatusBadRequest, models.ErrUserNotFound)
+	} else {
+		t, err := helpers.CreateJWT()
+		if err != nil {
+			helpers.SetResponse(w, http.StatusForbidden, err)
+		} else {
+			var session = &helpers.Jscode2Session{
+				SessionKey: t,
+				UserID:     isUser.ID.Hex(),
+				Name:       isUser.Name,
+			}
+			helpers.SetResponse(w, http.StatusOK, session)
+		}
 	}
-
-	helpers.SetResponse(w, http.StatusCreated, isUser)
-
 }
 
 // CheckUserName ...

@@ -70,9 +70,9 @@ func init() {
 	})
 
 	routes = append(routes, Route{
-		Name:        "UserCreate",
+		Name:        "UserSession",
 		Method:      "POST",
-		Pattern:     "/api/session",
+		Pattern:     "/api/session/",
 		HandlerFunc: handlers.LoginUser,
 	})
 

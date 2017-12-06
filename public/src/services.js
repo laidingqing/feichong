@@ -47,10 +47,10 @@ define(['angular'], function(angular) {
           }
         },
         storeUserLocally: function(obj) {
+          console.log(obj)
           if (typeof(Storage) !== "undefined") {
-            localStorage.setItem("username", this.getUserName());
-            localStorage.setItem("password", this.getPassword());
-            localStorage.setItem("token", this.getToken());
+            localStorage.setItem("username", obj.name);
+            localStorage.setItem("token", obj.sessionKey);
           } else {
             console.log('no local storage available');
           }
@@ -59,25 +59,22 @@ define(['angular'], function(angular) {
         getUserOBJ: function() {
           return $this.userOBJ;
         },
-        login: function(inputUsername, inputPassword, callback) {
+        session: function(data, callback, error) {
+          var jsonObject = angular.toJson(data);
           var headers = {
             'Content-Type': 'application/json'
           };
-          var jsonObject = angular.toJson({
-            "username": inputUsername,
-            "password": inputPassword
-          });
-          $http.post(Config.url + this.type + '/session', jsonObject, {
+          $http.post(Config.url + 'session/', jsonObject, {
               headers: headers
             })
             .then(function(response) {
-              User.setUsername(response.user.username);
-              User.setToken(response.token);
-              User.storeUserLocally(response.user);
+              console.log(response.data)
+              User.storeUserLocally(response.data);
               callback(response);
             })
             .catch(function(err) {
-              callback(err);
+              console.log(err)
+              error(err);
             })
         },
         putUser: function(user, callback) {
@@ -197,11 +194,11 @@ define(['angular'], function(angular) {
     .factory('OrderService', ['$http', 'Config', function($http, Config) {
       var Order = {
         type: 'orders',
-        getOrders: function(page = 0, size = 10, catalog = 1, success, error) {
+        getOrders: function(page = 0, size = 10, orderNO, catalog = 1, success, error) {
           var headers = {
             'Content-Type': 'application/json'
           };
-          $http.get(Config.url + this.type, { params: { "page": page, "size": size, "catalog": catalog} }, {headers: headers})
+          $http.get(Config.url + this.type, { params: { "page": page, "size": size, "catalog": catalog, "orderNO": orderNO} }, {headers: headers})
             .then(function(response) {
               success(response);
             })
