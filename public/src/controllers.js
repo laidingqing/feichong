@@ -164,6 +164,10 @@ define(function() {
 
   // 客户管理控制器
   controllers.CustomersCtrl = function($scope, $rootScope, $uibModal, UserService) {
+    $rootScope.$on('httpRequestInterceptor', function(errorType){
+    	$state.go("login");
+    });
+
     $scope.totalItems = 64;
     $scope.currentPage = 1;
     $scope.itemsPerPage = 10;
@@ -214,6 +218,7 @@ define(function() {
               console.log("更新登录会话信息", updateUserId)
               UserService.getUser(updateUserId, function(res){
                 $scope.user = res
+                $scope.user.password = ""
               }, function(err){
                 $scope.error = true
                 $scope.errorText = err
