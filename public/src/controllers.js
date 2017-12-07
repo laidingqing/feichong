@@ -31,14 +31,23 @@ define(function() {
   controllers.HomeCtrl.$inject = ['$scope', '$rootScope', '$location', 'UserService'];
 
   // 面板控制器
-  controllers.DashboardCtrl = function($scope, $rootScope, UserService) {
+  controllers.DashboardCtrl = function($scope, $rootScope, $location, UserService) {
     $scope.title = "面板"
     $scope.name = UserService.getLoggedUserName()
     if( UserService.getToken() == undefined || UserService.getToken() == "undefined"){
       $location.path("/login")
     }
+    $scope.logout = function(){
+      console.log("logout")
+      UserService.logout(function(result){
+        console.log(result)
+        if(result){
+          $location.path("/login")
+        }
+      })
+    }
   }
-  controllers.DashboardCtrl.$inject = ['$scope', '$rootScope', 'UserService'];
+  controllers.DashboardCtrl.$inject = ['$scope', '$rootScope', '$location', 'UserService'];
 
   // 订单控制器
   controllers.OrdersCtrl = function($scope, $rootScope, $uibModal, OrderService) {
@@ -344,7 +353,7 @@ define(function() {
     }
     $scope.showProfit = function(orderId, businessId){
       var modalInstance = $uibModal.open({
-          templateUrl: '../components/profitInfoModal.html?1',
+          templateUrl: '../components/profitInfoModal.html?2',
           controller: function($scope, $uibModalInstance, OrderService){
             $scope.profitInfo = {}
             $scope.err = false

@@ -59,6 +59,16 @@ define(['angular'], function(angular) {
         getUserOBJ: function() {
           return $this.userOBJ;
         },
+        logout: function(success){
+          if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("username", undefined);
+            localStorage.setItem("token", undefined);
+            console.log('token');
+            success(true)
+          } else {
+            console.log('no local storage available');
+          }
+        },
         session: function(data, callback, error) {
           var jsonObject = angular.toJson(data);
           var headers = {
@@ -186,9 +196,6 @@ define(['angular'], function(angular) {
               error(err);
             })
         },
-        logout: function() {
-
-        }
       }
       return User;
     }])

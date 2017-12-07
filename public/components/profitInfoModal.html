@@ -1,28 +1,58 @@
 <div class="modal-header">
- <h3 class="modal-title">利润情况</h3>
+ <h3 class="modal-title">资产负债情况</h3>
 </div>
 <div class="modal-body card" ng-init="init()">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
       <div class="form-group">
-        <label>收入(元)</label>
-        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.inAmt"/>
+        <label>流动资产(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.ldzcAmt"/>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>非流动资产(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.fldzcAmt"/>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>资产合计(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.zchjAmt"/>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
       <div class="form-group">
-        <label>支出(元)</label>
-        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.outAmt"/>
+        <label>流动负债(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.ldfzAmt"/>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>非流动负债(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.fldfzAmt"/>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>负债合计(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.fzAmt"/>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
       <div class="form-group">
-        <label>利润(元)</label>
-        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.totalAmt"/>
+        <label>所有者(股东)权益合计(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.qyhjAmt"/>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>负债及所有者(股东)权益总计(元)</label>
+        <input class="form-control" type="number" currency-format="number" ng-model="profitInfo.fzqyhjAmt"/>
       </div>
     </div>
   </div>

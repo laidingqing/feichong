@@ -123,9 +123,14 @@ type ProfitInfo struct {
 	BusinessID string  `bson:"businessID" json:"businessID"`
 	Year       int     `bson:"year" json:"year"`
 	Month      int     `bson:"month" json:"month"`
-	InAmt      float64 `bson:"inAmt" json:"inAmt"`
-	OutAmt     float64 `bson:"outAmt" json:"outAmt"`
-	TotalAmt   float64 `bson:"totalAmt" json:"totalAmt"`
+	LdzcAmt    float64 `bson:"ldzcAmt" json:"ldzcAmt"`     //流动资产
+	FldzcAmt   float64 `bson:"fldzcAmt" json:"fldzcAmt"`   //非流动资产
+	ZchjAmt    float64 `bson:"zchjAmt" json:"zchjAmt"`     //资产合计
+	LdfzAmt    float64 `bson:"ldfzAmt" json:"ldfzAmt"`     //流动负债
+	FldfzAmt   float64 `bson:"fldfzAmt" json:"fldfzAmt"`   //非流动负债
+	FzAmt      float64 `bson:"fzAmt" json:"fzAmt"`         //负债合计
+	QyhjAmt    float64 `bson:"qyhjAmt" json:"qyhjAmt"`     //所有者(股东)权益合计
+	FzqyhjAmt  float64 `bson:"fzqyhjAmt" json:"fzqyhjAmt"` //负债及所有者(股东)权益总计
 }
 
 // TaxInfo 纳税情况

@@ -13,7 +13,7 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/login');
     $stateProvider
         .state('login', { url: '/login', templateUrl: 'views/login.html?6', controller: controllers.HomeCtrl })
-        .state('dashboard', { url: '/dashboard', templateUrl: 'views/dashboard.html?7', controller: controllers.DashboardCtrl })
+        .state('dashboard', { url: '/dashboard', templateUrl: 'views/dashboard.html?8', controller: controllers.DashboardCtrl })
         .state('dashboard.customers', { url: '/customers', templateUrl: 'views/customers.html?6', controller: controllers.CustomersCtrl })
         .state('dashboard.orders', { url: '/orders', templateUrl: 'views/orders.html?8', controller: controllers.OrdersCtrl })
         .state('dashboard.tracks', { url: '/tracks', templateUrl: 'views/tracks.html?10', controller: controllers.TracksCtrl })
