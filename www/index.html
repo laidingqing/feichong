@@ -163,8 +163,8 @@
           </div>
         </div>
         <!--手机端-->
-        <div class="container" id="phone_show">
-          <div class="row">
+        <div class="container telregister-comgpany" id="phone_show">
+          <div class="row tel-registerbox">
             <div class="col-xs-12">
               <ul class="tel-register01">
                 <li>
@@ -176,7 +176,7 @@
               </ul>
             </div>
           </div>
-          <div class="row">
+          <div class="row tel-registerbox">
             <div class="col-xs-6 domestic-com">
               <ul class="tel-register02">
                 <li>
@@ -196,7 +196,7 @@
               </ul>
             </div>
           </div>
-          <div class="row">
+          <div class="row tel-registerbox">
             <div class="col-xs-6 domestic-com">
               <ul class="tel-register03">
                 <li>
@@ -301,7 +301,7 @@
   <script language="javascript">
     // 判断web还是手机端
     $(document).ready(function(){  
-      if (document.body.offsetWidth >= 1024) {
+      if (document.body.offsetWidth > 1024) {
         document.getElementById("phone_show").style.display="none";
         document.getElementById("web_show").style.display="";
       } else {
@@ -310,7 +310,7 @@
       }
     });
     window.onresize = function(){
-      if (document.body.offsetWidth >= 1024) {
+      if (document.body.offsetWidth > 1024) {
         document.getElementById("phone_show").style.display="none";
         document.getElementById("web_show").style.display="";
       } else {

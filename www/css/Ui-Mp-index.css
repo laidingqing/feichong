@@ -1,7 +1,4 @@
 @media (min-width: 1200px) {
-    .container{
-        width: 1400px;
-    }
     .navbar{
         min-height: 80px;
     }
@@ -85,6 +82,9 @@
     font-size: 18px;
     line-height: 60px;
     }
+     .register-comgpany{
+        padding: 50px 0;
+    }
     /*代理记账*/
     .small-taxpayer{
         background: #B3E5FC;
@@ -99,7 +99,7 @@
     }
     .small-taxpayer li:nth-child(2){
         margin-left: 20px;
-        width: 80%;
+        width: 70%;
         height: 120px;
     }
     .small-taxpayer p{
@@ -114,12 +114,15 @@
     }
 }
 @media( max-width: 1200px) and (min-width: 768px){
+    .container{
+        width: 760px;
+    }
     .container h1{
         font-size: 34px;
         font-weight: bold;
     }
     .jumbotron p{
-        width: 40%;
+        width: 60%;
         margin: 0 auto;
         margin-top: 20px;
         height: 150px;
@@ -145,7 +148,6 @@
     background-image: url(../img/sucess-picture.png);
     background-repeat: no-repeat;
     background-size: cover;
-    margin-top: 60px;
     }
     .col-md-6-second{
         margin-top: 20px;
@@ -195,6 +197,12 @@
     .register-wrap img{
         width: 90%;
     }
+    .tel-registerbox{
+        padding-right: 30px;
+    }
+     .telregister-comgpany{
+        padding-bottom: 30px;
+    }
     /*代理记账*/
     .small-taxpayer{
         background: #B3E5FC;
@@ -208,7 +216,7 @@
         margin-bottom: 20px;
     }
     .small-taxpayer li:nth-child(2){
-        width: 80%;
+        width: 70%;
         height: 120px;
     }
     .small-taxpayer p{
@@ -304,6 +312,9 @@
     }
     .register-wrap img{
         width: 95%;
+    }
+    .telregister-comgpany{
+        padding-bottom: 30px;
     }
     /*代理记账*/
     .account-box{
@@ -503,9 +514,6 @@
     .register-left li:nth-child(3){
         text-align: center;
     }
-    .register-comgpany{
-        padding: 50px 0;
-    }
     .register-right{
         overflow: hidden;
     }
@@ -595,4 +603,3 @@
     float: right;
     margin-bottom: 0;
 }
-
