@@ -18,7 +18,7 @@ func GetOrders(page int, size int, catalog int) (models.Pagination, error) {
 	session := getSession()
 	defer session.Close()
 	c := session.DB(databaseName).C(orderCollectionName)
-	q := c.Find(bsonQuery)
+	q := c.Find(bsonQuery).Skip(page).Limit(size)
 	total, err := q.Count()
 
 	q.All(&orders)

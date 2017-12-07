@@ -17,9 +17,9 @@ func GetUsers(page int, size int) (models.Pagination, error) {
 	session := getSession()
 	defer session.Close()
 	c := session.DB(databaseName).C(userCollectionName)
-	q := c.Find(bson)
-
-	total, err := q.Count()
+	q := c.Find(bson).Skip(page).Limit(size)
+	countQuery := c.Find(bson)
+	total, err := countQuery.Count()
 	logger.Log("err", err, "total", total)
 
 	q.All(&users)

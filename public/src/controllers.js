@@ -95,25 +95,28 @@ define(function() {
   // 业务跟踪控制器
   controllers.TracksCtrl = function($scope, $rootScope, $uibModal, $state, OrderService) {
 
-    $scope.totalItems = 64;
+    $scope.totalItems = 0;
     $scope.currentPage = 1;
-    $scope.itemsPerPage = 10;
+    $scope.itemsPerPage = 10
 
     $scope.pagination = {};
     $scope.pagination.data = [];
 
-    $scope.orderNO = ""
+    $scope.setPage = function (pageNo) {
+      $scope.currentPage = pageNo;
+    };
 
-    $scope.$watch("currentPage", function() {
-      queryList($scope.currentPage);
-    });
+    $scope.pageChanged = function() {
+      $log.log('Page changed to: ' + $scope.currentPage);
+      queryList($scope.currentPage)
+    };
 
     var queryList = function(page) {
       var page = (page - 1) * $scope.itemsPerPage;
       var size = $scope.itemsPerPage;
       OrderService.getOrders(page, size, $scope.orderNO, 1, function(res) {
         $scope.pagination.data = res.data.data;
-        $scope.totalItems = res.totalCount;
+        $scope.totalItems = res.data.totalCount;
         console.log(res.data)
       }, function(err) {
         console.log(err)
@@ -139,7 +142,7 @@ define(function() {
     $scope.order = {
       orderNO: $filter('date')(new Date(), 'yyyyMMddHHmmss')
     }
-    $scope.selected
+
     var queryList = function() {
       UserService.getUserBySelf(function(response){
         $scope.users = response.data
@@ -177,12 +180,21 @@ define(function() {
     	$state.go("login");
     });
 
-    $scope.totalItems = 64;
+    $scope.totalItems = 0;
     $scope.currentPage = 1;
-    $scope.itemsPerPage = 10;
+    $scope.itemsPerPage = 10
 
     $scope.pagination = {};
     $scope.pagination.data = [];
+
+    $scope.setPage = function (pageNo) {
+      $scope.currentPage = pageNo;
+    };
+
+    $scope.pageChanged = function() {
+      $log.log('Page changed to: ' + $scope.currentPage);
+      queryList($scope.currentPage)
+    };
 
     $scope.$watch("currentPage", function() {
       queryList($scope.currentPage);
@@ -193,8 +205,8 @@ define(function() {
       var size = $scope.itemsPerPage;
       UserService.getUsers(page, size, function(res) {
         $scope.pagination.data = res.data.data;
-        $scope.totalItems = res.totalCount;
-        console.log(res.data)
+        $scope.totalItems = res.data.totalCount;
+        console.log($scope.pagination.data, $scope.totalItems, $scope.currentPage)
       }, function(err) {
         console.log(err)
       })
