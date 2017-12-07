@@ -38,7 +38,7 @@
           <li><a href="" class="navbar-font">首页</a></li>
           <li><a onclick="clickSubNav()" href="#server-domain" class="navbar-font">工商注册</a></li>
           <li><a onclick="clickSubNav()" href="#projects-financal" class="navbar-font">代理记账</a></li>
-          <li><a onclick="clickSubNav()" href="#projects-tax" class="navbar-font">财税咨询</a></li>
+          <!-- <li><a onclick="clickSubNav()" href="#projects-tax" class="navbar-font">财税咨询</a></li> -->
           <li><a onclick="clickSubNav()" href="#about-us" class="navbar-font">联系我们</a></li>
         </ul>
       </div>
@@ -97,16 +97,11 @@
     <div class="picture-bg">
       <div class="reg-wrap container">
         <div class="projects-header page-header" >
-          <h2><span class="reg-company">公司注册</span>成功您能得到什么？</h2>
+          <h2><span class="reg-company">工商注册</span>成功您能得到什么？</h2>
         </div>
-        <ul class="register-wrap" >
-          <li>
-            <h3>工商注册</h3>
-          </li>
-          <li>设立公司须依法向公司登记机关申请设立登记，公司凭营业执照刻制印章， 开立银行账户，申请纳税登记。
-          </li>
-          <li><img src="img/zhucechengg.png"></li>
-        </ul>
+        <div style="text-align:center">
+          <img src="img/zhucechengg.png">
+        </div>
         <!--web端-->
         <div class="row register-comgpany" id="web_show">
           <div class="col-xs-2 register-left">
@@ -227,7 +222,7 @@
   <div class="account-wrap" id="projects-financal">
     <div class="container">
        <div class="projects-header page-header">
-          <h2>代理记账</h2>
+          <h2><span class="reg-company">代理记账</span>为您做一本能赚钱的账</h2>
         </div>
       <div class="row account-box">
         <div class="col-xs-6 account-left">
@@ -263,12 +258,9 @@
     <div class="intro">
       <ul>
         <li>
-          <h3 class="intro-title">打造具有竞争力的服务机构</h3>
+          <h3 class="intro-title">为创业者提供安全、专业、高效的一站式服务</h3>
         </li>
-        <li>公司成立于2017年10月，以企业注册及财务外包为主要业务方向，团队成员专业且稳定，并拥有顶级的 资质和丰富的经验，且全部由行业精英组成。
-        </li>
-        <li>
-          <h3 class="intro-title">加入我们</h3>
+        <li>肥虫财务咨询（福建）有限公司是经工商行政管理局注册成立的专业代理机构。由多位持有高、中级职称的财会人才组成。为各类企业提供工商注册、代理记帐、资产评估、知识产权以及多种行业的企业增值服务等。
         </li>
         <li>
           <span></span>
@@ -285,7 +277,7 @@
         </div>
         <div class="col-md-6 contact-list">
           <ul class="list-inline text-center">
-            <li>400-00000&nbsp;&nbsp;&nbsp;▏&nbsp;fcfjcwzx@163.com</li>
+            <li>0591-88353535&nbsp;&nbsp;&nbsp;▏&nbsp;fcfjcwzx@163.com</li>
             <li>福建 · 福州 · 仓山 · 奥体路 · 阳光soho3楼1008</li>
           </ul>
         </div>
@@ -300,7 +292,7 @@
   <script src="js/swiper-3.4.2.min.js"></script>
   <script language="javascript">
     // 判断web还是手机端
-    $(document).ready(function(){  
+    $(document).ready(function(){
       if (document.body.offsetWidth > 1024) {
         document.getElementById("phone_show").style.display="none";
         document.getElementById("web_show").style.display="";
