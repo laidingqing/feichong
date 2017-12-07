@@ -16,7 +16,7 @@
   <link href="css/bootstrap.min.css?v=1.10" type="text/css" rel="stylesheet"></link>
   <link href="css/swiper-3.4.2.min.css?v=1.10" type="text/css" rel="stylesheet"></link>
   <link href="css/Ui.css?v=1.10" type="text/css" rel="stylesheet"></link>
-  <link href="css/Ui-Mp-index.css?v=1.10" type="text/css" rel="stylesheet"></link>
+  <link href="css/Ui-Mp-index.css?v=1.14" type="text/css" rel="stylesheet"></link>
 </head>
 
 <body>
@@ -30,8 +30,8 @@
                         <span class="icon-bar"></span>
                     </button>
         <a class="navbar-brand navbar-font">
-                    <img src="img/logo.png">
-                </a>
+          <img src="img/logo.png">
+        </a>
       </div>
       <div class="navbar-collapse collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right">
@@ -39,7 +39,6 @@
           <li><a onclick="clickSubNav()" href="#server-domain" class="navbar-font">工商注册</a></li>
           <li><a onclick="clickSubNav()" href="#projects-financal" class="navbar-font">代理记账</a></li>
           <li><a onclick="clickSubNav()" href="#projects-tax" class="navbar-font">财税咨询</a></li>
-          <li><a onclick="clickSubNav()" href="#projects-partner" class="navbar-font">合作服务</a></li>
           <li><a onclick="clickSubNav()" href="#about-us" class="navbar-font">联系我们</a></li>
         </ul>
       </div>
@@ -47,8 +46,8 @@
   </div>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" title="0元工商注册，99元起财务记账">
-        <div class="banner-bg2">
+      <div class="swiper-slide" title="0元工商注册，99元起财务记账" >
+        <div class="banner-bg3">
           <div class="jumbotron masthead">
             <div class="container">
               <h1>0元工商注册，99元起财务记账</h1>
@@ -58,7 +57,7 @@
           </div>
         </div>
       </div>
-      <div class="swiper-slide">
+      <div class="swiper-slide" >
         <div class="banner-bg">
           <div class="jumbotron masthead">
             <div class="container">
@@ -81,7 +80,7 @@
         </div>
       </div>
       <div class="swiper-slide" title="肥虫小程序，及时查看财务情况">
-        <div class="banner-bg2">
+        <div class="banner-bg4">
           <div class="jumbotron masthead">
             <div class="container">
               <h1>肥虫小程序，及时查看财务情况</h1>
@@ -94,34 +93,171 @@
     </div>
     <div class="swiper-pagination"></div>
   </div>
-  <div class="company-sucess">
+  <div class="company-sucess" id="server-domain">
     <div class="picture-bg">
-      <div class="reg-wrap">
-        <div class="projects-header page-header">
+      <div class="reg-wrap container">
+        <div class="projects-header page-header" >
           <h2><span class="reg-company">公司注册</span>成功您能得到什么？</h2>
         </div>
-        <div class="reg-sucess">
-          <div class="tabbable">
-            <!-- Only required for left/right tabs -->
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab1" data-toggle="tab">工商注册</a></li>
-              <li><a href="#tab2" data-toggle="tab">个体工商户</a></li>
+        <ul class="register-wrap" >
+          <li>
+            <h3>工商注册</h3>
+          </li>
+          <li>设立公司须依法向公司登记机关申请设立登记，公司凭营业执照刻制印章， 开立银行账户，申请纳税登记。
+          </li>
+          <li><img src="img/zhucechengg.png"></li>
+        </ul>
+        <!--web端-->
+        <div class="row register-comgpany" id="web_show">
+          <div class="col-xs-2 register-left">
+            <ul>
+              <li>
+                <h3>私营企业</h3>
+              </li>
+              <li>指由自然人或同自然人控股的营利性经济组织投资设立的企业及其分支机构。包括按照《公司法》、《个人独资企业法》、《合作企业法》和《私 营企业暂行条例》登记注册的私营有限责任公司、私营股份有限公司、合作企业和个人独资企业及其分支机构。
+              </li>
+              <li><button type="button" class="btn-apply">立即申请</button></li>
             </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab1">
-                <img src="img/zhucechengg.png">
+          </div>
+          <div class="col-xs-10">
+            <div class="register-right">
+              <div class="register-right01">
+                <ul>
+                  <li>
+                    <h3>内资企业</h3>
+                  </li>
+                  <li>指非公司制企业法人及其分支机构，国有、集体经济出资占50%以上的公司及其分支机构。</li>
+                  <li><button type="button" class="btn-apply">立即申请</button></li>
+                </ul>
               </div>
-              <div class="tab-pane" id="tab2">
-              
+              <div class="register-right02">
+                <ul>
+                  <li>
+                    <h3>农业合作社</h3>
+                  </li>
+                  <li>指按照《农业专业合作登记管理条例》的规定核准登记，并领取农民专业合作社法人营业执照，取得法人资格的农民专业合作社经济组织及其分支机构。</li>
+                  <li><button type="button" class="btn-apply">立即申请</button></li>
+                </ul>
               </div>
+            </div>
+            <div class="register-right">
+              <div class="register-right02">
+                <ul>
+                  <li>
+                    <h3>个体工商户</h3>
+                  </li>
+                  <li>指具有经营能力，并依照《个体工商户条例》规定工商行政管理部门登记，人事工商经营的公民（含港、澳、台）。个体工商户可以个人经营，也可以家庭经营。</li>
+                  <li><button type="button" class="btn-apply">立即申请</button></li>
+                </ul>
+              </div>
+              <div class="register-right01">
+                <ul>
+                  <li>
+                    <h3>集团</h3>
+                  </li>
+                  <li>指以资本为主要联结纽带母子公司为主体、以集团章程为共同行为的母公司、子公司、参股公司及其他成员企业或机构共同组成的具有一定规模的企业法人联合体。企业集团不具有法人资格。</li>
+                  <li><button type="button" class="btn-apply">立即申请</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--手机端-->
+        <div class="container" id="phone_show">
+          <div class="row">
+            <div class="col-xs-12">
+              <ul class="tel-register01">
+                <li>
+                  <h4>私营企业</h4>
+                </li>
+                <li>指由自然人或同自然人控股的营利性经济组织投资设立的企业及其分支机构。包括按照《公司法》、《个人独资企业法》、《合作企业法》和《私 营企业暂行条例》登记注册的私营有限责任公司、私营股份有限公司、合作企业和个人独资企业及其分支机构。
+                </li>
+                <li><button type="button" class="btn-apply">立即申请</button></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 domestic-com">
+              <ul class="tel-register02">
+                <li>
+                  <h4>内资企业</h4>
+                </li>
+                <li>指非公司制企业法人及其分支机构，国有、集体经济出资占50%以上的公司及其分支机构。</li>
+                <li><button type="button" class="btn-apply">立即申请</button></li>
+              </ul>
+            </div>
+            <div class="col-xs-6 agriculture-com">
+              <ul class="tel-register03">
+                <li>
+                  <h4>农业合作社</h4>
+                </li>
+                <li>指按照《农业专业合作登记管理条例》的规定核准登记，并领取农民专业合作社法人营业执照，取得法人资格的农民专业合作社经济组织及其分支机构。</li>
+                <li><button type="button" class="btn-apply">立即申请</button></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 domestic-com">
+              <ul class="tel-register03">
+                <li>
+                  <h4>个体工商</h4>
+                </li>
+                <li>指非公司制企业法人及其分支机构，国有、集体经济出资占50%以上的公司及其分支机构。</li>
+                <li><button type="button" class="btn-apply">立即申请</button></li>
+              </ul>
+            </div>
+            <div class="col-xs-6 agriculture-com">
+              <ul class="tel-register02">
+                <li>
+                  <h4>集团</h4>
+                </li>
+                <li>指按照《农业专业合作登记管理条例》的规定核准登记，并领取农民专业合作社法人营业执照，取得法人资格的农民专业合作社经济组织及其分支机构。</li>
+                <li><button type="button" class="btn-apply">立即申请</button></li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container projects" id="projects-price">
-    <div class="projects-header page-header" id="about-us">
+  </div>
+  </div>
+  </div>
+  <!--代理记账-->
+  <div class="account-wrap" id="projects-financal">
+    <div class="container">
+       <div class="projects-header page-header">
+          <h2>代理记账</h2>
+        </div>
+      <div class="row account-box">
+        <div class="col-xs-6 account-left">
+          <ul class="small-taxpayer">
+            <li>
+              <img src="img/icon01.png">
+            </li>
+            <li>
+              <h3>小规模纳税人</h3>
+              <p>小规模企业的最佳财务解决方案是代理记账。</p>
+            </li>
+          </ul>
+        </div>
+        <div class="col-xs-6 account-right">
+          <ul class="small-taxpayer" id="same-taxpayer">
+            <li>
+              <img src="img/icon02.png">
+            </li>
+            <li>
+              <h3>一般纳税人</h3>
+              <p>一般纳税人企业是指主动申请为一般纳税人，或因为连续12个月开票总额超过限定强制转为一般纳税人的企业。</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--联系我们-->
+  <div class="container projects" id="about-us">
+    <div class="projects-header page-header" >
       <h2>联系我们</h2>
     </div>
     <div class="intro">
@@ -163,55 +299,77 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/swiper-3.4.2.min.js"></script>
   <script language="javascript">
-    var mySwiper = new Swiper('.swiper-container', {
-      autoplay: 5000, //可选选项，自动滑动
-      pagination: '.swiper-pagination',
-      paginationClickable: true,
-    })
-    var scrollBlue = false;
-    var buttonBlue = false;
-    window.onscroll = function() {
-      if (document.body.scrollTop > 0) {
-        scrollBlue = true;
-        changeNavBlue();
+    // 判断web还是手机端
+    $(document).ready(function(){  
+      if (document.body.offsetWidth >= 1024) {
+        document.getElementById("phone_show").style.display="none";
+        document.getElementById("web_show").style.display="";
       } else {
-        scrollBlue = false;
-        changeNavTrans();
+        document.getElementById("phone_show").style.display="";
+        document.getElementById("web_show").style.display="none";
       }
-    };
-
-    function changeNavBlue() {
-      if (scrollBlue || buttonBlue) {
-        document.getElementById("top-header").style.backgroundColor = "#3A76E5";
-        var list = document.getElementsByClassName("navbar-font");
-        for (var i = 0; i < list.length; i++) {
-          list[i].style.color = "#fff";
-        }
-      }
-    }
-
-    function changeNavTrans() {
-      if (!(buttonBlue || scrollBlue)) {
-        document.getElementById("top-header").style.backgroundColor = "transparent";
-        var list = document.getElementsByClassName("navbar-font");
-        for (var i = 0; i < list.length; i++) {
-          list[i].style.color = "";
-        }
-      }
-    }
-
-    function clickNav() {
-      buttonBlue = !buttonBlue;
-      if (buttonBlue) {
-        changeNavBlue();
+    });
+    window.onresize = function(){
+      if (document.body.offsetWidth >= 1024) {
+        document.getElementById("phone_show").style.display="none";
+        document.getElementById("web_show").style.display="";
       } else {
-        changeNavTrans();
+        document.getElementById("phone_show").style.display="";
+        document.getElementById("web_show").style.display="none";
       }
     }
 
-    function clickSubNav() {
-      $('.navbar-toggle').click();
-    }
+                          var mySwiper = new Swiper('.swiper-container', {
+                            autoplay: 5000, //可选选项，自动滑动
+                            pagination: '.swiper-pagination',
+                            paginationClickable: true,
+                          })
+                          var scrollBlue = false;
+                          var buttonBlue = false;
+                          window.onscroll = function () {
+                            if (document.body.scrollTop > 0) {
+                              scrollBlue = true;
+                              changeNavBlue();
+                            } else {
+                              scrollBlue = false;
+                              changeNavTrans();
+                            }
+                          };
+
+                          function changeNavBlue() {
+                            if (scrollBlue || buttonBlue) {
+                              document.getElementById("top-header").style.backgroundColor = "#3A76E5";
+                              var list = document.getElementsByClassName("navbar-font");
+                              for (var i = 0; i < list.length; i++) {
+                                list[i].style.color = "#fff";
+                              }
+                            }
+                          }
+
+                          function changeNavTrans() {
+                            if (!(buttonBlue || scrollBlue)) {
+                              document.getElementById("top-header").style.backgroundColor = "transparent";
+                              var list = document.getElementsByClassName("navbar-font");
+                              for (var i = 0; i < list.length; i++) {
+                                list[i].style.color = "";
+                              }
+                            }
+                          }
+
+                          function clickNav() {
+                            buttonBlue = !buttonBlue;
+                            if (buttonBlue) {
+                              changeNavBlue();
+                            } else {
+                              changeNavTrans();
+                            }
+                          }
+
+                          function clickSubNav() {
+                            if (document.body.offsetWidth < 768) {
+                              $('.navbar-toggle').click();
+                            }
+                          }
   </script>
 </body>
 

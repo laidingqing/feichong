@@ -1,4 +1,7 @@
 @media (min-width: 1200px) {
+    .container{
+        width: 1400px;
+    }
     .navbar{
         min-height: 80px;
     }
@@ -6,7 +9,7 @@
         font-size: 38px;
         font-weight: bold;
     }
-    .container p{
+    .jumbotron p{
         width: 40%;
         margin: 0 auto;
         margin-top: 30px;
@@ -21,12 +24,12 @@
     background:#FF4081;
     margin-top: 40px;
     }
-    .banner-bg, .banner-bg2{
+    .banner-bg, .banner-bg2,.banner-bg3,.banner-bg4{
     background-repeat: no-repeat;
     width: 100%;
     height: 600px;
     background-size: cover;
-}
+    }
     .picture-bg{
     width: 100%;
     background-image: url(../img/sucess-picture.png);
@@ -63,16 +66,63 @@
         padding: 0 15px;
         line-height: 80px;
     }
+    /*各个注册类型公司*/
+    .register-left ul{
+        color: #fff;
+        padding: 20px 10px;
+        height: 440px;
+    }
+    .register-right01 ul{
+        color: #fff;
+        padding: 20px 25px;
+        height: 220px;
+    }
+    .register-right02 ul{
+        padding: 20px 25px;
+        height: 220px;
+    }
+    .register-wrap li{
+    font-size: 18px;
+    line-height: 60px;
+    }
+    /*代理记账*/
+    .small-taxpayer{
+        background: #B3E5FC;
+        padding: 40px 40px;
+        overflow: hidden;
+    }
+    .small-taxpayer li{
+        float: left;
+    }
+    .small-taxpayer li:nth-child(1){
+        margin-bottom: 20px;
+    }
+    .small-taxpayer li:nth-child(2){
+        margin-left: 20px;
+        width: 80%;
+        height: 120px;
+    }
+    .small-taxpayer p{
+        margin-top: 20px;
+    }
+    .small-taxpayer img{
+        width: 80px;
+    }
+    #same-taxpayer{
+        background: #2196f3;
+        color: #fff;
+    }
 }
-@media( max-width: 1200px) and (min-width: 768px)  {
+@media( max-width: 1200px) and (min-width: 768px){
     .container h1{
         font-size: 34px;
         font-weight: bold;
     }
-    .container p{
+    .jumbotron p{
         width: 40%;
         margin: 0 auto;
         margin-top: 20px;
+        height: 150px;
     }
      .btn{
         width: 150px;
@@ -81,6 +131,15 @@
         background:#FF4081;
         margin-top: 20px;
         }
+    .banner-bg, .banner-bg2,.banner-bg3,.banner-bg4{
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 450px;
+    background-size: cover;
+    }
+    .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+        bottom: 25px;
+    }
     .picture-bg{
     width: 100%;
     background-image: url(../img/sucess-picture.png);
@@ -111,18 +170,70 @@
       .navbar-brand img{
     width: 60%;
     }
+     /*各个注册类型公司*/
+    .register-left ul{
+        color: #fff;
+        padding: 20px 10px;
+        height: 560px;
+    }
+    .register-right01 ul{
+        color: #fff;
+        padding: 20px 25px;
+        height: 280px;
+    }
+    .register-right02 ul{
+        padding: 20px 25px;
+        height: 280px;
+    }
+    .register-wrap{
+        padding: 0 20px;
+    }
+    .register-wrap li{
+    font-size: 18px;
+    line-height: 60px;
+    }
+    .register-wrap img{
+        width: 90%;
+    }
+    /*代理记账*/
+    .small-taxpayer{
+        background: #B3E5FC;
+        padding: 40px 40px;
+        overflow: hidden;
+    }
+    .small-taxpayer li{
+        float: left;
+    }
+    .small-taxpayer li:nth-child(1){
+        margin-bottom: 20px;
+    }
+    .small-taxpayer li:nth-child(2){
+        width: 80%;
+        height: 120px;
+    }
+    .small-taxpayer p{
+        margin-top: 20px;
+    }
+    .small-taxpayer img{
+        width: 80px;
+    }
+    #same-taxpayer{
+        background: #2196f3;
+        color: #fff;
+    }
 }
 @media (max-width: 768px){
     .container h1{
         font-size: 20px;
         font-weight: bold;
     }
-    .container p{
+    .jumbotron p{
         font-size: 14px;
         width: 70%;
         line-height: 26px;
         margin: 0 auto;
         margin-top: 30px;
+        height: 105px;
     }
     .btn{
     width: 120px;
@@ -135,7 +246,7 @@
     width: 200px;
     }
     .page-header h2{
-     font-size: 16px;
+     font-size: 24px;
      line-height: 26px;
     }
     .reg-process img{
@@ -143,7 +254,6 @@
    }
    .picture-bg{
     width: 100%;
-    height: 300px;
     background-image: url(../img/sucess-picture.png);
     background-size: cover;
     margin-top: 40px;
@@ -163,7 +273,6 @@
         text-align: center;
         margin: 40px 0 10px;
         font-weight: 200;
-        margin-bottom: 40px;
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -182,7 +291,59 @@
       .navbar-brand img{
     width: 60%;
     }
+    .register-wrap{
+        padding: 0 20px;
+    }
+    .register-wrap h3{
+        font-size: 18px;
+    }
+    .register-wrap li{
+    font-size: 14px;
+    line-height: 24px;
+    padding: 10px 0;
+    }
+    .register-wrap img{
+        width: 95%;
+    }
+    /*代理记账*/
+    .account-box{
+        padding: 20px 15px 0 15px;        
+    }
+    .account-left{
+        padding-right: 0;
+    }
+    .account-right{
+        padding-left: 0;
+    }
+    .small-taxpayer{
+        background: #B3E5FC;
+        padding: 20px 20px;
+        overflow: hidden;
+    }
+    .small-taxpayer li{
+        float: left;
+    }
+    .small-taxpayer li:nth-child(1){
+        margin-bottom: 20px;
+    }
+    .small-taxpayer li:nth-child(2){
+        height: 180px;
+    }
+    .small-taxpayer p{
+        margin-top: 20px;
+    }
+    .small-taxpayer h3{
+       font-size: 18px;
+    }
+    .small-taxpayer img{
+        width: 40px;
+    }
+    #same-taxpayer{
+        background: #2196f3;
+        color: #fff;
+    }
 }
+/*公共样式*/
 .navbar{
     margin-bottom: 0px;
 }
@@ -216,13 +377,6 @@
 .reg-process img{
     width: 100%;
 }
-.reg-sucess{
-    width: 90%;
-    margin: 0 auto;
-}
-.reg-sucess img{
-     width: 100%;
-}
 .reg-wrap{
     padding-top: 10px;
     margin: 0 auto;
@@ -232,6 +386,12 @@
 }
 .banner-bg2{
     background-image: url(../img/banner02.png);
+}
+.banner-bg3{
+    background-image: url(../img/banner03.png);
+}
+.banner-bg4{
+    background-image: url(../img/banner04.png);
 }
 .price-free{
     background: #B3E5FC;
@@ -306,3 +466,133 @@
 .navbar-inverse .navbar-nav>li>a:hover{
     color: #d9d9d9;
 }
+.private-company{
+    background: #2196f3;
+}
+.private-company ul{ 
+    padding: 20px 10px;
+    color: #fff;
+}
+.private-company h3{
+    line-height: 48px;
+}
+.private-company li{
+    line-height: 28px;
+}
+ /*各个注册类型公司*/
+    .btn-apply{
+        border: solid 1px #fff;
+        border-radius: 5px;
+        padding: 5px 20px;
+        font-size: 16px;
+    }
+    .register-right02 .btn-apply{
+        background: #fff;
+    }
+     .register-left{
+        background: #2196f3;
+    }
+    .register-left ul{
+        color: #fff;
+        padding: 20px 10px;
+    }
+    .register-left li:nth-child(2){
+        line-height: 24px;
+        padding: 20px 0;
+    }
+    .register-left li:nth-child(3){
+        text-align: center;
+    }
+    .register-comgpany{
+        padding: 50px 0;
+    }
+    .register-right{
+        overflow: hidden;
+    }
+    .register-right01{
+        background: #2196f3;
+        float: left;
+        width:50%;
+    }
+    .register-right02{
+        background: #cbecfe;
+        float: left;
+        width:50%;
+    }
+    .register-right01 li:nth-child(2){
+        line-height: 24px;
+        padding: 20px 0;
+        height: 120px;
+    }
+    .register-right02 li:nth-child(2){
+        line-height: 24px;
+        padding: 20px 0;
+        height: 120px;
+    }
+    .register-right02 li:nth-child(3){
+        float: right;
+    }
+    .register-right01 li:nth-child(3){
+        float: right;
+    }
+
+/*手机端各个注册类型公司*/
+.tel-register01{
+    background: #2196f3;
+    padding: 20px 20px;
+    color: #fff;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.tel-register01 li:nth-child(2){
+    padding: 20px 0;
+}
+.tel-register01 li:nth-child(3){
+    float: right;
+}
+.tel-register02{
+    background: #B3E5FC;
+    padding: 20px 15px;
+    color: #333333;
+    overflow: hidden;
+    margin-top: 10px;
+    height: 300px;
+}
+.tel-register02 .btn-apply{
+    background: #fff;
+    font-size: 14px;
+}
+.tel-register03 .btn-apply{
+    font-size: 14px;
+}
+.tel-register02 li:nth-child(2){
+    padding: 20px 0;
+    height: 200px;
+}
+.tel-register02 li:nth-child(3){
+    float: right;
+    margin-bottom: 0;
+}
+.domestic-com{
+    padding-right: 0;
+}
+.agriculture-com{
+    padding-left: 0;
+}
+.tel-register03{
+    background: #2196f3;
+    padding: 20px 15px;
+    color: #fff;
+    overflow: hidden;
+    margin-top: 10px;
+    height: 300px;
+}
+.tel-register03 li:nth-child(2){
+    padding: 20px 0;
+    height: 200px;
+}
+.tel-register03 li:nth-child(3){
+    float: right;
+    margin-bottom: 0;
+}
+
