@@ -48,9 +48,9 @@ func GetOrders(page int, size int, catalog int) (models.Pagination, error) {
 		}
 
 		o.UserInfo = models.User{
-			ID:          user.ID,
-			Nick:        user.Nick,
-			CompanyName: user.CompanyName,
+			ID:          cusUser.ID,
+			Nick:        cusUser.Nick,
+			CompanyName: cusUser.CompanyName,
 		}
 
 	}
