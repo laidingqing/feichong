@@ -75,7 +75,7 @@ func PutUserSecurity(w http.ResponseWriter, r *http.Request) {
 		}
 	} else {
 		haveUser := managers.GetUserByUserName(user.UserName)
-		if haveUser.ID != "" {
+		if haveUser.ID == "" {
 			model, err := managers.UpdateUserPasswordAndName(userID, user.UserName, user.Password)
 			if err != nil {
 				helpers.SetResponse(w, http.StatusBadRequest, err)
@@ -83,7 +83,7 @@ func PutUserSecurity(w http.ResponseWriter, r *http.Request) {
 				helpers.SetResponse(w, http.StatusOK, model)
 			}
 		} else {
-			helpers.SetResponse(w, http.StatusBadRequest, "")
+			helpers.SetResponse(w, http.StatusBadRequest, models.ErrUserFounded)
 		}
 	}
 

@@ -246,7 +246,13 @@ define(function() {
               })
 
               $scope.submit = function(){
-                UserService.putUserSecurity($scope.user, function(res){
+                $scope.user.createdAt = undefined
+                var data = {
+                  id: $scope.user.id,
+                  username: $scope.user.username,
+                  password: $scope.user.password
+                }
+                UserService.putUserSecurity(data, function(res){
                   console.log(res.data)
                   if(res.status == 200){
                     $uibModalInstance.close(true)

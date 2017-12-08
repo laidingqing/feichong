@@ -135,8 +135,8 @@ define(['angular'], function(angular) {
           var headers = {
             'Content-Type': 'application/json'
           };
-          var jsonObject = angular.toJson(user);
-          $http.put(Config.url + this.type + '/' + user.id +"/security/", jsonObject, {
+          console.log(user)
+          $http.put(Config.url + this.type + '/' + user.id +"/security/", user, {
               headers: headers
             })
             .then(function(response) {
@@ -144,6 +144,7 @@ define(['angular'], function(angular) {
               callback(response);
             })
             .catch(function(err) {
+              console.log("err", err)
               error(err);
             })
         },

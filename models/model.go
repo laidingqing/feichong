@@ -174,4 +174,5 @@ type FeedBack struct {
 var (
 	// ErrUserNotFound 用户不存在
 	ErrUserNotFound = errors.New("用户不存在")
+	ErrUserFounded  = errors.New("用户名已存在")
 )
