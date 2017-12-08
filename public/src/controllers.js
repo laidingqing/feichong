@@ -246,19 +246,14 @@ define(function() {
               })
 
               $scope.submit = function(){
-                UserService.checkUserName($scope.user.username, function(res){
-                    console.log(res)
-                    if( res.id != ""){
-                      console.log("已存在用户")
-                      $scope.error = true
-                      $scope.errText = "已存在相同的登录用户名，请重新输入！"
-                    }else{
-                      UserService.putUserSecurity($scope.user, function(data){
-                        console.log(data)
-                      })
-                    }
-                }, function(err){
-                  console.log(err)
+                UserService.putUserSecurity($scope.user, function(res){
+                  console.log(res.data)
+                  if(res.status == 200){
+                    $uibModalInstance.close(true)
+                  }
+                }, function(error){
+                    console.log(error)
+                    $uibModalInstance.close(false)
                 })
               }
           },

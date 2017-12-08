@@ -131,7 +131,7 @@ define(['angular'], function(angular) {
               error(err);
             })
         },
-        putUserSecurity: function(user, callback) {
+        putUserSecurity: function(user, callback, error) {
           var headers = {
             'Content-Type': 'application/json'
           };
@@ -144,7 +144,7 @@ define(['angular'], function(angular) {
               callback(response);
             })
             .catch(function(err) {
-              callback(err);
+              error(err);
             })
         },
         getUserBySelf: function(success, error) {

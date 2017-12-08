@@ -2,7 +2,7 @@
 define(['angular'], function(angular) {
   /* Services */
   angular.module('app.interceptor', [])
-    .factory('httpRequestInterceptor', function() {
+    .factory('httpRequestInterceptor', function($q, $rootScope) {
       return {
         request: function(config) {
           config.headers['Authorization'] = 'Bearer ' + localStorage.getItem("token");

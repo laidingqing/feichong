@@ -60,15 +60,31 @@ func PutUserSecurity(w http.ResponseWriter, r *http.Request) {
 	userID := helpers.GetParam(r, userIDParam)
 	var user models.User
 	helpers.GetUserBody(w, r, &user)
+
+	theUser := managers.GetUserByID(userID)
 	user.Salt = user.UserName
 	user.Password = helpers.CalculatePassHash(user.Password, user.Salt)
-	model, err := managers.UpdateUserPasswordAndName(userID, user.UserName, user.Password)
-	if err != nil {
-		helpers.SetResponse(w, http.StatusBadRequest, err)
+
+	if theUser.UserName == user.UserName {
+		//更新密码
+		model, err := managers.UpdateUserPasswordAndName(userID, user.UserName, user.Password)
+		if err != nil {
+			helpers.SetResponse(w, http.StatusBadRequest, err)
+		} else {
+			helpers.SetResponse(w, http.StatusOK, model)
+		}
 	} else {
-		helpers.SetResponse(w, http.StatusOK, models.User{
-			ID: model.ID,
-		})
+		haveUser := managers.GetUserByUserName(user.UserName)
+		if haveUser.ID != "" {
+			model, err := managers.UpdateUserPasswordAndName(userID, user.UserName, user.Password)
+			if err != nil {
+				helpers.SetResponse(w, http.StatusBadRequest, err)
+			} else {
+				helpers.SetResponse(w, http.StatusOK, model)
+			}
+		} else {
+			helpers.SetResponse(w, http.StatusBadRequest, "")
+		}
 	}
 
 }
