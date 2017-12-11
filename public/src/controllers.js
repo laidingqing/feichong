@@ -89,6 +89,16 @@ define(function() {
         });
     }
     $scope.queryList($scope.currentPage)
+
+    $scope.removeOrder = function(id) {
+      OrderService.removeOrder(id, function(res) {
+        if( res.status == 200){
+          $scope.queryList($scope.currentPage)
+        }
+      }, function(err) {
+        console.log(err)
+      })
+    }
   }
   controllers.OrdersCtrl.$inject = ['$scope', '$rootScope', '$uibModal', 'OrderService'];
 

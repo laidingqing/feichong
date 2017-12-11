@@ -12,7 +12,7 @@ import (
 // GetOrders 获取所有订单
 func GetOrders(page int, size int, catalog int) (models.Pagination, error) {
 
-	bsonQuery := bson.M{"catalog": catalog} // 查询条件
+	bsonQuery := bson.M{"status": int(models.OrderStatusDoing)} // 查询条件
 	logger := helpers.NewLogger()
 	var orders []models.Order
 	session := getSession()
@@ -22,7 +22,7 @@ func GetOrders(page int, size int, catalog int) (models.Pagination, error) {
 	total, err := q.Count()
 
 	q.All(&orders)
-
+	logger.Log("size", len(orders))
 	for i := 0; i < len(orders); i++ {
 		var o = &orders[i]
 		var user *models.User
@@ -87,12 +87,15 @@ func DeleteOrderByID(orderID string) error {
 	}
 
 	query := func(c *mgo.Collection) error {
-		return c.Update(bson.M{"_id": bson.ObjectIdHex(orderID)}, bson.M{"status": int(models.OrderStatusDeleted)})
+		data := bson.M{"$set": bson.M{"status": int(models.OrderStatusDeleted)}}
+		return c.Update(bson.M{"_id": bson.ObjectIdHex(orderID)}, data)
 	}
 
 	err := executeQuery(orderCollectionName, query)
-
-	return err
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // GetOrdersByUser ...

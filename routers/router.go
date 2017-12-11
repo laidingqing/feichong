@@ -94,7 +94,7 @@ func init() {
 	routes = append(routes, Route{
 		Name:        "OrdersGet",
 		Method:      "GET",
-		Pattern:     "/api/orders",
+		Pattern:     "/api/orders/",
 		HandlerFunc: handlers.GetOrders,
 	})
 
@@ -108,7 +108,7 @@ func init() {
 	routes = append(routes, Route{
 		Name:        "OrderDeleteById",
 		Method:      "DELETE",
-		Pattern:     "/api/orders/{orderId}",
+		Pattern:     "/api/orders/{orderId}/",
 		HandlerFunc: handlers.DeleteOrderByID,
 	})
 

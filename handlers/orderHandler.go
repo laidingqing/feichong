@@ -55,7 +55,8 @@ func DeleteOrderByID(w http.ResponseWriter, r *http.Request) {
 
 	orderID := helpers.GetParam(r, orderIDParam)
 	err := managers.DeleteOrderByID(orderID)
-
+	log := helpers.NewLogger()
+	log.Log("err", err)
 	if err != nil {
 		helpers.SetResponse(w, http.StatusNotFound, err)
 	} else {

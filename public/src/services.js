@@ -259,6 +259,21 @@ define(['angular'], function(angular) {
               callback(err);
             })
         },
+        removeOrder: function(orderId, callback, error){
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.delete(Config.url + 'orders/' + orderId + "/", {}, {
+              headers: headers
+            })
+            .then(function(response) {
+              console.log(response)
+              callback(response);
+            })
+            .catch(function(err) {
+              error(err);
+            })
+        },
       }
       return Order;
     }])
