@@ -69,7 +69,8 @@ func GetOrdersByUser(w http.ResponseWriter, r *http.Request) {
 	userID := helpers.GetParam(r, userIDParam)
 
 	models, err := managers.GetOrdersByUser(userID)
-
+	log := helpers.NewLogger()
+	log.Log("user_id", userID)
 	if err != nil {
 		helpers.SetResponse(w, http.StatusNotFound, nil)
 	} else {
