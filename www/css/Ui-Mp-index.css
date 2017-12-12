@@ -86,6 +86,9 @@
         padding: 50px 0;
     }
     /*代理记账*/
+    .account-wrap{
+        margin-bottom: 60px;
+    }
     .small-taxpayer{
         background: #B3E5FC;
         padding: 40px 40px;
@@ -127,6 +130,9 @@
         margin-top: 20px;
         height: 150px;
     }
+      .reg-process img{
+       width: 90%;
+   }
      .btn{
         width: 150px;
         height: 48px;
@@ -258,7 +264,7 @@
      line-height: 26px;
     }
     .reg-process img{
-    width: 100%;
+    width: 80%;
    }
    .picture-bg{
     width: 100%;
@@ -381,11 +387,7 @@
     color: #3A76E5;
 }
 .reg-process{
-    width: 90%;
-    margin: 0 auto;
-}
-.reg-process img{
-    width: 100%;
+    text-align: center;
 }
 .reg-wrap{
     padding-top: 10px;
@@ -496,8 +498,15 @@
         padding: 5px 20px;
         font-size: 16px;
     }
+     .btn-apply:hover{
+        background: #e6e6e6;
+        color: #333333;
+    }
     .register-right02 .btn-apply{
         background: #fff;
+    }
+    .register-right02 .btn-apply:hover{
+        background: #e6e6e6;
     }
      .register-left{
         background: #2196f3;
@@ -601,4 +610,35 @@
 .tel-register03 li:nth-child(3){
     float: right;
     margin-bottom: 0;
+}
+/*联系我们*/
+#about-us{
+    background: #fbfbfb;
+}
+.input-group .form-control:last-child{
+    border-top-left-radius:4px;
+    border-bottom-left-radius:4px;
+}
+.input-title  .input-group-addon{
+    background-color:transparent;
+    border: none;
+    font-weight: bold;
+}
+.input-title .input-group-addon, .input-group-btn{
+    vertical-align: top;
+}
+.input-title .input-group{
+    margin: 20px 0;
+}
+.btn-consult{
+   background: #2196f3;
+   padding: 5px 20px; 
+   border-radius: 4px;
+   color: #fff;
+   font-size: 16px;
+   float: right;
+   margin-top: 16px;
+}
+.btn-consult:hover{
+    background: #3A76E5;
 }
