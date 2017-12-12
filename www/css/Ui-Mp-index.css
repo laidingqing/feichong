@@ -628,7 +628,7 @@
     vertical-align: top;
 }
 .input-title .input-group{
-    margin: 20px 0;
+    margin: 0 0 20px 0;
 }
 .btn-consult{
    background: #2196f3;
@@ -641,4 +641,15 @@
 }
 .btn-consult:hover{
     background: #3A76E5;
+}
+.consult-wrap{
+    background: #fff;
+    padding: 20px 20px;
+    margin-top: 20px;
+}
+.consult-wrap p{
+    margin-left: 15px;
+    font-size: 18px;
+    color: #3A76E5;
+    font-weight: bold;
 }
