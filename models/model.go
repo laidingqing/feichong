@@ -171,6 +171,38 @@ type FeedBack struct {
 	Comment string `json:"comment"` //客户评价
 }
 
+// Resume 简历
+type Resume struct {
+	ID         bson.ObjectId `bson:"_id" json:"id"`
+	Name       string        `bson:"name" json:"name"`
+	Phone      string        `bson:"phone" json:"phone"`
+	Email      string        `bson:"email" json:"email"`
+	Bio        string        `bson:"bio" json:"bio"`
+	Degree     string        `bson:"degree" json:"degree"`
+	Status     string        `bson:"status" json:"status"` //工作状态
+	Projects   []Project     `bson:"projects" json:"projects"`
+	Educations []Education   `bson:"educations" json:"educations"`
+}
+
+//Education 教育经历
+type Education struct {
+	Name        string `bson:"name" json:"name"`               //学校
+	Major       string `bson:"major" json:"major"`             //专业
+	Degree      string `bson:"degree" json:"degree"`           //学历
+	StartDate   string `bson:"startAt" json:"startAt"`         //开始日期
+	EndDate     string `bson:"endAt" json:"endAt"`             //结束日期
+	Description string `bson:"description" json:"description"` //在校经历，描述
+}
+
+//Project 工作经历
+type Project struct {
+	StartDate string   `bson:"startAt" json:"startAt"`   //开始日期
+	EndDate   string   `bson:"endAt" json:"endAt"`       //结束日期
+	Position  string   `bson:"position" json:"position"` //职位
+	Content   string   `bson:"content" json:"content"`   //工作内容
+	Tags      []string `bson:"tags" json:"tags"`         //标签
+}
+
 var (
 	// ErrUserNotFound 用户不存在
 	ErrUserNotFound = errors.New("用户不存在")
