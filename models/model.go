@@ -171,6 +171,28 @@ type FeedBack struct {
 	Comment string `json:"comment"` //客户评价
 }
 
+//EnterpriseInfo 企业雇主信息
+type EnterpriseInfo struct {
+	ID      bson.ObjectId `bson:"_id" json:"id"`
+	Name    string        `bson:"name" json:"name"`
+	Intro   string        `bson:"intro" json:"intro"`
+	Address string        `bson:"address" json:"address"`
+	Code    string        `bson:"code" json:"code"`
+	Website string        `bson:"website" json:"website"`
+}
+
+//Job 招聘职位
+type Job struct {
+	ID           bson.ObjectId `bson:"_id" json:"id"`
+	EnterpriseID string        `bson:"enterPriseID" json:"enterPriseID"`
+	Title        string        `bson:"title" json:"title"`
+	City         string        `bson:"city" json:"city"`
+	Working      string        `bson:"woking" json:"working"`
+	Degree       string        `bson:"degree" json:"degree"`
+	PublishAt    time.Time     `bson:"publishAt" json:"publishAt"`
+	Status       int           `bson:"status" json:"status"`
+}
+
 // Resume 简历
 type Resume struct {
 	ID         bson.ObjectId `bson:"_id" json:"id"`
@@ -182,6 +204,7 @@ type Resume struct {
 	Status     string        `bson:"status" json:"status"` //工作状态
 	Projects   []Project     `bson:"projects" json:"projects"`
 	Educations []Education   `bson:"educations" json:"educations"`
+	UpdateAt   time.Time     `bson:"updateAt" json:"updateAt"`
 }
 
 //Education 教育经历
