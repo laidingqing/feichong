@@ -205,6 +205,22 @@ func init() {
 		HandlerFunc: handlers.LoginSession,
 	})
 
+	//Jobs route
+
+	routes = append(routes, Route{
+		Name:        "GetResume",
+		Method:      "Get",
+		Pattern:     "/api/users/{userId}/resumes",
+		HandlerFunc: handlers.GetUserResume,
+	})
+
+	routes = append(routes, Route{
+		Name:        "UpdateResume",
+		Method:      "POST",
+		Pattern:     "/api/users/{userId}/resumes",
+		HandlerFunc: handlers.UpdateUserResume,
+	})
+
 }
 
 // NewRouter ...

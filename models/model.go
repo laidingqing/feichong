@@ -173,12 +173,14 @@ type FeedBack struct {
 
 //EnterpriseInfo 企业雇主信息
 type EnterpriseInfo struct {
-	ID      bson.ObjectId `bson:"_id" json:"id"`
-	Name    string        `bson:"name" json:"name"`
-	Intro   string        `bson:"intro" json:"intro"`
-	Address string        `bson:"address" json:"address"`
-	Code    string        `bson:"code" json:"code"`
-	Website string        `bson:"website" json:"website"`
+	ID        bson.ObjectId `bson:"_id" json:"id"`
+	UserID    string        `bson:"userID" json:"userID"`
+	Name      string        `bson:"name" json:"name"`
+	Intro     string        `bson:"intro" json:"intro"`
+	Address   string        `bson:"address" json:"address"`
+	Code      string        `bson:"code" json:"code"`
+	Website   string        `bson:"website" json:"website"`
+	Recommand bool          `bson:"recommand" json:"recommand"`
 }
 
 //Job 招聘职位
@@ -196,15 +198,20 @@ type Job struct {
 // Resume 简历
 type Resume struct {
 	ID         bson.ObjectId `bson:"_id" json:"id"`
-	Name       string        `bson:"name" json:"name"`
-	Phone      string        `bson:"phone" json:"phone"`
-	Email      string        `bson:"email" json:"email"`
-	Bio        string        `bson:"bio" json:"bio"`
-	Degree     string        `bson:"degree" json:"degree"`
-	Status     string        `bson:"status" json:"status"` //工作状态
-	Projects   []Project     `bson:"projects" json:"projects"`
-	Educations []Education   `bson:"educations" json:"educations"`
-	UpdateAt   time.Time     `bson:"updateAt" json:"updateAt"`
+	UserID     string        `bson:"userId" json:"userId,omitempty"`
+	Name       string        `bson:"name" json:"name,omitempty"`
+	Phone      string        `bson:"phone" json:"phone,omitempty"`
+	Email      string        `bson:"email" json:"email,omitempty"`
+	Gender     string        `bson:"gender" json:"gender,omitempty"`
+	Birth      time.Time     `bson:"birth" json:"birth,omitempty"`
+	Bio        string        `bson:"bio" json:"bio,omitempty"`
+	Status     int           `bson:"status" json:"status,omitempty"` //工作状态: 0，离职随时到岗，1,在职，考虑换工作
+	Projects   []Project     `bson:"projects" json:"projects,omitempty"`
+	Educations []Education   `bson:"educations" json:"educations,omitempty"`
+	CreatedAt  time.Time     `bson:"createdAt" json:"createdAt"`
+	UpdateAt   time.Time     `bson:"updateAt" json:"updateAt,omitempty"`
+	IsAuth     bool          `bson:"isAuth" json:"isAuth,omitempty"`
+	Recommand  bool          `bson:"recommand" json:"recommand"`
 }
 
 //Education 教育经历
@@ -219,15 +226,26 @@ type Education struct {
 
 //Project 工作经历
 type Project struct {
-	StartDate string   `bson:"startAt" json:"startAt"`   //开始日期
-	EndDate   string   `bson:"endAt" json:"endAt"`       //结束日期
-	Position  string   `bson:"position" json:"position"` //职位
-	Content   string   `bson:"content" json:"content"`   //工作内容
-	Tags      []string `bson:"tags" json:"tags"`         //标签
+	StartDate string   `bson:"startAt" json:"startAt,omitempty"`   //开始日期
+	EndDate   string   `bson:"endAt" json:"endAt,omitempty"`       //结束日期
+	Position  string   `bson:"position" json:"position,omitempty"` //职位
+	Content   string   `bson:"content" json:"content,omitempty"`   //工作内容
+	Name      string   `bson:"name" json:"name,omitempty"`         //公司名称
+	Tags      []string `bson:"tags" json:"tags,omitempty"`         //标签
+}
+
+//Entrust 委托认证
+type Entrust struct {
+	ID             bson.ObjectId `bson:"_id" json:"id"`
+	UserID         string        `bson:"userID" json:"userID"`
+	ResumeID       string        `bson:"resumeID" json:"resumeID"`
+	EnterpriseInfo string        `bson:"enterpriseID" json:"enterpriseID"`
+	CreatedAt      time.Time     `bson:"createdAt" json:"createdAt"`
 }
 
 var (
 	// ErrUserNotFound 用户不存在
 	ErrUserNotFound = errors.New("用户不存在")
-	ErrUserFounded  = errors.New("用户名已存在")
+	//ErrUserFounded ...
+	ErrUserFounded = errors.New("用户名已存在")
 )
