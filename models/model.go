@@ -180,7 +180,11 @@ type EnterpriseInfo struct {
 	Address   string        `bson:"address" json:"address"`
 	Code      string        `bson:"code" json:"code"`
 	Website   string        `bson:"website" json:"website"`
+	Tel       string        `bson:"tel" json:"tel"`
 	Recommand bool          `bson:"recommand" json:"recommand"`
+	CreatedAt time.Time     `bson:"createdAt" json:"createdAt"`
+	UpdateAt  time.Time     `bson:"updateAt" json:"updateAt,omitempty"`
+	IsAuth    bool          `bson:"isAuth" json:"isAuth,omitempty"`
 }
 
 //Job 招聘职位

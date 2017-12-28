@@ -38,3 +38,32 @@ func UpdateUserResume(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
+
+// GetUserEnterprise ..
+func GetUserEnterprise(w http.ResponseWriter, r *http.Request) {
+	userID := helpers.GetParam(r, jobUserIDParam)
+	res, err := managers.GetEnterpriseByUser(userID)
+
+	if err == nil {
+		helpers.SetResponse(w, http.StatusOK, res)
+	} else {
+		helpers.SetResponse(w, http.StatusBadRequest, err)
+	}
+
+}
+
+// UpdateUserEnterprise ..
+func UpdateUserEnterprise(w http.ResponseWriter, r *http.Request) {
+	userID := helpers.GetParam(r, jobUserIDParam)
+	var enterprise models.EnterpriseInfo
+	helpers.GetEnterpriseBody(w, r, &enterprise)
+
+	res, err := managers.UpdateEnterpriseByUser(userID, enterprise)
+
+	if err == nil {
+		helpers.SetResponse(w, http.StatusOK, res)
+	} else {
+		helpers.SetResponse(w, http.StatusBadRequest, err)
+	}
+
+}

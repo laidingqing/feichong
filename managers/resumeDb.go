@@ -10,7 +10,8 @@ import (
 )
 
 var (
-	resumeCollectionName = "resumes"
+	resumeCollectionName     = "resumes"
+	enterpriseCollectionName = "enterprises"
 )
 
 // GetResumeByUser 查询用户的简历
@@ -23,6 +24,18 @@ func GetResumeByUser(userID string) (models.Resume, error) {
 	executeQuery(resumeCollectionName, query)
 
 	return resume, nil
+}
+
+// GetEnterpriseByUser 查询用户的企业信息
+func GetEnterpriseByUser(userID string) (models.EnterpriseInfo, error) {
+	var enterprise models.EnterpriseInfo
+	query := func(c *mgo.Collection) error {
+		return c.Find(bson.M{"userID": userID}).One(&enterprise)
+	}
+
+	executeQuery(enterpriseCollectionName, query)
+
+	return enterprise, nil
 }
 
 // UpdateResumeByUser 更新用户的简历
@@ -56,6 +69,42 @@ func UpdateResumeByUser(userID string, resume models.Resume) (models.Resume, err
 			return c.UpdateId(rev.ID, rev)
 		}
 		exErr = executeQuery(resumeCollectionName, updateQuery)
+	}
+
+	return rev, exErr
+}
+
+// UpdateEnterpriseByUser 更新用户的企业信息
+func UpdateEnterpriseByUser(userID string, enterprise models.EnterpriseInfo) (models.EnterpriseInfo, error) {
+	rev, err := GetEnterpriseByUser(userID)
+	if err != nil {
+		return models.EnterpriseInfo{}, err
+	}
+	log := helpers.NewLogger()
+	var exErr error
+	log.Log("ID", rev.ID)
+	if rev.ID.Hex() == "" {
+		rev = enterprise
+		insertQuery := func(c *mgo.Collection) error {
+			rev.ID = bson.NewObjectId()
+			rev.UserID = userID
+			rev.CreatedAt = time.Now()
+			rev.IsAuth = false
+			rev.Recommand = false
+			return c.Insert(rev)
+		}
+		exErr = executeQuery(enterpriseCollectionName, insertQuery)
+	} else {
+		updateQuery := func(c *mgo.Collection) error {
+			rev.UpdateAt = time.Now()
+			rev.Name = enterprise.Name
+			rev.Address = enterprise.Address
+			rev.Intro = enterprise.Intro
+			rev.Code = enterprise.Code
+			rev.Website = enterprise.Website
+			return c.UpdateId(rev.ID, rev)
+		}
+		exErr = executeQuery(enterpriseCollectionName, updateQuery)
 	}
 
 	return rev, exErr
