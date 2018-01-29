@@ -100,6 +100,7 @@ func UpdateEnterpriseByUser(userID string, enterprise models.EnterpriseInfo) (mo
 			rev.Name = enterprise.Name
 			rev.Address = enterprise.Address
 			rev.Intro = enterprise.Intro
+			rev.Tel = enterprise.Tel
 			rev.Code = enterprise.Code
 			rev.Website = enterprise.Website
 			return c.UpdateId(rev.ID, rev)

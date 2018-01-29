@@ -70,6 +70,24 @@ func UpdateUserByID(user models.User) models.User {
 	return user
 }
 
+// UpdateUserProfileByID ..
+func UpdateUserProfileByID(user models.User) models.User {
+
+	us := GetUserByID(user.ID.Hex())
+	us.Email = user.Email
+	us.Name = user.Name
+	us.CompanyName = user.CompanyName
+	us.Phone = user.Phone
+
+	query := func(c *mgo.Collection) error {
+		return c.UpdateId(user.ID, us)
+	}
+
+	executeQuery(userCollectionName, query)
+
+	return user
+}
+
 // UpdateUserPasswordAndName ..
 func UpdateUserPasswordAndName(userID string, username string, password string) (models.User, error) {
 

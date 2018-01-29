@@ -105,6 +105,21 @@ func PostUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// PutUserProfile create user
+func PutUserProfile(w http.ResponseWriter, r *http.Request) {
+
+	var user models.User
+	helpers.GetUserBody(w, r, &user)
+	user.Salt = user.UserName
+	profile := managers.UpdateUserProfileByID(user)
+
+	if profile.ID.Hex() != "" {
+		helpers.SetResponse(w, http.StatusOK, nil)
+	} else {
+		helpers.SetResponse(w, http.StatusBadRequest, nil)
+	}
+}
+
 // SelfUsers 获取管理用户
 func SelfUsers(w http.ResponseWriter, r *http.Request) {
 	users := managers.GetUsersBySelf()

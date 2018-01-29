@@ -63,6 +63,13 @@ func init() {
 	})
 
 	routes = append(routes, Route{
+		Name:        "UpdateUser",
+		Method:      "PUT",
+		Pattern:     "/api/users/{userId}/profile",
+		HandlerFunc: handlers.PutUserProfile,
+	})
+
+	routes = append(routes, Route{
 		Name:        "UserCreate",
 		Method:      "POST",
 		Pattern:     "/api/users",
