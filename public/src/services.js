@@ -381,4 +381,23 @@ define(['angular'], function(angular) {
       }
       return Feedback
     }])
+
+    .factory('JobsService', ['$http', 'Config', function($http, Config) {
+      var Feedback = {
+        type: 'jobs',
+        getSummary: function(success, error){
+          var headers = {
+            'Content-Type': 'application/json'
+          };
+          $http.get(Config.url + this.type, { }, {headers: headers})
+            .then(function(response) {
+              success(response);
+            })
+            .catch(function(err) {
+              error(err);
+            })
+        }
+      }
+      return Feedback
+    }])
 })

@@ -552,5 +552,20 @@ define(function() {
   }
   controllers.FeedbackCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'FeedbackService'];
 
+  controllers.JobsCtrl = function($scope, $uibModal, $stateParams, JobsService){
+    $scope.summary = {};
+    var queryList = function() {
+      JobsService.getSummary(function(res) {
+        $scope.summary = res.data;
+        console.log(res.data)
+      }, function(err) {
+        console.log(err)
+      })
+    }
+    queryList()
+  }
+
+  controllers.JobsCtrl.$inject = ['$scope', '$uibModal', '$stateParams', 'JobsService'];
+
   return controllers;
 });

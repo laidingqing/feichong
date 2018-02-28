@@ -14,6 +14,18 @@ var (
 	enterpriseCollectionName = "enterprises"
 )
 
+//GetRecentlyResumes ...
+func GetRecentlyResumes() ([]models.Resume, error) {
+	var resumes []models.Resume
+	query := func(c *mgo.Collection) error {
+		return c.Find(bson.M{}).Sort("updateAt").Limit(5).All(&resumes)
+	}
+
+	executeQuery(resumeCollectionName, query)
+
+	return resumes, nil
+}
+
 // GetResumeByUser 查询用户的简历
 func GetResumeByUser(userID string) (models.Resume, error) {
 	var resume models.Resume
@@ -53,6 +65,7 @@ func UpdateResumeByUser(userID string, resume models.Resume) (models.Resume, err
 			rev.ID = bson.NewObjectId()
 			rev.UserID = userID
 			rev.CreatedAt = time.Now()
+			rev.UpdateAt = time.Now()
 			rev.IsAuth = false
 			return c.Insert(rev)
 		}
@@ -90,7 +103,6 @@ func UpdateEnterpriseByUser(userID string, enterprise models.EnterpriseInfo) (mo
 			rev.UserID = userID
 			rev.CreatedAt = time.Now()
 			rev.IsAuth = false
-			rev.Recommand = false
 			return c.Insert(rev)
 		}
 		exErr = executeQuery(enterpriseCollectionName, insertQuery)

@@ -19,4 +19,5 @@ routerApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         .state('dashboard.tracks', { url: '/tracks', templateUrl: 'views/tracks.html?10', controller: controllers.TracksCtrl })
         .state('dashboard.business', { url: '/business/?:id&:orderNO', params: {'id': null, 'orderNO':null}, templateUrl: 'views/business.html?10', controller: controllers.BusinessCtrl })
         .state('dashboard.feedback', { url: '/feedback', templateUrl: 'views/feedback.html?6', controller: controllers.FeedbackCtrl })
+        .state('dashboard.jobs', { url: '/jobs', templateUrl: 'views/jobs.html?6', controller: controllers.JobsCtrl })
 });

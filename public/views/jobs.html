@@ -1,0 +1,79 @@
+<!-- 会计在线 -->
+
+        <div class="content">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="card">
+                          <div class="header">
+                              <h4 class="title">人才管理</h4>
+                              <p class="category">维护财务人才库</p>
+                          </div>
+                          <div class="content">
+                              <table class="table table-hover table-striped" id="paninationData">
+                                  <tbody>
+                                    <tr ng-repeat="item in summary.resumes">
+                                      <td><span><span ng-bind="item.updateAt | date: 'yyyy-MM-dd'"></span></span></td>
+                                      <td><span>{{item.name}}</span></td>
+                                      <td><span>{{item.phone}}</span></td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                              <div class="footer">
+                                  <div class="stats">
+                                      <button type="button" class="btn btn-sm btn-info btn-fill" ng-click="showFormModal()">录入</button>
+                                      <button type="button" class="btn btn-sm btn-info btn-fill" ng-click="showFormModal()">查询</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4">
+                      <div class="card">
+                          <div class="header">
+                              <h4 class="title">企业管理</h4>
+                              <p class="category">维护企业库</p>
+                          </div>
+                          <div class="content">
+                              <div class="footer">
+                                  <div class="legend">
+                                      <i class="fa fa-circle text-info"></i> Open
+                                      <i class="fa fa-circle text-danger"></i> Click
+                                      <i class="fa fa-circle text-warning"></i> Click Second Time
+                                  </div>
+                                  <hr>
+                                  <div class="stats">
+                                    <button type="button" class="btn btn-sm btn-info btn-fill" ng-click="showFormModal()">录入</button>
+                                    <button type="button" class="btn btn-sm btn-info btn-fill" ng-click="showFormModal()">查询</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-4">
+                      <div class="card">
+                          <div class="header">
+                              <h4 class="title">认证管理</h4>
+                              <p class="category">请求认证的人才与企业管理</p>
+                          </div>
+                          <div class="content">
+                              <div class="footer">
+                                  <div class="legend">
+                                      <i class="fa fa-circle text-info"></i> Open
+                                      <i class="fa fa-circle text-danger"></i> Click
+                                      <i class="fa fa-circle text-warning"></i> Click Second Time
+                                  </div>
+                                  <hr>
+                                  <div class="stats">
+                                    <button type="button" class="btn btn-sm btn-info btn-fill" ng-click="showFormModal()">查询</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+
+        </div>

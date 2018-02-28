@@ -161,13 +161,14 @@ type Job struct {
 type Resume struct {
 	ID         bson.ObjectId `bson:"_id" json:"id"`
 	UserID     string        `bson:"userId" json:"userId,omitempty"`
+	CreatedBy  string        `bson:"createBy" json:"createBy,omitempty"`
 	Name       string        `bson:"name" json:"name,omitempty"`
 	Phone      string        `bson:"phone" json:"phone,omitempty"`
 	Email      string        `bson:"email" json:"email,omitempty"`
 	Gender     string        `bson:"gender" json:"gender,omitempty"`
 	Birth      time.Time     `bson:"birth" json:"birth,omitempty"`
 	Bio        string        `bson:"bio" json:"bio,omitempty"`
-	Status     int           `bson:"status" json:"status,omitempty"` //工作状态: 0，离职随时到岗，1,在职，考虑换工作
+	Status     int32         `bson:"status" json:"status,omitempty"` //工作状态: 0，离职随时到岗，1,在职，考虑换工作
 	Projects   []Project     `bson:"projects" json:"projects,omitempty"`
 	Educations []Education   `bson:"educations" json:"educations,omitempty"`
 	CreatedAt  time.Time     `bson:"createdAt" json:"createdAt"`

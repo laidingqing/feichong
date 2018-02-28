@@ -10,6 +10,14 @@ import (
 
 const jobUserIDParam = "userId"
 
+// GetJobSummary ..
+func GetJobSummary(w http.ResponseWriter, r *http.Request) {
+	var summary = map[string]interface{}{}
+	resumes, _ := managers.GetRecentlyResumes()
+	summary["resumes"] = resumes
+	helpers.SetResponse(w, http.StatusOK, summary)
+}
+
 // GetUserResume ..
 func GetUserResume(w http.ResponseWriter, r *http.Request) {
 	userID := helpers.GetParam(r, jobUserIDParam)

@@ -244,6 +244,13 @@ func init() {
 		HandlerFunc: handlers.UpdateUserEnterprise,
 	})
 
+	routes = append(routes, Route{
+		Name:        "JobSummary",
+		Method:      "GET",
+		Pattern:     "/api/jobs",
+		HandlerFunc: handlers.GetJobSummary,
+	})
+
 }
 
 // NewRouter ...
