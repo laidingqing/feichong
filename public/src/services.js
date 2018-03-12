@@ -4,7 +4,8 @@ define(['angular'], function(angular) {
   angular.module('app.services', [])
     .factory('Config', [function() {
       var Config = {
-        url: "http://localhost:8080/api/"
+        // url: "http://localhost:8080/api/"
+        url: "http://api.fcfjcwzx.com/api/"
       };
       return Config;
     }])
