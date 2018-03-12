@@ -61,8 +61,10 @@ func GetOrderByID(w http.ResponseWriter, r *http.Request) {
 		} else {
 			log.Log("model", model.ID.Hex(), "userid", userID)
 			if userID != "" {
+				user := managers.GetUserByID(userID)
 				//绑定合同
 				model.UserID = userID
+				model.Company = user.CompanyName
 				order, err := managers.PutOrder(model.ID.Hex(), model)
 				if err != nil {
 					log.Log("PutOrder err", err)
