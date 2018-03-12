@@ -4,7 +4,6 @@ import (
 	"errors"
 	"time"
 
-	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -72,10 +71,10 @@ type Order struct {
 	ExpiredAt   time.Time     `bson:"expiredAt" json:"expiredAt"`
 	Status      OrderStatus   `bson:"status" json:"status"`
 	Company     string        `bson:"companyName" json:"companyName"`
-	SalerID     *mgo.DBRef    `bson:"saler,omitempty" json:"salerId,omitempty"` //业务
-	UserID      *mgo.DBRef    `bson:"userid,omitempty" json:"userId,omitempty"`
-	ServiceID   *mgo.DBRef    `bson:"serviceid,omitempty" json:"serviceId,omitempty"` //客服
-	AdviserID   *mgo.DBRef    `bson:"adviserid,omitempty" json:"adviserId,omitempty"` //财务顾问
+	SalerID     string        `bson:"saler,omitempty" json:"salerId,omitempty"` //业务
+	UserID      string        `bson:"userid,omitempty" json:"userId,omitempty"`
+	ServiceID   string        `bson:"serviceid,omitempty" json:"serviceId,omitempty"` //客服
+	AdviserID   string        `bson:"adviserid,omitempty" json:"adviserId,omitempty"` //财务顾问
 	SalerInfo   User          `bson:"-" json:"salerInfo"`                             //业务员
 	UserInfo    User          `bson:"-" json:"userInfo"`                              //所属用户
 	ServiceInfo User          `bson:"-" json:"serviceInfo"`                           //客服

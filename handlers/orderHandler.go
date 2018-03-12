@@ -10,6 +10,8 @@ import (
 )
 
 const orderIDParam = "orderId"
+const orderNOParam = "orderNo"
+const queryWayParam = "way"
 
 // GetOrders ...
 func GetOrders(w http.ResponseWriter, r *http.Request) {
@@ -36,17 +38,42 @@ func GetOrders(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// GetOrderByID ..
+// GetOrderByID .. include way query string
 func GetOrderByID(w http.ResponseWriter, r *http.Request) {
 
+	way := helpers.GetParam(r, queryWayParam)
 	orderID := helpers.GetParam(r, orderIDParam)
+	userID := helpers.GetInParam(r, userIDParam)
+	log := helpers.NewLogger()
 
-	model, err := managers.GetOrderByID(orderID)
-
-	if err != nil {
-		helpers.SetResponse(w, http.StatusNotFound, nil)
+	if way == "byId" {
+		model, err := managers.GetOrderByID(orderID)
+		if err != nil {
+			helpers.SetResponse(w, http.StatusNotFound, nil)
+		} else {
+			helpers.SetResponse(w, http.StatusOK, model)
+		}
 	} else {
-		helpers.SetResponse(w, http.StatusOK, model)
+		model, err := managers.GetOrderByNo(orderID)
+		if err != nil {
+			log.Log("err", err)
+			helpers.SetResponse(w, http.StatusNotFound, nil)
+		} else {
+			log.Log("model", model.ID.Hex(), "userid", userID)
+			if userID != "" {
+				//绑定合同
+				model.UserID = userID
+				order, err := managers.PutOrder(model.ID.Hex(), model)
+				if err != nil {
+					log.Log("PutOrder err", err)
+					helpers.SetResponse(w, http.StatusNotFound, nil)
+					return
+				}
+				helpers.SetResponse(w, http.StatusOK, order)
+			} else {
+				helpers.SetResponse(w, http.StatusOK, model)
+			}
+		}
 	}
 }
 
@@ -90,13 +117,7 @@ func PostOrder(w http.ResponseWriter, r *http.Request) {
 		orderReq.Company = user.CompanyName
 	}
 
-	log := helpers.NewLogger()
-
-	log.Log("startAt", orderReq.StartAt)
-
 	order, err := managers.InsertOrder(orderReq)
-
-	log.Log("err", err)
 	if err == nil {
 		helpers.SetResponse(w, http.StatusOK, order)
 	} else {

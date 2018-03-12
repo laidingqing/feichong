@@ -25,34 +25,22 @@ func GetOrders(page int, size int, catalog int) (models.Pagination, error) {
 	logger.Log("size", len(orders))
 	for i := 0; i < len(orders); i++ {
 		var o = &orders[i]
-		var user *models.User
-		dbref := &mgo.DBRef{
-			Collection: "users",
-			Id:         o.SalerID.Id,
+		if o.UserID != "" {
+			user := GetUserByID(o.UserID)
+			o.UserInfo = user
 		}
-		if err = session.DB(databaseName).FindRef(dbref).One(&user); err != nil {
-			logger.Log("err", err)
+		if o.AdviserID != "" {
+			user := GetUserByID(o.AdviserID)
+			o.AdviserInfo = user
 		}
-		o.SalerInfo = models.User{
-			ID:   user.ID,
-			Nick: user.Nick,
+		if o.SalerID != "" {
+			user := GetUserByID(o.SalerID)
+			o.SalerInfo = user
 		}
-
-		var cusUser *models.User
-		userRef := &mgo.DBRef{
-			Collection: "users",
-			Id:         o.UserID.Id,
+		if o.ServiceID != "" {
+			user := GetUserByID(o.ServiceID)
+			o.ServiceInfo = user
 		}
-		if err = session.DB(databaseName).FindRef(userRef).One(&cusUser); err != nil {
-			logger.Log("err", err)
-		}
-
-		o.UserInfo = models.User{
-			ID:          cusUser.ID,
-			Nick:        cusUser.Nick,
-			CompanyName: cusUser.CompanyName,
-		}
-
 	}
 
 	return models.Pagination{
@@ -72,6 +60,19 @@ func GetOrderByID(orderID string) (models.Order, error) {
 
 	query := func(c *mgo.Collection) error {
 		return c.FindId(orderID).One(&order)
+	}
+
+	err := executeQuery(orderCollectionName, query)
+
+	return order, err
+}
+
+// GetOrderByNo 根据合同号获取订单信息
+func GetOrderByNo(orderNo string) (models.Order, error) {
+	var order models.Order
+
+	query := func(c *mgo.Collection) error {
+		return c.Find(bson.M{"orderNO": orderNo}).One(&order)
 	}
 
 	err := executeQuery(orderCollectionName, query)
@@ -104,7 +105,7 @@ func GetOrdersByUser(userID string) ([]models.Order, error) {
 	var orders []models.Order
 
 	query := func(c *mgo.Collection) error {
-		return c.Find(bson.M{"userid.$id": bson.ObjectIdHex(userID), "status": int(models.OrderStatusDoing)}).All(&orders)
+		return c.Find(bson.M{"userid": userID, "status": int(models.OrderStatusDoing)}).All(&orders)
 	}
 
 	err := executeQuery(orderCollectionName, query)
@@ -114,14 +115,11 @@ func GetOrdersByUser(userID string) ([]models.Order, error) {
 
 	orderList := []models.Order{}
 	for _, order := range orders {
-		salerID := order.SalerID.Id.(bson.ObjectId)
-		adviserID := order.AdviserID.Id.(bson.ObjectId)
-		serviceID := order.ServiceID.Id.(bson.ObjectId)
 
-		order.SalerInfo = GetUserByID(salerID.Hex())
-		order.AdviserInfo = GetUserByID(adviserID.Hex())
-		order.ServiceInfo = GetUserByID(serviceID.Hex())
-
+		order.SalerInfo = GetUserByID(order.SalerID)
+		order.AdviserInfo = GetUserByID(order.AdviserID)
+		order.ServiceInfo = GetUserByID(order.ServiceID)
+		order.UserInfo = GetUserByID(order.UserID)
 		orderList = append(orderList, order)
 	}
 
@@ -154,12 +152,18 @@ func PutOrder(orderID string, order models.Order) (models.Order, error) {
 	}
 
 	query := func(c *mgo.Collection) error {
-		return c.UpdateId(orderID, order)
+		return c.UpdateId(bson.ObjectIdHex(orderID), order)
+	}
+	log := helpers.NewLogger()
+	err := executeQuery(orderCollectionName, query)
+	if err != nil {
+		log.Log("put order err", err)
+		return models.Order{
+			ID: "",
+		}, err
 	}
 
-	err := executeQuery(orderCollectionName, query)
-
-	return order, err
+	return order, nil
 }
 
 // InsertOrder 新增订单
@@ -167,30 +171,13 @@ func InsertOrder(order models.Order) (models.Order, error) {
 	order.ID = bson.NewObjectId()
 	order.CreatedAt = time.Now()
 	order.Status = models.OrderStatusDoing
+
 	query := func(c *mgo.Collection) error {
 		return c.Insert(order)
 	}
-	order.SalerID = &mgo.DBRef{
-		Collection: "users",
-		Id:         order.SalerInfo.ID,
-	}
-
-	order.UserID = &mgo.DBRef{
-		Collection: "users",
-		Id:         order.UserInfo.ID,
-	}
-
-	order.ServiceID = &mgo.DBRef{
-		Collection: "users",
-		Id:         order.ServiceInfo.ID,
-	}
-
-	order.AdviserID = &mgo.DBRef{
-		Collection: "users",
-		Id:         order.AdviserInfo.ID,
-	}
 
 	err := executeQuery(orderCollectionName, query)
+
 	if err != nil {
 		return models.Order{
 			ID: "",
