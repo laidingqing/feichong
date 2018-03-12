@@ -150,7 +150,8 @@ define(function() {
     $scope.users = []
     $scope.companies = []
     $scope.order = {
-      orderNO: $filter('date')(new Date(), 'yyyyMMddHHmmss')
+      orderNO: $filter('date')(new Date(), 'yyyyMMddHHmmss'),
+      catalog: 1
     }
 
     var queryList = function() {
